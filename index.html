@@ -198,7 +198,270 @@
     <div class="description">
         <div class="content" v-pre>
             
-            
+            <h2 id="1、配置文件相关命令"><a href="#1、配置文件相关命令" class="headerlink" title="1、配置文件相关命令"></a>1、配置文件相关命令</h2><pre><code class="language-shell">[Huawei-switch]display current-configuration    显示当前生效的配置
+[Huawei-switch]display saved-configuration      显示flash中配置文件，即下次上电启动时所用的配置文件
+[Huawei-switch]reset saved-configuration        檫除旧的配置文件
+&lt;Huawei-switch&gt;reboot                           交换机重启
+&lt;Huawei-switch&gt;display version                  显示系统版本信息
+</code></pre>
+<h2 id="2、基本配置"><a href="#2、基本配置" class="headerlink" title="2、基本配置"></a>2、基本配置</h2><pre><code class="language-plain">[Huawei-switch]super password                   修改特权用户密码
+[Huawei-switch]Huawei-switch                    交换机命名
+[Huawei-switch]interface ethernet 1/0/1         进入接口视图
+[Huawei-switch]interface vlan 1                 进入接口视图
+[Huawei-switch-Vlan-interfacex]ip address 10.1.1.11 255.255.0.0     配置VLAN的IP地址
+[Huawei-switch]ip route-static 0.0.0.0 0.0.0.0 10.1.1.1             静态路由＝网关
+</code></pre>
+<h2 id="3、telnet配置"><a href="#3、telnet配置" class="headerlink" title="3、telnet配置"></a>3、telnet配置</h2><pre><code class="language-shell">[Huawei-switch]user-interface vty 0 4               进入虚拟终端
+[Huawei-switch]authentication-mode password         设置口令模式
+[Huawei-switch]set authentication-mode password simple xmws123       设置口令
+[Huawei-switch]user privilege level 3               用户级别
+</code></pre>
+<h2 id="4、端口配置"><a href="#4、端口配置" class="headerlink" title="4、端口配置"></a>4、端口配置</h2><pre><code class="language-plain">[Huawei-switch-Ethernet1/0/1]duplex {half|full|auto}        配置端口工作状态
+[Huawei-switch-Ethernet1/0/1]speed {10|100|auto}            配置端口工作速率
+[Huawei-switch-Ethernet1/0/1]flow-control                   配置端口流控
+[Huawei-switch-Ethernet1/0/1]mdi {across|auto|normal}       配置端口平接扭接
+[Huawei-switch-Ethernet1/0/1]port link-type {trunk|access|hybrid} 设置端口工作模式
+[Huawei-switch-Ethernet1/0/1]undo shutdown                  激活端口
+[Huawei-switch-Ethernet1/0/2]quit                           退出系统视图
+</code></pre>
+<h2 id="5、链路聚合配置"><a href="#5、链路聚合配置" class="headerlink" title="5、链路聚合配置"></a>5、链路聚合配置</h2><pre><code class="language-plain">[Huawei-switch] link-aggregation group 1 mode manual            创建手工聚合组1
+[Huawei-switch] interface ethernet 1/0/1                        将以太网端口Ethernet1/0/1加入聚合组1
+[Huawei-switch-Ethernet1/0/1] port link-aggregation group 1
+[Huawei-switch-Ethernet1/0/1] interface ethernet 1/0/2          将以太网端口Ethernet1/0/1加入聚合组1
+[Huawei-switch-Ethernet1/0/2] port link-aggregation group 1
+[Huawei-switch] link-aggregation group 1 service-type tunnel    在手工聚合组的基础上创建 tunnel业务环回组。
+[Huawei-switch] interface ethernet 1/0/1                        将以太网端口Ethernet1/0/1加入业务环回组。
+[Huawei-switch-Ethernet1/0/1] undo stp
+[Huawei-switch-Ethernet1/0/1] port link-aggregation group 1
+</code></pre>
+<h2 id="6、端口镜像"><a href="#6、端口镜像" class="headerlink" title="6、端口镜像"></a>6、端口镜像</h2><pre><code class="language-plain">[Huawei-switch]monitor-port 　         指定镜像端口
+[Huawei-switch]port mirror 　　        指定被镜像端口
+[Huawei-switch]port mirror int_list observing-port int_type int_num 指定镜像和被镜像
+</code></pre>
+<h2 id="7、VLAN配置"><a href="#7、VLAN配置" class="headerlink" title="7、VLAN配置"></a>7、VLAN配置</h2><pre><code class="language-plain">[Huawei-switch]vlan 4   创建VLAN
+[Huawei-switch-vlan4]port ethernet 1/0/1 to ethernet 1/0/4  在VLAN中增加端口
+
+配置基于access的VLAN
+[Huawei-switch-Ethernet1/0/2]port access vlan 4             当前端口加入到VLAN
+注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1
+
+配置基于trunk的VLAN
+[Huawei-switch-Ethernet 1/0/24]port link-type trunk         设置当前端口为trunk
+[Huawei-switch-Ethernet 1/0/24]port trunk permit vlan {ID|All} 　　设trunk允许的VLAN
+注意：所有端口缺省情况下都是允许VLAN1的报文通过的
+[Huawei-switch-Ethernet1/0/2]port trunk pvid vlan 34 　　　　设置trunk端口的PVID
+
+配置基于Hybrid端口的VLAN
+[Huawei-switch-Ethernet1/0/2]port link-type hybrid      配置端口的链路类型为Hybrid类型
+[Huawei-switch-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }        允许指定的VLAN通过当前Hybrid端口
+注意：缺省情况下，所有Hybrid端口只允许VLAN1通过
+[Huawei-switch-Ethernet1/0/2]port hybrid pvid vlan vlan-id 设置Hybrid端口的缺省VLAN
+注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1
+
+VLAN描述
+[Huawei-switch]description string 　　　　   指定VLAN描述字符
+[Huawei-switch]undo description             删除VLAN描述字符
+[Huawei-switch]display vlan [vlan_id]       查看VLAN设置
+
+私有VLAN配置
+[Huawei-switch-vlanx]isolate-user-vlan enable           设置主vlan
+[Huawei-switch]Isolate-user-vlan secondary              设置主vlan包括的子vlan
+[Huawei-switch-Ethernet1/0/2]port hybrid pvid vlan      设置vlan的pvid
+[Huawei-switch-Ethernet1/0/2]port hybrid pvid           删除vlan的pvid
+[Huawei-switch-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged     设置无标识的vlan
+如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。
+所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.
+</code></pre>
+<h2 id="8、STP配置"><a href="#8、STP配置" class="headerlink" title="8、STP配置"></a>8、STP配置</h2><pre><code class="language-plain">[Huawei-switch]stp {enable|disable}             设置生成树,默认关闭
+[Huawei-switch]stp mode rstp                    设置生成树模式为rstp
+[Huawei-switch]stp priority 8192                设置交换机的优先级
+[Huawei-switch]stp root {primary|secondary} 　　设置为根或根的备份
+[Huawei-switch-Ethernet0/1]stp cost 200         设置交换机端口的花费
+MSTP配置：
+　　配置MST域名为info，MSTP修订级别为1，VLAN映射关系为VLAN2～VLAN10映射到生成树实例1上，VLAN20～VLAN30映射生成树实例2上。
+
+&lt;Huawei-switch&gt;system-view
+[Huawei-switch] stp region-configuration
+[Huawei-switch-mst-region] region-name info
+[Huawei-switch-mst-region] instance 1 vlan 2 to 10
+[Huawei-switch-mst-region] instance 2 vlan 20 to 30
+[Huawei-switch-mst-region] revision-level 1
+[Huawei-switch-mst-region] active region-configuration
+</code></pre>
+<h2 id="9、MAC地址表的操作"><a href="#9、MAC地址表的操作" class="headerlink" title="9、MAC地址表的操作"></a>9、MAC地址表的操作</h2><pre><code class="language-plain">在系统视图下添加MAC地址表项
+[Huawei-switch]mac-address { static | dynamic | blackhole } mac-address interface interface-type interface-number vlan vlan-id      添加MAC地址表项
+
+在添加MAC地址表项时，命令中interface参数指定的端口必须属于vlan参数指定的VLAN，否则将添加失败。
+如果vlan参数指定的VLAN是动态VLAN，在添加静态MAC地址之后，会自动变为静态VLAN。
+
+在以太网端口视图下添加MAC地址表项
+
+[Huawei-switch-Ethernet1/0/2]mac-address { static | dynamic | blackhole } mac-address vlan vlan-id
+
+在添加MAC地址表项时，当前的端口必须属于命令中vlan参数指定的VLAN，否则将添加失败；
+如果vlan参数指定的VLAN是动态VLAN，在添加静态MAC地址之后，会自动变为静态VLAN。
+[Huawei-switch]mac-address timer { aging age | no-aging } 设置MAC地址表项的老化时间
+注意：缺省情况下，MAC地址表项的老化时间为300秒，使用参数no-aging时表示不对MAC地址表项进行老化。
+
+MAC地址老化时间的配置对所有端口都生效，但地址老化功能只对动态的（学习到的或者用户配置可老化的）MAC地址表项起作用。
+
+[Huawei-switch-Ethernet1/0/2]mac-address max-mac-count count        设置端口最多可以学习到的MAC地址数量
+
+注意：缺省情况下，没有配置对端口学习MAC地址数量的限制。反之，如果端口启动了MAC地址认证和端口安全功能，则不能配置该端口的最大MAC地址学习个数。
+
+[Huawei-switch-Ethernet1/0/2]port-mac start-mac-address             配置以太网端口MAC地址的起始值
+
+在缺省情况下，E126/E126A交换机的以太网端口是没有配置MAC地址的，因此当交换机在发送二层协议报文（例如STP）时，由于无法取用发送端口的MAC地址，将使用该协议预置的MAC地址作为源地址填充到报文中进行发送。在实际组网中，由于多台设备都使用相同的源MAC地址发送二层协议报文，会造成在某台设备的不同端口学习到相同MAC地址的情况，可能会对MAC地址表的维护产生影响。
+
+[Huawei-switch]display mac-address              显示地址表信息
+[Huawei-switch]display mac-address aging-time   显示地址表动态表项的老化时间
+[Huawei-switch]display port-mac                 显示用户配置的以太网端口MAC地址的起始值
+</code></pre>
+<h2 id="10、GVRP配置"><a href="#10、GVRP配置" class="headerlink" title="10、GVRP配置"></a>10、GVRP配置</h2><pre><code class="language-plain">[Huawei-switch] gvrp                    开启全局GVRP
+[Huawei-switch-Ethernet1/0/1] gvrp      在以太网端口Ethernet1/0/1上开启GVRP
+[Huawei-switch-Ethernet1/0/1] gvrp registration { fixed | forbidden | normal }          配置GVRP端口注册模式 ，缺省为normal。
+[Huawei-switch] display garp statistics [ interface interface-list ]                    显示GARP统计信息
+[Huawei-switch] display garp timer [ interface interface-list ]                         显示GARP定时器的值
+[Huawei-switch] display gvrp statistics [ interface interface-list ]                    显示GVRP统计信息
+[Huawei-switch] display gvrp status                                                     显示GVRP的全局状态信息
+[Huawei-switch] display gvrp statusreset garp statistics [ interface interface-list ]   清除GARP统计
+</code></pre>
+<h2 id="11、DLDP配置"><a href="#11、DLDP配置" class="headerlink" title="11、DLDP配置"></a>11、DLDP配置</h2><pre><code class="language-plain">[Huawei-switch] interface gigabitethernet 1/1/1
+[Huawei-switch-GigabitEthernet1/1/1] duplex full                     配置端口工作在强制全双工模式
+[Huawei-switch-GigabitEthernet1/1/1] speed 1000                      速率为1000Mbits/s
+[Huawei-switch] dldp enable                                          全局开启DLDP。
+[Huawei-switch] dldp interval 15                                     设置发送DLDP报文的时间间隔为15秒
+[Huawei-switch] dldp work-mode { enhance | normal }                  配置DLDP协议的工作模式为加强模式/ 缺省为normal
+[Huawei-switch] dldp unidirectional-shutdown { auto | manual }       配置DLDP单向链路操作模式为自动模式/缺省为auto
+[Huawei-switch] display dldp 1                                       查看DLDP状态
+
+当光纤交叉连接时，可能有两个或三个端口处于Disable状态，剩余端口处于Inactive状态。
+当光纤一端连接正确，一端未连接时：
+    如果DLDP的工作模式为normal，则有收光的一端处于Advertisement状态，没有收光的一端处于Inactive状态。
+    如果DLDP的工作模式为enhance，则有收光的一端处于Disable状态，没有收光的一端处于Inactive状态。
+dldp reset命令在全局下可以重置所有端口的DLDP状态，在接口下可以充值该端口的DLDP状态
+</code></pre>
+<h2 id="12、端口隔离配置"><a href="#12、端口隔离配置" class="headerlink" title="12、端口隔离配置"></a>12、端口隔离配置</h2><pre><code class="language-plain">通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。
+
+[Huawei-switch] interface ethernet1/0/2         将以太网端口Ethernet1/0/2加入隔离组。
+[Huawei-switch-Ethernet1/0/2] port isolate
+[Huawei-switch] display isolate port            显示隔离组中的端口信息
+
+配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。
+端口隔离特性与以太网端口所属的VLAN无关。
+当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。
+对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。
+如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。
+当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。
+</code></pre>
+<h2 id="13、端口安全配置"><a href="#13、端口安全配置" class="headerlink" title="13、端口安全配置"></a>13、端口安全配置</h2><pre><code class="language-shell">[Switch] port-security enable           启动端口安全功能
+[Switch] interface Ethernet 1/0/1       进入以太网Ethernet1/0/1端口视图
+[Switch-Ethernet1/0/1] port-security max-mac-count 80           设置端口允许接入的最大MAC地址数为80
+[Switch-Ethernet1/0/1] port-security port-mode autolearn        配置端口的安全模式为autolearn
+[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1
+
+将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中
+
+[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily         设置Intrusion Protection特性被触发后，暂时关闭该端口
+[Switch]port-security timer disableport 30                                          关闭时间为30秒。
+</code></pre>
+<h2 id="14、端口绑定配置"><a href="#14、端口绑定配置" class="headerlink" title="14、端口绑定配置"></a>14、端口绑定配置</h2><pre><code class="language-shell">通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。
+
+[Huawei-switch-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1
+
+将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。
+有的交换机上绑定的配置不一样
+
+[Huawei-switch] interface ethernet 1/0/2
+[Huawei-switch-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405
+
+端口过滤配置
+
+[Huawei-switch] interface ethernet1/0/1         配置端口Ethernet1/0/1的端口过滤功能。
+[Huawei-switch-Ethernet1/0/1] ip check source ip-address mac-address
+[Huawei-switch] dhcp-snooping                   开启DHCP Snooping功能。
+[Huawei-switch] interface ethernet1/0/2
+
+设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。
+
+[Huawei-switch-Ethernet1/0/2] dhcp-snooping trust
+
+在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击
+</code></pre>
+<h2 id="15、交换机巡检常用命令"><a href="#15、交换机巡检常用命令" class="headerlink" title="15、交换机巡检常用命令"></a>15、交换机巡检常用命令</h2><pre><code class="language-shell">&lt;Huawei-switch&gt; display esn								查看设备序列号
+&lt;Huawei-switch&gt; display reboot-info      	查看设备复位情况
+&lt;Huawei-switch&gt; display temperature all  	查看设备温度
+&lt;Huawei-switch&gt; display alarm urgent     	查看设备的告警信息
+&lt;Huawei-switch&gt; display cpu-usage        	查看cpu状态
+&lt;Huawei-switch&gt; display memory-usage    	查看内存占用情况
+&lt;Huawei-switch&gt; display logbuffe         	查看日志信息
+&lt;Huawei-switch&gt; display trapbuffer       	查看日志信息
+&lt;Huawei-switch&gt; display bgp peer					查看BGP信息
+&lt;Huawei-switch&gt; display device						查看设备信息
+&lt;Huawei-switch&gt; display device fan				查看风扇转速
+&lt;Huawei-switch&gt; display interface					查看端口信息
+&lt;Huawei-switch&gt; display stack							查看堆叠信息
+&lt;Huawei-switch&gt; display dual-active				查看堆叠系统中的双主检测配置
+&lt;Huawei-switch&gt; display ospf peer					查看OSPF信息
+&lt;Huawei-switch&gt; display device power			查看电源信息
+&lt;Huawei-switch&gt; display vrrp verbose			查看VRRP配置
+&lt;Huawei-switch&gt; display eth-trunk					查看eth-trunk相关成员
+&lt;Huawei-switch&gt; display stack configuration															查看堆叠配置
+&lt;Huawei-switch&gt; display ssh server status																查看SSH信息
+&lt;Huawei-switch&gt; dis mac-address aging-time															查看MAC老化时间
+&lt;Huawei-switch&gt; display current-configuration														查看交换机配置
+&lt;Huawei-switch&gt; display monitor-link group all													查看所有Monitor Link组的信息
+&lt;Huawei-switch&gt; display stp region-configuration												查看STP信息
+&lt;Huawei-switch&gt; display current-configuration | in ntp									查看NTP配置
+&lt;Huawei-switch&gt; display current-configuration interface									查看端口配置
+&lt;Huawei-switch&gt; display current-configuration configuration bgp					查看BGP配置
+&lt;Huawei-switch&gt; display current-configuration configuration  ospf				查看OSPF配置
+&lt;Huawei-switch&gt; display current-configuration | include  route-static		查看路由配置
+</code></pre>
+<h2 id="16、术语解释"><a href="#16、术语解释" class="headerlink" title="16、术语解释"></a>16、术语解释</h2><h3 id="交换机。"><a href="#交换机。" class="headerlink" title="交换机。"></a>交换机。</h3><p>交换机是用于实现交换式网络的设备，在iSO的ON模式中，它位于第二层——数据链路层，可以对帧进行操作，是一种智能设备。</p>
+<h3 id="IEEE-802-3"><a href="#IEEE-802-3" class="headerlink" title="IEEE 802.3"></a>IEEE 802.3</h3><p>IEEE 802.3是一个工作组，该工作组编写了电气和电子工程师协会（IEEE）标准集合,该工作组定义了有线以太网的物理层和数据链路层的介质访问控制（MAC）。这通常是具有一些广域网（WAN）应用的局域网（LAN）技术。 通过各种类型的铜缆或光缆在节点和&#x2F;或基础设施设备（集线器，交换机，路由器）之间建立物理连接。</p>
+<h3 id="IEEE-802-3U。"><a href="#IEEE-802-3U。" class="headerlink" title="IEEE 802.3U。"></a>IEEE 802.3U。</h3><p>IEEE 802.3u (100Base-T)是100兆比特每秒以太网的标准。100Base-T技术中可采用3类传输介质，即100Base-T4、100Base-TX和100Base-FX，它采用4B&#x2F;5B编码方式。</p>
+<h3 id="IEEE-802-3AB"><a href="#IEEE-802-3AB" class="headerlink" title="IEEE 802.3AB"></a>IEEE 802.3AB</h3><p>千兆以太网技术标准，制定了五类双绞线上较长距离连接方案的标准。</p>
+<h3 id="IEEE-802-3Z"><a href="#IEEE-802-3Z" class="headerlink" title="IEEE 802.3Z"></a>IEEE 802.3Z</h3><p>千兆以太网技术标准，制定了光纤和短程铜线连接方案的标准。</p>
+<h3 id="IEEE-802-3X"><a href="#IEEE-802-3X" class="headerlink" title="IEEE 802.3X"></a>IEEE 802.3X</h3><p>全双工以太网数据链路层的流控方法。</p>
+<h3 id="IEEE-802-1X"><a href="#IEEE-802-1X" class="headerlink" title="IEEE 802.1X"></a>IEEE 802.1X</h3><p>一种应用于LAN交换机和无线LAN接入点的用户认证技术。</p>
+<h3 id="IEEE-802-1Q"><a href="#IEEE-802-1Q" class="headerlink" title="IEEE 802.1Q"></a>IEEE 802.1Q</h3><p>IEEE 802.1q定义一个关于VLAN连接介质访问控制层和IEEE 802.1D生成树协议的具体概念模型。这个模型允许各个独立的VLAN与以太网交换机的数据链路层或路由器互相连接。</p>
+<h3 id="IEEES802-1P"><a href="#IEEES802-1P" class="headerlink" title="IEEES802.1P"></a>IEEES802.1P</h3><p>IEEE 802.1p是IEEE 802.1Q（VLAN标签技术）标准的扩展协议，两者共同运作，使第二层网上交换器能够提供流量优先级和动态多播过滤服务。</p>
+<h3 id="STP协议"><a href="#STP协议" class="headerlink" title="STP协议"></a>STP协议</h3><p>STP协议（生成树协议）逻辑上断开环路，防止二层网络的广播风暴的产生。</p>
+<h3 id="数据链接层"><a href="#数据链接层" class="headerlink" title="数据链接层"></a>数据链接层</h3><p>在ISO&#x2F;OSI参考模型的第二层中，负责通过节点间线路上的一系列手段，如检测、流量控制和重发，使从上一层(网络层)看来不出错的传输一帧数据。</p>
+<h3 id="全部、部分双工。"><a href="#全部、部分双工。" class="headerlink" title="全部、部分双工。"></a>全部、部分双工。</h3><p>全双工是网络中收发采用两个相互独立的信道，可以同时进行，互不干扰。而且半双工是接收和发送共用一个通道，在同一时刻只能发送或接收，因此半双工可能会发生冲突。交换机是全双工设备，集线器是半双工设备。</p>
+<h3 id="MAC地址。"><a href="#MAC地址。" class="headerlink" title="MAC地址。"></a>MAC地址。</h3><p>MAC地址直译为媒体存取控制位址，也称为局域网地址（LAN Address），MAC位址，以太网地址（Ethernet Address）或物理地址（Physical Address），它是一个用来确认网络设备位置的位址。在OSI模型中，第三层网络层负责IP地址，第二层数据链路层则负责MAC位址。MAC地址用于在网络中唯一标示一个网卡，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的MAC地址。</p>
+<h3 id="IP地址。"><a href="#IP地址。" class="headerlink" title="IP地址。"></a>IP地址。</h3><p>IP地址是一个32bit的地址，它为每个连接的Internet主机指定。每一台主机都可以通过IP地址访问。</p>
+<h3 id="适应性-自我咨询-自动更新"><a href="#适应性-自我咨询-自动更新" class="headerlink" title="适应性&#x2F;自我咨询(自动更新)"></a>适应性&#x2F;自我咨询(自动更新)</h3><p>自动调光交换机标准按如下顺序调整交换机的工作速度和工作方式：100M全双工、100M全双工、10M全双工、10M全双工。</p>
+<h3 id="完全双向流动控制。"><a href="#完全双向流动控制。" class="headerlink" title="完全双向流动控制。"></a>完全双向流动控制。</h3><p>按照IEEE 802.3X标准，当网络出现拥塞时，网络设备会使用预定义的Pause帧来实现流控制。</p>
+<h3 id="Pause帧"><a href="#Pause帧" class="headerlink" title="Pause帧"></a>Pause帧</h3><p>PAUSE帧是以太网在全双工模式下，MAC控制子层发出的流量控制帧。</p>
+<h3 id="半双工流量控制-B-P-P-Sur"><a href="#半双工流量控制-B-P-P-Sur" class="headerlink" title="半双工流量控制(B-P-P-Sur)"></a>半双工流量控制(B-P-P-Sur)</h3><p>根据IEEE 802.3x标准，当处理器发现缓冲器将被填满时，会向源发站发送一个虚假的冲突信号，它导致客观的网络带宽不能正常运行。RadioRiver控制允许一个端口过滤网络上出现的RadioRiver。打开广播风暴控制后，当端口接收的广播帧累积到预定的阈值时，端口将自动接收广播帧。如果没有启用此功能，或者播帧没有累积到门限，则播帧将正常广播到交换机的其他端口。</p>
+<h3 id="TRUNK-合并端口"><a href="#TRUNK-合并端口" class="headerlink" title="TRUNK(合并端口)"></a>TRUNK(合并端口)</h3><p>一般情况下用来将多个端口聚集在一起，形成一个高带宽的数据传输信道。交换机将所有连接在一起的端口看作是逻辑端口。</p>
+<h3 id="VLAN-虚拟局域网，VirtualLocalAreaNetwork"><a href="#VLAN-虚拟局域网，VirtualLocalAreaNetwork" class="headerlink" title="VLAN(虚拟局域网，VirtualLocalAreaNetwork)"></a>VLAN(虚拟局域网，VirtualLocalAreaNetwork)</h3><p>它是一个广播域，由一组终端工作站组成，在同一个VLT上相互通信的主机(交换机端口)，它可以建立逻辑工作组，而无需考虑具体的布线结构。弹性配置，提高系统安全性。</p>
+<h3 id="TagVLa。"><a href="#TagVLa。" class="headerlink" title="TagVLa。"></a>TagVLa。</h3><p>在IEEE 802.1Q基础上，采用VID对VLAN进行划分。</p>
+<h3 id="身份识别码-VLANID"><a href="#身份识别码-VLANID" class="headerlink" title="身份识别码(VLANID)"></a>身份识别码(VLANID)</h3><p>VLAN的标识符，用来代表一个标签AN。</p>
+<h3 id="MTUVLL。"><a href="#MTUVLL。" class="headerlink" title="MTUVLL。"></a>MTUVLL。</h3><p>当设置交换机的VLT时，将每个用户占用的端口和上行端口分开，形成一个独立的VLT。</p>
+<h3 id="MAC地址的老化时间。"><a href="#MAC地址的老化时间。" class="headerlink" title="MAC地址的老化时间。"></a>MAC地址的老化时间。</h3><p>交换机中每一个端口都有自动学习地址的功能，通过该端口发送和接收帧的源地址(源MAC地址，交换机端口号)被存储在地址表中。陈旧度是一个影响切换过程的参数。在一个地址记录添加到地址表之后开始计时，如果在使用期间各个端口没有接收到作为该MAC地址的源地址的帧，则动态转发地址表(由源MAC地址、目的MAC地址及其对应的交换机的端口号)将删除这些地址。地址老化时间对静态MAC地址表没有影响。</p>
+<h3 id="固定地址表。"><a href="#固定地址表。" class="headerlink" title="固定地址表。"></a>固定地址表。</h3><p>动态MAC地址与普通MAC地址的区别是通过学习而得到的。一旦加入，该静态地址将一直有效，直到删除，并且不受最长老化时间的限制。StaticAddress表记录端口的静态地址。在静态地址表中，MAC地址对应于一个端口，如果设置，发送到该地址的所有数据将仅转发到该端口。还可以绑定MAC地址。</p>
+<h3 id="MAC地址过滤"><a href="#MAC地址过滤" class="headerlink" title="MAC地址过滤"></a>MAC地址过滤</h3><p>通过配置过滤地址，MAC地址过滤允许交换机过滤不希望转发的数据帧。在有限的MAC地址进入交换机时，交换机会自动过滤目标地址为该地址的帧，从而保证交换机的安全性。在所有交换机端口上过滤地址表中的地址有效。添加到过滤器地址表的地址不能添加到静态地址表，并且不能由端口动态绑定。</p>
+<h3 id="MAC地址的动态绑定"><a href="#MAC地址的动态绑定" class="headerlink" title="MAC地址的动态绑定"></a>MAC地址的动态绑定</h3><p>动态地址绑定是指交换机端口处于动态地址绑定状态，MAC地址可以动态学习，但MAC地址数量有限。学习到一个MAC地址的端口之后，立即进行绑定，继续学习下一个地址。该绑定地址不受老化时间限制，并将始终有效。学到一定数量的端口之后，就不需要再学习和绑定了。只有在停用了端口地址绑定功能或者切换后，才会删除被端口绑定的MAC地址。</p>
+<h3 id="端口安全性"><a href="#端口安全性" class="headerlink" title="端口安全性"></a>端口安全性</h3><p>如果端口启用了端口安全，则端口将不会学习新的MAC地址，而只会转发MAC地址学习过的数据帧，而丢弃其它数据帧。判定条件是：发送到交换机的帧，如果其源地址是MAC地址中该端口的成员，则允许转发，否则将放弃。在端口安全设置为“禁用”的情况下，它会恢复自动学习新MAC地址并转发接收到的帧。</p>
+<h3 id="控制端口带宽"><a href="#控制端口带宽" class="headerlink" title="控制端口带宽"></a>控制端口带宽</h3><p>每个端口(非模块化接口)的输入输出数据传输速率可以被带宽限制。</p>
+<h3 id="端口监测-端口镜像（Port-Monitoring）"><a href="#端口监测-端口镜像（Port-Monitoring）" class="headerlink" title="端口监测\端口镜像（Port-Monitoring）"></a>端口监测\端口镜像（Port-Monitoring）</h3><p>Port-Monitoring是将被监控端口的消息复制到监控端口，在监控端口上接有一个安装了包分析软件的主机，网络管理员通过分析收集到的包来进行网络监控，并排除网络故障。</p>
+<h3 id="探测电缆"><a href="#探测电缆" class="headerlink" title="探测电缆"></a>探测电缆</h3><p>如果交换机端口连接上了合适的双绞线，则可通过交换机测试双绞线的状态，确定是否有问题，以及出现问题的位置。</p>
+<h3 id="简单网络管理协议（Simple-Network-Management-Protocol）"><a href="#简单网络管理协议（Simple-Network-Management-Protocol）" class="headerlink" title="简单网络管理协议（Simple Network Management Protocol）"></a>简单网络管理协议（Simple Network Management Protocol）</h3><p>用于在管理服务器和代表管理服务器执行的代理之间传递网络 管理控制和信息报文</p>
+<h3 id="IGMP"><a href="#IGMP" class="headerlink" title="IGMP"></a>IGMP</h3><p>Internet 组管理协议称为IGMP协议（Internet Group Management Protocol），是因特网协议家族中的一个组播协议。该协议运行在主机和组播路由器之间。IGMP</p>
+<h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>VLAN（Virtual Local Area Network）的中文名为”虚拟局域网”。既然是虚拟的局域网，也就不受物理位置的限制，可以根据功能、部门及应用等因素将它们组织起来，相互之间的通信就好像它们在同一个网段中一样，所以叫虚拟局域网</p>
+<h3 id="Telnet"><a href="#Telnet" class="headerlink" title="Telnet"></a>Telnet</h3><p>是Intelnet远程登录服务的标准协议和主要方式，Telnet是常用的远程控制Web服务器的方法<br>可以在终端查找到交换机的原始ip，192.168.0.233<br>将本机ip改为和交换机同一网段，在浏览器地址中输入交换机ip即可查看交换机web登录界面</p>
+<h3 id="端口镜像"><a href="#端口镜像" class="headerlink" title="端口镜像"></a>端口镜像</h3><p>端口镜像的目的就是实现对网络的监听，为服务器听抓取数据、故障定位等功能<br>• 镜像入端口：只对从该端口进入的流量进行镜像。<br>• 镜像出端口：只对该端口的发出的流量进行镜像。<br>• 镜像入和出端口：支持对该端口收到和发出的双向流量进行镜像。</p>
+<h3 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h3><p>地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP&#x2F;IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到局域网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
+<h3 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h3><p>SNMP一般指简单网络管理协议。 简单网络管理协议（SNMP） 是专门设计用于在 IP 网络管理网络节点（服务器、工作站、路由器、交换机及HUBS等）的一种标准协议，它是一种应用层协议。</p>
+<h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>OSPF路由协议是用于网际协议（IP）网络的链路状态路由协议。该协议使用链路状态路由算法的内部网关协议（IGP），在单一自治系统（AS）内部工作。适用于IPv4的OSPFv2协议定义于RFC 2328，RFC 5340定义了适用于IPv6的OSPFv3。</p>
+<h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>BGP是自治系统间的路由协议，BGP交换的网络可达性信息提供了足够的信息来检测路由回路并根据性能优先和策略约束对路由进行决策。</p>
+<h3 id="广播风暴"><a href="#广播风暴" class="headerlink" title="广播风暴"></a>广播风暴</h3><p>广播风暴（broadcast storm）简单的讲是指当广播数据充斥网络无法处理，并占用大量网络带宽，导致正常业务不能运行，甚至彻底瘫痪，这就发生了“广播风暴”</p>
+<h3 id="PPP"><a href="#PPP" class="headerlink" title="PPP"></a>PPP</h3><p>PPP协议一般指PPP。 点对点协议（Point to Point Protocol，PPP）为在点对点连接上传输多协议数据包提供了一个标准方法。</p>
+<h3 id="aaa"><a href="#aaa" class="headerlink" title="aaa"></a>aaa</h3><p>AAA是指：Authentication(认证)、Authorization(授权)、Accounting(计费)的简称，是网络安全的一种管理机制；Authentication是本地认证&#x2F;授权，authorization和accounting是由远处radius(远程拨号认证系统)服务或hwtacacs(华为终端访问控制系统)服务器完成认证&#x2F;授权；AAA是基于用户进行认证、授权、计费的，而NAC方案是基于接入设备接口进行认证的。</p>
+
             
         </div>
     </div>

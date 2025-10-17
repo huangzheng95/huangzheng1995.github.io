@@ -170,44 +170,44 @@
     </div>
     
     <div class="content" v-pre>
-        <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a><font style="color:rgb(24, 24, 24);">准备工作</font></h1><p><font style="color:rgb(24, 24, 24);">需要准备两台服务器作为 Windows AD 域的主备机</font></p>
-<p><font style="color:rgb(24, 24, 24);">本文环境示例信息如下：</font></p>
+        <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>需要准备两台服务器作为 Windows AD 域的主备机</p>
+<p>本文环境示例信息如下：</p>
 <ul>
-<li><font style="color:rgb(24, 24, 24);">域名信息：AD</font><font style="color:rgb(24, 24, 24);">域的根域名信息，示例域名为</font><font style="color:rgb(24, 24, 24);">example.com。</font></li>
-<li><font style="color:rgb(24, 24, 24);">Windows 主机 IP信息：AD-Master 的 IP 为 192.168.100.35，AD-Slave 的 IP 为 192.168.100.30</font></li>
-<li><font style="color:rgb(24, 24, 24);">本环境的 IP 均为 IPV4，无 IPV6 的参与。</font></li>
+<li>域名信息：AD域的根域名信息，示例域名为example.com。</li>
+<li>Windows 主机 IP信息：AD-Master 的 IP 为 192.168.100.35，AD-Slave 的 IP 为 192.168.100.30</li>
+<li>本环境的 IP 均为 IPV4，无 IPV6 的参与。</li>
 </ul>
-<h1 id="部署-AD-域控制器"><a href="#部署-AD-域控制器" class="headerlink" title="部署 AD 域控制器"></a>部署 AD 域控制器</h1><h2 id="打开服务器管理器。"><a href="#打开服务器管理器。" class="headerlink" title="打开服务器管理器。"></a><font style="color:rgb(24, 24, 24);">打开服务器管理器。</font></h2><p><img src="/Image/Windows_AD/Windows_AD_1.png"></p>
-<h3 id="在服务器管理器中，为服务器添加角色和功能。"><a href="#在服务器管理器中，为服务器添加角色和功能。" class="headerlink" title="在服务器管理器中，为服务器添加角色和功能。"></a><font style="color:rgb(24, 24, 24);">在服务器管理器中，为服务器添加角色和功能。</font></h3><h4 id="单击添加角色和功能。"><a href="#单击添加角色和功能。" class="headerlink" title="单击添加角色和功能。"></a><font style="color:rgb(24, 24, 24);">单击添加角色和功能。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_2.png"></p>
-<h4 id="选择安装类型。"><a href="#选择安装类型。" class="headerlink" title="选择安装类型。"></a><font style="color:rgb(24, 24, 24);">选择安装类型。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_3.png"></p>
-<h4 id="选择要安装角色和功能的服务器。"><a href="#选择要安装角色和功能的服务器。" class="headerlink" title="选择要安装角色和功能的服务器。"></a><font style="color:rgb(24, 24, 24);">选择要安装角色和功能的服务器。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_4.png"></p>
-<h4 id="选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。"><a href="#选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。" class="headerlink" title="选中要安装在服务器上的角色，即Active Directory 域服务和DNS 服务器。"></a><font style="color:rgb(24, 24, 24);">选中要安装在服务器上的角色，即</font><font style="color:rgb(24, 24, 24);">Active Directory 域服务</font><font style="color:rgb(24, 24, 24);">和</font><font style="color:rgb(24, 24, 24);">DNS 服务器</font><font style="color:rgb(24, 24, 24);">。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_5.png"></p>
+<h1 id="部署-AD-域控制器"><a href="#部署-AD-域控制器" class="headerlink" title="部署 AD 域控制器"></a>部署 AD 域控制器</h1><h2 id="打开服务器管理器。"><a href="#打开服务器管理器。" class="headerlink" title="打开服务器管理器。"></a>打开服务器管理器。</h2><p><img src="/Image/Windows_AD/Windows_AD_1.png"></p>
+<h3 id="在服务器管理器中，为服务器添加角色和功能。"><a href="#在服务器管理器中，为服务器添加角色和功能。" class="headerlink" title="在服务器管理器中，为服务器添加角色和功能。"></a>在服务器管理器中，为服务器添加角色和功能。</h3><h4 id="单击添加角色和功能。"><a href="#单击添加角色和功能。" class="headerlink" title="单击添加角色和功能。"></a>单击添加角色和功能。</h4><p><img src="/Image/Windows_AD/Windows_AD_2.png"></p>
+<h4 id="选择安装类型。"><a href="#选择安装类型。" class="headerlink" title="选择安装类型。"></a>选择安装类型。</h4><p><img src="/Image/Windows_AD/Windows_AD_3.png"></p>
+<h4 id="选择要安装角色和功能的服务器。"><a href="#选择要安装角色和功能的服务器。" class="headerlink" title="选择要安装角色和功能的服务器。"></a>选择要安装角色和功能的服务器。</h4><p><img src="/Image/Windows_AD/Windows_AD_4.png"></p>
+<h4 id="选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。"><a href="#选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。" class="headerlink" title="选中要安装在服务器上的角色，即Active Directory 域服务和DNS 服务器。"></a>选中要安装在服务器上的角色，即Active Directory 域服务和DNS 服务器。</h4><p><img src="/Image/Windows_AD/Windows_AD_5.png"></p>
 <p><img src="/Image/Windows_AD/Windows_AD_6.png"></p>
-<h4 id="安装完成后，单击关闭。"><a href="#安装完成后，单击关闭。" class="headerlink" title="安装完成后，单击关闭。"></a><font style="color:rgb(24, 24, 24);">安装完成后，单击关闭。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_7.png"></p>
-<h2 id="将当前主机设置为主域服务器。"><a href="#将当前主机设置为主域服务器。" class="headerlink" title="将当前主机设置为主域服务器。"></a><font style="color:rgb(24, 24, 24);">将当前主机设置为主域服务器。</font></h2><h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a><font style="color:rgb(24, 24, 24);">单击服务器管理器右上角的</font><img src="/Image/Windows_AD/Windows_AD_8.png"><font style="color:rgb(24, 24, 24);">图标，然后单击将此服务器提升为域控制器。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_9.png"></p>
-<h4 id="在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。"><a href="#在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。" class="headerlink" title="在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。"></a><font style="color:rgb(24, 24, 24);">在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。</font></h4><p><font style="color:rgb(24, 24, 24);">本文操作中，AD域的示例域名为</font><code>&lt;font style=&quot;color:rgb(24, 24, 24);&quot;&gt;example.com&lt;/font&gt;</code><font style="color:rgb(24, 24, 24);">。</font></p>
+<h4 id="安装完成后，单击关闭。"><a href="#安装完成后，单击关闭。" class="headerlink" title="安装完成后，单击关闭。"></a>安装完成后，单击关闭。</h4><p><img src="/Image/Windows_AD/Windows_AD_7.png"></p>
+<h2 id="将当前主机设置为主域服务器。"><a href="#将当前主机设置为主域服务器。" class="headerlink" title="将当前主机设置为主域服务器。"></a>将当前主机设置为主域服务器。</h2><h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a>单击服务器管理器右上角的<img src="/Image/Windows_AD/Windows_AD_8.png">图标，然后单击将此服务器提升为域控制器。</h4><p><img src="/Image/Windows_AD/Windows_AD_9.png"></p>
+<h4 id="在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。"><a href="#在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。" class="headerlink" title="在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。"></a>在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。</h4><p>本文操作中，AD域的示例域名为: <code>example.com</code></p>
 <p><img src="/Image/Windows_AD/Windows_AD_10.png"></p>
-<h4 id="配置域服务器参数，然后单击下一步。"><a href="#配置域服务器参数，然后单击下一步。" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a><font style="color:rgb(24, 24, 24);">配置域服务器参数，然后单击下一步。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_11.png"></p>
-<h4 id="配置DNS选项，然后单击下一步。"><a href="#配置DNS选项，然后单击下一步。" class="headerlink" title="配置DNS选项，然后单击下一步。"></a><font style="color:rgb(24, 24, 24);">配置DNS选项，然后单击</font><font style="color:rgb(24, 24, 24);">下一步</font><font style="color:rgb(24, 24, 24);">。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_12.png"></p>
-<h4 id="配置NetBIOS域名，然后单击下一步。"><a href="#配置NetBIOS域名，然后单击下一步。" class="headerlink" title="配置NetBIOS域名，然后单击下一步。"></a><font style="color:rgb(24, 24, 24);">配置NetBIOS域名，然后单击下一步。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_13.png"></p>
-<h4 id="检查并确认您的选择，单击下一步。"><a href="#检查并确认您的选择，单击下一步。" class="headerlink" title="检查并确认您的选择，单击下一步。"></a><font style="color:rgb(24, 24, 24);">检查并确认您的选择，单击</font><font style="color:rgb(24, 24, 24);">下一步</font><font style="color:rgb(24, 24, 24);">。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_14.png"></p>
+<h4 id="配置域服务器参数，然后单击下一步。"><a href="#配置域服务器参数，然后单击下一步。" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a>配置域服务器参数，然后单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_11.png"></p>
+<h4 id="配置DNS选项，然后单击下一步。"><a href="#配置DNS选项，然后单击下一步。" class="headerlink" title="配置DNS选项，然后单击下一步。"></a>配置DNS选项，然后单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_12.png"></p>
+<h4 id="配置NetBIOS域名，然后单击下一步。"><a href="#配置NetBIOS域名，然后单击下一步。" class="headerlink" title="配置NetBIOS域名，然后单击下一步。"></a>配置NetBIOS域名，然后单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_13.png"></p>
+<h4 id="检查并确认您的选择，单击下一步。"><a href="#检查并确认您的选择，单击下一步。" class="headerlink" title="检查并确认您的选择，单击下一步。"></a>检查并确认您的选择，单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_14.png"></p>
 <p><img src="/Image/Windows_AD/Windows_AD_15.png"></p>
-<h4 id="所有先决条件都检查通过后，单击安装。"><a href="#所有先决条件都检查通过后，单击安装。" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a><font style="color:rgb(24, 24, 24);">所有先决条件都检查通过后，单击安装。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_16.png"></p>
-<p><font style="color:rgb(24, 24, 24);">安装完成后将自动重启该服务器，重新连接该服务器后可以在系统配置中查看安装结果，当您的DC相关信息无误时，表示安装成功，如下图所示。</font></p>
+<h4 id="所有先决条件都检查通过后，单击安装。"><a href="#所有先决条件都检查通过后，单击安装。" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a>所有先决条件都检查通过后，单击安装。</h4><p><img src="/Image/Windows_AD/Windows_AD_16.png"></p>
+<p>安装完成后将自动重启该服务器，重新连接该服务器后可以在系统配置中查看安装结果，当您的DC相关信息无误时，表示安装成功，如下图所示。</p>
 <p><img src="/Image/Windows_AD/Windows_AD_17.png"></p>
-<h2 id="设置备域服务器。"><a href="#设置备域服务器。" class="headerlink" title="设置备域服务器。"></a><font style="color:rgb(24, 24, 24);">设置备域服务器。</font></h2><h4 id="重复上文的《打开服务器管理器》部分"><a href="#重复上文的《打开服务器管理器》部分" class="headerlink" title="重复上文的《打开服务器管理器》部分"></a>重复上文的《打开服务器管理器<font style="color:rgb(24, 24, 24);">》部分</font></h4><h4 id="设置备域服务器的-DNS-为主域服务器的-IP"><a href="#设置备域服务器的-DNS-为主域服务器的-IP" class="headerlink" title="设置备域服务器的 DNS 为主域服务器的 IP"></a><font style="color:rgb(24, 24, 24);">设置备域服务器的 DNS 为主域服务器的 IP</font></h4><p><img src="/Image/Windows_AD/Windows_AD_18.png"></p>
+<h2 id="设置备域服务器。"><a href="#设置备域服务器。" class="headerlink" title="设置备域服务器。"></a>设置备域服务器。</h2><h4 id="重复上文的《打开服务器管理器》部分"><a href="#重复上文的《打开服务器管理器》部分" class="headerlink" title="重复上文的《打开服务器管理器》部分"></a>重复上文的《打开服务器管理器》部分</h4><h4 id="设置备域服务器的-DNS-为主域服务器的-IP"><a href="#设置备域服务器的-DNS-为主域服务器的-IP" class="headerlink" title="设置备域服务器的 DNS 为主域服务器的 IP"></a>设置备域服务器的 DNS 为主域服务器的 IP</h4><p><img src="/Image/Windows_AD/Windows_AD_18.png"></p>
 <h4 id="将此服务器加入-AD-域，如果域名无法解析到，需要先在-hosts-里面添加本地域名解析。"><a href="#将此服务器加入-AD-域，如果域名无法解析到，需要先在-hosts-里面添加本地域名解析。" class="headerlink" title="将此服务器加入 AD 域，如果域名无法解析到，需要先在 hosts 里面添加本地域名解析。"></a>将此服务器加入 AD 域，如果域名无法解析到，需要先在 hosts 里面添加本地域名解析。</h4><p><img src="/Image/Windows_AD/Windows_AD_19.png"></p>
-<h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a><font style="color:rgb(24, 24, 24);">单击服务器管理器右上角的</font><img src="/Image/Windows_AD/Windows_AD_20.png"><font style="color:rgb(24, 24, 24);">图标，然后单击将此服务器提升为域控制器。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_21.png"></p>
-<h4 id="在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。"><a href="#在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。" class="headerlink" title="在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。"></a><font style="color:rgb(24, 24, 24);">在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。</font></h4><p><font style="color:rgb(24, 24, 24);">本文操作中，AD域的示例域名为</font><code>&lt;font style=&quot;color:rgb(24, 24, 24);&quot;&gt;example.com&lt;/font&gt;</code><font style="color:rgb(24, 24, 24);">。</font></p>
+<h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a>单击服务器管理器右上角的<img src="/Image/Windows_AD/Windows_AD_20.png">图标，然后单击将此服务器提升为域控制器。</h4><p><img src="/Image/Windows_AD/Windows_AD_21.png"></p>
+<h4 id="在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。"><a href="#在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。" class="headerlink" title="在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。"></a>在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。</h4><p>本文操作中，AD域的示例域名为: <code>example.com</code></p>
 <p><img src="/Image/Windows_AD/Windows_AD_22.png"></p>
 <p><img src="/Image/Windows_AD/Windows_AD_23.png"></p>
-<h4 id="配置域服务器参数，然后单击下一步。-1"><a href="#配置域服务器参数，然后单击下一步。-1" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a><font style="color:rgb(24, 24, 24);">配置域服务器参数，然后单击下一步。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_24.png"></p>
-<h4 id="配置DNS选项，然后单击下一步。-1"><a href="#配置DNS选项，然后单击下一步。-1" class="headerlink" title="配置DNS选项，然后单击下一步。"></a><font style="color:rgb(24, 24, 24);">配置DNS选项，然后单击下一步。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_25.png"></p>
-<h4 id="检查并确认您的选择，单击下一步。-1"><a href="#检查并确认您的选择，单击下一步。-1" class="headerlink" title="检查并确认您的选择，单击下一步。"></a><font style="color:rgb(24, 24, 24);">检查并确认您的选择，单击下一步。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_26.png"></p>
+<h4 id="配置域服务器参数，然后单击下一步。-1"><a href="#配置域服务器参数，然后单击下一步。-1" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a>配置域服务器参数，然后单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_24.png"></p>
+<h4 id="配置DNS选项，然后单击下一步。-1"><a href="#配置DNS选项，然后单击下一步。-1" class="headerlink" title="配置DNS选项，然后单击下一步。"></a>配置DNS选项，然后单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_25.png"></p>
+<h4 id="检查并确认您的选择，单击下一步。-1"><a href="#检查并确认您的选择，单击下一步。-1" class="headerlink" title="检查并确认您的选择，单击下一步。"></a>检查并确认您的选择，单击下一步。</h4><p><img src="/Image/Windows_AD/Windows_AD_26.png"></p>
 <p><img src="/Image/Windows_AD/Windows_AD_27.png"></p>
 <p><img src="/Image/Windows_AD/Windows_AD_28.png"></p>
-<h4 id="所有先决条件都检查通过后，单击安装。-1"><a href="#所有先决条件都检查通过后，单击安装。-1" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a><font style="color:rgb(24, 24, 24);">所有先决条件都检查通过后，单击安装。</font></h4><p><img src="/Image/Windows_AD/Windows_AD_28.png"></p>
-<h1 id=""><a href="#" class="headerlink" title=""></a></h1>
+<h4 id="所有先决条件都检查通过后，单击安装。-1"><a href="#所有先决条件都检查通过后，单击安装。-1" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a>所有先决条件都检查通过后，单击安装。</h4><p><img src="/Image/Windows_AD/Windows_AD_28.png"></p>
+
     </div>
     
     

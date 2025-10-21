@@ -181,6 +181,172 @@
         
 
 <div class="post">
+    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+        <h2 class="post-title">三层交换VLAN互访配置</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/10/21
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="三层交换VLAN互访配置"><a href="#三层交换VLAN互访配置" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h1><p>在配置三层交换VLAN互访之前，先了解下VLAN配置，网口工作模式配置。</p>
+<h4 id="VLAN配置："><a href="#VLAN配置：" class="headerlink" title="VLAN配置："></a>VLAN配置：</h4><p>名词解释：</p>
+<ul>
+<li>Ethernet—————–以太网</li>
+<li>fastEthernet————-快速以太网</li>
+<li>GigabitEthernet———-千兆以太网</li>
+<li>TenGigabitEthernet——-万兆以太网</li>
+</ul>
+<p>以下是VLAN配置命令</p>
+<pre><code>Switch&gt;enable                                                         #进入特权模式
+
+Switch#configure  terminal                                            #进入全局配置模式
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+Switch(config)#interface  vlan 1                                      #进入交换机接口配置模式
+
+Switch(config-if)#ip address  IP.IP.IP.IP   SM.SM.SM.SM               #配置交换机的IP地址和子网掩码
+
+Switch(config-if)#end                                                 #退出
+
+Switch#show ip interface                                              #验证交换机IP地址已经配置，管理端口已经开启
+
+Switch#configure  terminal                                            #进入全局配置模式
+
+Switch(config)#hostname Test                                          #修改主机名称
+
+Test(config)#interface fastEthernet 0/3                               #进入端口
+
+Test(config-if)#speed 10                                              #限速100MB/S流量上限
+
+Test(config-if)#no shutdown                                           #激活端口
+
+Test#show interfaces fastEthernet 0/3                                 #查看端口配置情况
+
+Test#show mac address-tabl                                            #显示Mac地址
+
+Test#show running-config                                              #查看交换机的当前的配置信息
+
+Test#show ip interface                                                #查看接口信息
+</code></pre>
+<h4 id="网口工作模式："><a href="#网口工作模式：" class="headerlink" title="网口工作模式："></a>网口工作模式：</h4><p>Cisco网络设备支持动态协商端口的工作状态，这为网络设备的实施提供了一定的方便（但不建议使用动态方式）。cisco动态协商协议从最初的DISL（Cisco私有协议）发展到DTP（公有协议）。根据动态协议的实现方式，Cisco网络设备接口主要分为下面几种模式：<br>switchport mode access:  强制接口成为access接口，并且可以与对方主动进行协商，诱使对方成为access模式。</p>
+<p>switchport mode dynamic desirable：主动与对协商成为Trunk接口的可能性，如果邻居接口模式为Trunk&#x2F;desirable&#x2F;auto之一，则接口将变成trunk接口工作。如果不能形成trunk模式，则工作在access模式。这种模式是现在交换机的默认模式。</p>
+<p>switchport mode dynamic auto:  只有邻居交换机主动与自己协商时才会变成Trunk接口，所以它是一种被动模式，当邻居接口为Trunk／desirable之一时，才会成为Trunk。如果不能形成trunk模式，则工作在access模式。</p>
+<p>switchport mode trunk:  强制接口成为Trunk接口，并且主动诱使对方成为Trunk模式，所以当邻居交换机接口为trunk&#x2F;desirable&#x2F;auto时会成为Trunk接口。</p>
+<p>switchport nonegotiate:  严格的说，这不算是种接口模式，它的作用只是阻止交换机接口发出DTP数据包，它必须与switchport mode trunk或者switchport mode access一起使用。</p>
+<p>switchport mode dot1q-tunnel：　配置交换机接口为隧道接口（非Trunk），以便与用户交换机的Trunk接口形成不对称链路。</p>
+<hr>
+<h2 id="三层交换VLAN互访配置-1"><a href="#三层交换VLAN互访配置-1" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h2><p><img src="/Images/Layer_3_Switching/Layer_3_Switching_1.png" alt="image"><br>上图是三层交换的扩扑图</p>
+<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_2.png" alt="image"><br>三层交换机的Fa0&#x2F;1和Fa0&#x2F;2分别连接到下面的两个二层交换机，并将Fa0&#x2F;1和Fa0&#x2F;2做了Trunk。</p>
+<p>以下是三层交换机的配置：</p>
+<p>创建VLAN：</p>
+<pre><code>Switch&gt;
+Switch&gt;en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#exit
+</code></pre>
+<p>为VLAN配置IP和子网掩码：</p>
+<pre><code>Switch(config)#int vlan 10
+Switch(config-if)#
+%LINK-5-CHANGED: Interface Vlan10, changed state to up
+Switch(config-if)#ip add 192.168.1.1 255.255.255.0
+Switch(config-if)#no shut
+Switch(config-if)#exit
+
+Switch(config)#int vlan 20
+Switch(config-if)#
+%LINK-5-CHANGED: Interface Vlan20, changed state to up
+Switch(config-if)#ip add 192.168.2.1 255.255.255.0
+Switch(config-if)#no shut
+Switch(config-if)#exit
+</code></pre>
+<p>为fastEthernet 0&#x2F;1和fastEthernet 0&#x2F;2创建trunk并启动三层交换机的路由功能</p>
+<pre><code>Switch(config)#interface fastEthernet 0/1
+Switch(config-if)#switchport mode access 
+Switch(config-if)#switchport mode trunk 
+Switch(config-if)#exit
+
+Switch(config)#int fastEthernet 0/2
+Switch(config-if)#switchport mode access 
+Switch(config-if)#switchport mode trunk 
+Switch(config-if)#exit
+
+Switch#(config)#ip routing
+Switch#(config)#end
+Switch#write 
+Building configuration...
+[OK]
+</code></pre>
+<p>以上是三层交换的配置，下面开始配置二层交换机：</p>
+<p>创建VLAN：</p>
+<pre><code>Switch&gt;en
+Switch#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#vlan 10
+Switch(config-vlan)#exit
+Switch(config)#vlan 20
+Switch(config-vlan)#exit
+</code></pre>
+<p>将VLAN和fastEthernet绑定：</p>
+<pre><code>Switch(config)#interface fastEthernet 0/1
+Switch(config-if)#switchport mode access 
+Switch(config-if)#switchport access vlan 10
+Switch(config-if)#exit
+
+Switch(config)#interface fastEthernet 0/2
+Switch(config-if)#switchport mode access 
+Switch(config-if)#switchport access vlan 20
+Switch(config-if)#exit
+</code></pre>
+<p>这里二层交换的fastEthernet 0&#x2F;24是和三层交换机相互连接，这里需要为fastEthernet 0&#x2F;24做trunk,并做保存。</p>
+<pre><code>Switch(config)#interface fastEthernet 0/24
+Switch(config-if)#sw
+Switch(config-if)#switchport acc
+Switch(config-if)#switchport mo
+Switch(config-if)#switchport mode ac
+Switch(config-if)#switchport mode access 
+Switch(config-if)#sw mo
+Switch(config-if)#sw
+Switch(config-if)#switchport mo
+Switch(config-if)#switchport mode re
+Switch(config-if)#switchport mode tr
+Switch(config-if)#switchport mode trunk 
+Switch(config-if)#end
+Switch#write 
+Building configuration...
+[OK]
+</code></pre>
+<p>二层交换配置完成，另外一台二层交换机的配置与此交换机配置相同。</p>
+<p>当PC1向PC4发送数据的时候，数据通过VLAN进入三层交换机，三层交换机查询路由表后将数据转给PC4。</p>
+<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_3.gif" alt="image"></p>
+<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_4.png" alt="image"></p>
+<p>至此，三层交换VLAN互访配置完成！</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
         <h2 class="post-title">Huawei交换机基础配置命令</h2>
     </a>

@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <title>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构 | 黄先生的小站</title>
+    <meta name="author" content="黄先生" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/Images/themes/avatar.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/Images/themes/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>黄先生的小站</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;主页</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;分类</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;黄先生的小站</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/10/21
+        </span>
+        
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h1 id="搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构"><a href="#搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构" class="headerlink" title="搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构"></a>搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><p>初期的互联网企业由于业务量较小，所以一般单机部署，实现单点访问即可满足业务的需求，这也是最简单的部署方式，但是随着业务的不断扩大，系统的访问量逐渐的上升，单机部署的模式已无法承载现有的业务量，需要进行服务集群化部署，本文主要介绍服务端Tomcat多实例部署，以及如何保证web服务的高可用方案。</p>
+<ul>
+<li><p>Nginx 是一个高性能的 HTTP反向代理服务器</p>
+</li>
+<li><p>Keepalived 是一个基于VRRP协议来实现的LVS服务高可用方案，可以利用其来避免服务的单点故障</p>
+</li>
+<li><p>Tomcat 是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器。</p>
+</li>
+</ul>
+<h2 id="2-Nginx的高可用负载均衡架构"><a href="#2-Nginx的高可用负载均衡架构" class="headerlink" title="2 Nginx的高可用负载均衡架构"></a>2 Nginx的高可用负载均衡架构</h2><p>如下图：为典型的Tomcat服务多实例部署的架构图</p>
+<p><img src="/Images/Keepalived/Keepalived_1.png"></p>
+<p>1.用户通过域名请求到DNS，由DNS解析域名后返回对应的IP地址，该IP及为Keepalived映射服务器的虚拟IP</p>
+<p>2.通过该虚拟IP访问到对应的负载均衡器（Nginx），这里Nginx部署两个，然后通过Keepalived来保证NG的高可用，正常情况下由Keepalived-M将虚拟IP映射转发至Nginx-M，如果Nginx-M出现故障，此时Keepalived会切换至Keepalived-S开始工作，从而保证了NG的单点故障问题。</p>
+<p>3.通过Nginx负载均衡器，将请求路由到对应的Tomcat服务。</p>
+<h2 id="3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构"><a href="#3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构" class="headerlink" title="3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构"></a>3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构</h2><h4 id="3-1-需要准备的软件"><a href="#3-1-需要准备的软件" class="headerlink" title="3.1 需要准备的软件"></a>3.1 需要准备的软件</h4><p>（1）apache-tomcat-8.5.16.tar.gz</p>
+<p>（2）nginx-1.12.2.tar.gz</p>
+<p>（3）keepalived-1.3.9.tar.gz</p>
+<h4 id="3-2-服务器准备"><a href="#3-2-服务器准备" class="headerlink" title="3.2 服务器准备"></a>3.2 服务器准备</h4><p>两台服务器如：192.168.10.11，192.168.10.12</p>
+<h4 id="3-3-安装需要的依赖包"><a href="#3-3-安装需要的依赖包" class="headerlink" title="3.3 安装需要的依赖包"></a>3.3 安装需要的依赖包</h4><pre><code>yum -y install gcc gcc-c++ automake pcre pcre-devel zlib zlib-devel open openssl-devel
+</code></pre>
+<h4 id="3-4-安装"><a href="#3-4-安装" class="headerlink" title="3.4 安装"></a>3.4 安装</h4><h5 id="3-4-1-安装Tomcat"><a href="#3-4-1-安装Tomcat" class="headerlink" title="3.4.1 安装Tomcat"></a>3.4.1 安装Tomcat</h5><p>（1）分别在两台服务器中安装Tomcat，解压apache-tomcat-8.5.16.tar.gz及可完成安装。</p>
+<h5 id="3-4-2-安装Nginx"><a href="#3-4-2-安装Nginx" class="headerlink" title="3.4.2 安装Nginx"></a>3.4.2 安装Nginx</h5><p>（1）解压安装包：tar -zxvf nginx-1.12.2.tar.gz</p>
+<p>（2）进入到nginx-1.12.2目录：cd nginx-1.12.2</p>
+<p>（3）编译：</p>
+<pre><code>./configure --with-http_stub_status_module --with-http_ssl_module  --prefix=/usr/local/nginx
+make &amp;&amp; sudo make install
+</code></pre>
+<h5 id="3-4-3-安装Keepalived"><a href="#3-4-3-安装Keepalived" class="headerlink" title="3.4.3 安装Keepalived"></a>3.4.3 安装Keepalived</h5><p>（1）解压安装包：tar -zxvf keepalived-1.3.9.tar.gz</p>
+<p>（2）进入到keepalived-1.3.9目录：cd keepalived-1.3.9</p>
+<p>（3）执行编译：</p>
+<pre><code>./configure --prefix=/usr/local/keepalived --sysconf=/etc
+make &amp;&amp; sudo make install
+</code></pre>
+<h4 id="3-5-配置"><a href="#3-5-配置" class="headerlink" title="3.5 配置"></a>3.5 配置</h4><h5 id="3-5-1-分别配置两台服务器的Nginx"><a href="#3-5-1-分别配置两台服务器的Nginx" class="headerlink" title="3.5.1 分别配置两台服务器的Nginx"></a>3.5.1 分别配置两台服务器的Nginx</h5><p>（1）分别修改两台服务器nginx配置文件，vi &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>#nginx进程数
+worker_processes  1;
+
+#单个进程最大连接数
+events {
+    worker_connections  1024;
+}
+
+#http服务器配置
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+	#长连接超时时间，单位是秒
+    keepalive_timeout  65;
+	#upstream负载均衡配置，配置路由到tomcat的服务地址以及权重
+    upstream localhost{
+       server 192.168.10.11:8080 weight=2;
+       server 192.168.10.12:8080 weight=2;
+    }
+	
+	#虚拟主机的配置
+    server {
+	    #监听端口
+        listen       80;
+		 #域名可以有多个，用空格隔开
+        server_name  localhost;
+        location / {
+            root   html;
+            index  index.html index.htm;
+			#nginx跟后端服务器连接超时时间(代理连接超时)
+            proxy_connect_timeout 3;
+			#后端服务器数据回传时间(代理发送超时)
+            proxy_send_timeout 30;
+			#连接成功后，后端服务器响应时间(代理接收超时)
+            proxy_read_timeout 30;
+            proxy_pass http://localhost;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+</code></pre>
+<h5 id="3-5-2-主Keepalived配置"><a href="#3-5-2-主Keepalived配置" class="headerlink" title="3.5.2 主Keepalived配置"></a>3.5.2 主Keepalived配置</h5><p>（1）修改11服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>! Configuration File for keepalived
+#全局配置
+global_defs {
+   #keepalived切换的时候，发消息到指定的email，可配置多个email
+   notification_email {
+     feinik1@foxmail.com
+	 feinik2@foxmail.com
+   }
+   #通知邮件从哪个地址发出
+   notification_email_from feinik@foxmail.com
+   #通知邮件的smtp地址
+   smtp_server smtp.exmail.qq.com
+   #连接smtp服务器的超时时间，单位秒
+   smtp_connect_timeout 30
+   #Keepalived的机器标识，一个网络内保持唯一
+   router_id nginx-master
+}
+
+#执行脚本配置
+vrrp_script chk_nginx {
+	#脚本所在路径
+    script &quot;/home/project/keepalived/check_nginx.sh&quot;
+	#脚本执行间隔时间，秒
+    interval 2
+	#优先级
+    weight 2
+}
+#keepalived实例配置
+vrrp_instance VI_1 {
+	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
+    state MASTER
+	#实例绑定的网卡
+    interface ens33
+	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
+    virtual_router_id 51
+	#优先级，数值愈大，优先级越高
+    priority 100
+	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
+    advert_int 1
+	#通信验证
+    authentication {
+        auth_type PASS
+        auth_pass feinik
+    }
+	#追踪外围脚本
+    track_script {
+	    #这里配置vrrp_script的名称
+        chk_nginx
+    }
+	#虚拟ip配置，可配置多个
+    virtual_ipaddress {
+        192.168.10.200
+    }
+}
+</code></pre>
+<h5 id="3-5-3-备Keepalived配置"><a href="#3-5-3-备Keepalived配置" class="headerlink" title="3.5.3 备Keepalived配置"></a>3.5.3 备Keepalived配置</h5><p>（1）修改12服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>! Configuration File for keepalived
+#全局配置
+global_defs {
+   #keepalived切换的时候，发消息到指定的email，可配置多个email
+   notification_email {
+     feinik1@foxmail.com
+	 feinik2@foxmail.com
+   }
+   #通知邮件从哪个地址发出
+   notification_email_from feinik@foxmail.com
+   #通知邮件的smtp地址
+   smtp_server smtp.exmail.qq.com
+   #连接smtp服务器的超时时间，单位秒
+   smtp_connect_timeout 30
+   #Keepalived的机器标识，一个网络内保持唯一
+   router_id nginx-master
+}
+
+#执行脚本配置
+vrrp_script chk_nginx {
+	#脚本所在路径
+    script &quot;/home/project/keepalived/check_nginx.sh&quot;
+	#脚本执行间隔时间，秒
+    interval 2
+	#优先级
+    weight 2
+}
+#keepalived实例配置
+vrrp_instance VI_1 {
+	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
+    state BACKUP
+	#实例绑定的网卡
+    interface ens33
+	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
+    virtual_router_id 51
+	#优先级，数值愈大，优先级越高
+    priority 99
+	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
+    advert_int 1
+	#通信验证
+    authentication {
+        auth_type PASS
+        auth_pass feinik
+    }
+	#追踪外围脚本
+    track_script {
+	    #这里配置vrrp_script的名称
+        chk_nginx
+    }
+	#虚拟ip配置，可配置多个
+    virtual_ipaddress {
+        192.168.10.200
+    }
+}
+</code></pre>
+<h5 id="3-5-4-Nginx状态检查脚本创建"><a href="#3-5-4-Nginx状态检查脚本创建" class="headerlink" title="3.5.4 Nginx状态检查脚本创建"></a>3.5.4 Nginx状态检查脚本创建</h5><p>（1）新建Nginx的状态检查脚本：check_nginx.sh</p>
+<p>（2）内容如下：</p>
+<pre><code>#!/bin/sh
+NGINX=/usr/common/nginx/sbin/nginx
+PORT=80
+nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
+#echo $?
+if [ $? -ne 0 ];then
+    $NGINX -s stop
+    #这里再次尝试启动NG
+    $NGINX
+    sleep 5
+    nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
+    [ $? -ne 0 ] &amp;&amp; cd /usr/common/keepalived/sbin &amp;&amp; pkill keepalived
+    echo &quot;stoped&quot;
+fi
+</code></pre>
+<h2 id="4-运行测试"><a href="#4-运行测试" class="headerlink" title="4 运行测试"></a>4 运行测试</h2><p>（1）为了更直观的查看到keepalived切换的效果，将11服务器中的nginx的upstream服务只配置11的tomcat服务地址，12服务器中的upstream服务只配置12的tomcat服务地址，这样只需要观察将11服务器中的nginx关闭看使用虚拟ip是否可以访问到12服务器的tomcat。</p>
+<p>（2）分别启动两个服务器中的tomcat、nginx、keepalived，访问虚拟ip：192.168.10.200，可以查看到访问的是主keepalived服务器的tomcat</p>
+<p><img src="/Images/Keepalived/Keepalived_2.png"></p>
+<p>3）关闭11服务器的nginx，nginx -s stop，再次访问虚拟ip，如下：说明主keepalived通过配置的脚本检测到了本服务的nginx服务挂掉了，所以立马切换至了备的keepalived，这时12服务器的keepalived升为了主，所以就访问到了12服务器的tomcat。<br><img src="/Images/Keepalived/Keepalived_3.png"></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy; 2025 - 2025 HZ的小站
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            @hz1995
+        </div>
+        
+    </div>
+    <!-- 引入核心库 -->
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
+    <!-- 引入 Bash/Shell 语言支持（解决 language-shell 错误） -->
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/languages/bash.min.js"></script>
+    <!-- 纯文本（plaintext）通常无需额外引入，核心已支持 -->
+</footer>
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>

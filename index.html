@@ -205,26 +205,26 @@
 <li>钉钉机器人（需提前创建，获取 access_token 和加签 secret）</li>
 </ul>
 <h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><h3 id="1-创建工作流"><a href="#1-创建工作流" class="headerlink" title="1. 创建工作流"></a>1. 创建工作流</h3><p>登录 N8N 后，点击顶部导航栏的Create workflow按钮创建新工作流，开始配置监控流程。</p>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_1.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_1.png"></p>
 <h3 id="2-添加定时触发器（Schedule-Trigger）"><a href="#2-添加定时触发器（Schedule-Trigger）" class="headerlink" title="2. 添加定时触发器（Schedule Trigger）"></a>2. 添加定时触发器（Schedule Trigger）</h3><p>用于设置公告采集频率，配置如下：</p>
 <ul>
 <li>触发类型：选择时间间隔触发</li>
 <li>时间间隔：测试环境可设为每分钟，生产环境建议每小时（平衡时效性与资源消耗）</li>
 <li>时区：根据实际业务场景调整（默认与服务器时区一致</li>
 </ul>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_2.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_2.png"></p>
 <h3 id="3-添加-RSS-读取节点（RSS-Read）"><a href="#3-添加-RSS-读取节点（RSS-Read）" class="headerlink" title="3. 添加 RSS 读取节点（RSS Read）"></a>3. 添加 RSS 读取节点（RSS Read）</h3><p>用于获取阿里云公告的 RSS 订阅内容：</p>
 <ul>
 <li>在节点配置中填入阿里云公告 RSS 地址（例如产品公告、安全更新等特定分类的 RSS 链接）</li>
 <li>其他参数保持默认（自动解析 RSS XML 格式内容）</li>
 </ul>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_3.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_3.png"></p>
 <h3 id="4-添加过滤节点（Filter）"><a href="#4-添加过滤节点（Filter）" class="headerlink" title="4. 添加过滤节点（Filter）"></a>4. 添加过滤节点（Filter）</h3><p>用于筛选指定时间范围内的公告，避免重复处理历史数据：</p>
 <ul>
 <li>条件设置：pubDate（发布时间）大于等于当前时间减去指定天数</li>
 <li>测试环境建议设置为 7 天（便于验证流程），生产环境建议设置为 1 天（仅监控当天新公告）</li>
 </ul>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_4.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_4.png"></p>
 <h3 id="5-添加数据处理节点（Code-in-JavaScript）"><a href="#5-添加数据处理节点（Code-in-JavaScript）" class="headerlink" title="5. 添加数据处理节点（Code in JavaScript）"></a>5. 添加数据处理节点（Code in JavaScript）</h3><ul>
 <li>用于提取 RSS 内容中的关键信息（N8N 对 JavaScript 支持更完善），代码如下</li>
 </ul>
@@ -258,16 +258,16 @@ const transformedData = targetKeys.reduce((result, key) =&gt; &#123;
 // 返回处理结果作为节点输出
 return transformedData;
 </code></pre>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_5.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_5.png"></p>
 <h3 id="6-添加-AI-处理节点（AI-Agent）"><a href="#6-添加-AI-处理节点（AI-Agent）" class="headerlink" title="6. 添加 AI 处理节点（AI Agent）"></a>6. 添加 AI 处理节点（AI Agent）</h3><p>使用 AI 对公告内容进行分析提炼（以 DeepSeek 为例），快速抓取关键信息：</p>
 <ul>
 <li>模型选择：DeepSeek（可根据需求替换为其他支持的模型）</li>
 <li>提示词配置：请分析以下阿里云公告内容，提炼关键变更点和影响范围，用简洁的语言总结（不超过200字）</li>
 <li>输入数据：选择上一节点处理后的字段（title、content:encodedSnippet 等）</li>
 </ul>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_6.png"></p>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_7.png"></p>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_8.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_6.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_7.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_8.png"></p>
 <h3 id="7-添加钉钉签名处理（Code-in-Python）"><a href="#7-添加钉钉签名处理（Code-in-Python）" class="headerlink" title="7. 添加钉钉签名处理（Code in Python）"></a>7. 添加钉钉签名处理（Code in Python）</h3><p>为钉钉机器人请求生成加签信息（确保请求安全性），代码如下：</p>
 <pre><code>import time
 import hmac
@@ -293,7 +293,7 @@ for item in _input.all():
   item.json.sign = sign 
 return _input.all()
 </code></pre>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_9.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_9.png"></p>
 <h3 id="8-添加-HTTP-请求节点（HTTP-Request）"><a href="#8-添加-HTTP-请求节点（HTTP-Request）" class="headerlink" title="8. 添加 HTTP 请求节点（HTTP Request）"></a>8. 添加 HTTP 请求节点（HTTP Request）</h3><p>用于发送通知到钉钉机器人，配置如下：</p>
 <table>
 <thead>
@@ -335,14 +335,14 @@ return _input.all()
 <td>json { “msgtype”: “text”, “text”: { “content”: “阿里云公告提醒：\n标题：\n发布时间：\n摘要：\nAI分析：“ } }</td>
 </tr>
 </tbody></table>
-<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_10.png"></p>
+<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_10.png"></p>
 <h3 id="工作流测试与运行"><a href="#工作流测试与运行" class="headerlink" title="工作流测试与运行"></a>工作流测试与运行</h3><ul>
 <li>点击工作流编辑器右上角的Execute Workflow按钮进行测试</li>
 <li>检查各节点执行状态（绿色表示成功，红色表示失败），可通过节点日志排查错误</li>
 <li>测试成功后，点击Activate按钮启用工作流自动运行</li>
 </ul>
-<h3 id="任务流全景："><a href="#任务流全景：" class="headerlink" title="任务流全景："></a>任务流全景：</h3><p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_11.png"></p>
-<h3 id="消息展示："><a href="#消息展示：" class="headerlink" title="消息展示："></a>消息展示：</h3><p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_12.png"></p>
+<h3 id="任务流全景："><a href="#任务流全景：" class="headerlink" title="任务流全景："></a>任务流全景：</h3><p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_11.png"></p>
+<h3 id="消息展示："><a href="#消息展示：" class="headerlink" title="消息展示："></a>消息展示：</h3><p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_12.png"></p>
 
             
         </div>
@@ -357,7 +357,7 @@ return _input.all()
         
         <span class="tag">
             
-            <a href="/tags/%E5%91%8A%E8%AD%A6/" style="color: #03a9f4">告警</a>
+            <a href="/tags/%E5%91%8A%E8%AD%A6/" style="color: #00a596">告警</a>
         </span>
         
         <span class="tag">
@@ -367,7 +367,7 @@ return _input.all()
         
         <span class="tag">
             
-            <a href="/tags/%E8%AE%A2%E9%98%85/" style="color: #ffa2c4">订阅</a>
+            <a href="/tags/%E8%AE%A2%E9%98%85/" style="color: #ff7d73">订阅</a>
         </span>
         
         <span class="tag">
@@ -377,7 +377,7 @@ return _input.all()
         
         <span class="tag">
             
-            <a href="/tags/N8N/" style="color: #ff7d73">N8N</a>
+            <a href="/tags/N8N/" style="color: #ffa2c4">N8N</a>
         </span>
         
     </div>
@@ -632,17 +632,17 @@ fi
         
         <span class="tag">
             
-            <a href="/tags/Nginx/" style="color: #ffa2c4">Nginx</a>
+            <a href="/tags/Nginx/" style="color: #00a596">Nginx</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Tomcat/" style="color: #ff7d73">Tomcat</a>
+            <a href="/tags/Tomcat/" style="color: #00bcd4">Tomcat</a>
         </span>
         
         <span class="tag">
             
-            <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="color: #03a9f4">Keepalived 网络</a>
+            <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="color: #ff7d73">Keepalived 网络</a>
         </span>
         
     </div>
@@ -1119,7 +1119,7 @@ dldp reset命令在全局下可以重置所有端口的DLDP状态，在接口下
         
         <span class="tag">
             
-            <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="color: #03a9f4">Huawei 交换机 基础配置 命令</a>
+            <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="color: #00a596">Huawei 交换机 基础配置 命令</a>
         </span>
         
     </div>
@@ -1195,7 +1195,7 @@ dldp reset命令在全局下可以重置所有端口的DLDP状态，在接口下
         
         <span class="tag">
             
-            <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="color: #00a596">Windows AD 域 冗余</a>
+            <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="color: #03a9f4">Windows AD 域 冗余</a>
         </span>
         
     </div>

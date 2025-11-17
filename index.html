@@ -1,1274 +1,929 @@
-
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="黄先生">
+    
+    
+    
+    
+    
+    
     <title>黄先生的小站</title>
-    <meta name="author" content="黄先生" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
-    <link rel="icon" href="/Images/themes/avatar.jpg" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
-<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.cn" />
-<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
-<link
-    rel="stylesheet"
-    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
-/>
-<script> const mixins = {}; </script>
+    <link href="https://i-love-you.work" rel="prefetch" />
 
-<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
 
+    
+<script src="/js/jquery.min.js"></script>
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
+    
+<script src="/js/bootstrap.min.js"></script>
 
+    
+<script src="/js/aos.js"></script>
 
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
 
-<script src="/js/lib/preview.js"></script>
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
 
-
-
-
-
-<script src="/js/lib/home.js"></script>
-
-<link rel="stylesheet" href="/css/main.css" />
-
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
 <meta name="generator" content="Hexo 8.1.1"></head>
 <body>
-    <div id="layout">
-        <transition name="fade">
-            <div id="loading" v-show="loading">
-                <div id="loading-circle">
-                    <h2>LOADING</h2>
-                    <p>加载过慢请开启缓存 浏览器默认开启</p>
-                    <img src="/Images/themes/loading.gif" />
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://i-love-you.work">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">黄先生的小站</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="current">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/">Huawei 交换机 基础配置 命令</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/">Windows AD 域 冗余</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/">Cisco 三层交换 VLAN 互访</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<div class="alert well fade in" id="gal-issue" role="alert">
+    <!-- TODO 添加关闭公告框功能 -->
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <!-- 这里自行配置公告内容 -->
+    这里是公告内容
+    <br>
+    配置相关说明请看<strong>_config.yml</strong>
+    <!-- 自行配置公告内容结束 -->
+</div>
+
+<div id="article-list">
+     
+     
+     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+    
+    <div class="data-article hidden-xs">
+        <span class="month">11月</span>
+        <span class="day">17</span>
+    </div>
+    <!-- 大型设备文章 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+                    <span>如何在N8N上创建一个RSS订阅</span>
+                </a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/%E5%91%8A%E8%AD%A6/">告警</a>, 
+                
+                <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>, 
+                
+                <a href="/tags/%E8%AE%A2%E9%98%85/">订阅</a>, 
+                
+                <a href="/tags/AI/">AI</a>, 
+                
+                <a href="/tags/N8N/">N8N</a>
+                
+            </span>
+            
+            
+            <!-- TODO 添加评论统计 -->
+            <!--<span class="label label-gal">
+                <i class="fa fa-comments"></i>
+                <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/#comments">739</a>
+            </span>-->
+        </div>
+        <div class="alert alert-gal article-body content-article">
+            <div class="item">
+                <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview1.jpg" alt="如何在N8N上创建一个RSS订阅">
+                    </div>
+                    <div class="info">
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="visible-xs">
+        <div class="title-article">
+            <center>
+                <h4>
+                    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+                        <span>如何在N8N上创建一个RSS订阅</span>
+                    </a>
+                </h4>
+            </center>
+        </div>
+        <p></p>
+        <center>
+            <i class="fa fa-calendar"></i> 2025-11-17
+        </center>
+        <p></p>
+        <p></p>
+        <center>
+            
+            <i class="fa fa-tags"></i>
+            
+            <a href="/tags/%E5%91%8A%E8%AD%A6/">告警</a>, 
+            
+            <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>, 
+            
+            <a href="/tags/%E8%AE%A2%E9%98%85/">订阅</a>, 
+            
+            <a href="/tags/AI/">AI</a>, 
+            
+            <a href="/tags/N8N/">N8N</a>
+            
+            
+            
+        </center>
+        <p></p>
+        <div class="alert alert-gal article-body content-article">
+            <p style="text-align: center;">
+                <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+                    
+                    <img src="/imgs/preview/preview1.jpg" alt="如何在N8N上创建一个RSS订阅">
+                </a>
+            </p>
+        </div>
+        
+        <a class="btn btn-danger pull-right read-more btn-block" href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+            阅读全文
+            <!--<span class="badge">739</span>-->
+        </a>
+    </section>
+</div>
+     
+     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+    
+    <div class="data-article hidden-xs">
+        <span class="month">10月</span>
+        <span class="day">21</span>
+    </div>
+    <!-- 大型设备文章 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
+                    <span>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</span>
+                </a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Nginx/">Nginx</a>, 
+                
+                <a href="/tags/Tomcat/">Tomcat</a>, 
+                
+                <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/">Keepalived 网络</a>
+                
+            </span>
+            
+            
+            <!-- TODO 添加评论统计 -->
+            <!--<span class="label label-gal">
+                <i class="fa fa-comments"></i>
+                <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/#comments">739</a>
+            </span>-->
+        </div>
+        <div class="alert alert-gal article-body content-article">
+            <div class="item">
+                <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview1.jpg" alt="搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构">
+                    </div>
+                    <div class="info">
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="visible-xs">
+        <div class="title-article">
+            <center>
+                <h4>
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
+                        <span>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</span>
+                    </a>
+                </h4>
+            </center>
+        </div>
+        <p></p>
+        <center>
+            <i class="fa fa-calendar"></i> 2025-10-21
+        </center>
+        <p></p>
+        <p></p>
+        <center>
+            
+            <i class="fa fa-tags"></i>
+            
+            <a href="/tags/Nginx/">Nginx</a>, 
+            
+            <a href="/tags/Tomcat/">Tomcat</a>, 
+            
+            <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/">Keepalived 网络</a>
+            
+            
+            
+        </center>
+        <p></p>
+        <div class="alert alert-gal article-body content-article">
+            <p style="text-align: center;">
+                <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
+                    
+                    <img src="/imgs/preview/preview2.jpg" alt="搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构">
+                </a>
+            </p>
+        </div>
+        
+        <a class="btn btn-danger pull-right read-more btn-block" href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
+            阅读全文
+            <!--<span class="badge">739</span>-->
+        </a>
+    </section>
+</div>
+     
+     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+    
+    <div class="data-article hidden-xs">
+        <span class="month">10月</span>
+        <span class="day">21</span>
+    </div>
+    <!-- 大型设备文章 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+                    <span>三层交换VLAN互访配置</span>
+                </a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/">Cisco 三层交换 VLAN 互访</a>
+                
+            </span>
+            
+            
+            <!-- TODO 添加评论统计 -->
+            <!--<span class="label label-gal">
+                <i class="fa fa-comments"></i>
+                <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/#comments">739</a>
+            </span>-->
+        </div>
+        <div class="alert alert-gal article-body content-article">
+            <div class="item">
+                <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview4.jpg" alt="三层交换VLAN互访配置">
+                    </div>
+                    <div class="info">
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="visible-xs">
+        <div class="title-article">
+            <center>
+                <h4>
+                    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+                        <span>三层交换VLAN互访配置</span>
+                    </a>
+                </h4>
+            </center>
+        </div>
+        <p></p>
+        <center>
+            <i class="fa fa-calendar"></i> 2025-10-21
+        </center>
+        <p></p>
+        <p></p>
+        <center>
+            
+            <i class="fa fa-tags"></i>
+            
+            <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/">Cisco 三层交换 VLAN 互访</a>
+            
+            
+            
+        </center>
+        <p></p>
+        <div class="alert alert-gal article-body content-article">
+            <p style="text-align: center;">
+                <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+                    
+                    <img src="/imgs/preview/preview2.jpg" alt="三层交换VLAN互访配置">
+                </a>
+            </p>
+        </div>
+        
+        <a class="btn btn-danger pull-right read-more btn-block" href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
+            阅读全文
+            <!--<span class="badge">739</span>-->
+        </a>
+    </section>
+</div>
+     
+     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+    
+    <div class="data-article hidden-xs">
+        <span class="month">10月</span>
+        <span class="day">17</span>
+    </div>
+    <!-- 大型设备文章 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
+                    <span>Huawei交换机基础配置命令</span>
+                </a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/">Huawei 交换机 基础配置 命令</a>
+                
+            </span>
+            
+            
+            <!-- TODO 添加评论统计 -->
+            <!--<span class="label label-gal">
+                <i class="fa fa-comments"></i>
+                <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/#comments">739</a>
+            </span>-->
+        </div>
+        <div class="alert alert-gal article-body content-article">
+            <div class="item">
+                <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview4.jpg" alt="Huawei交换机基础配置命令">
+                    </div>
+                    <div class="info">
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="visible-xs">
+        <div class="title-article">
+            <center>
+                <h4>
+                    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
+                        <span>Huawei交换机基础配置命令</span>
+                    </a>
+                </h4>
+            </center>
+        </div>
+        <p></p>
+        <center>
+            <i class="fa fa-calendar"></i> 2025-10-17
+        </center>
+        <p></p>
+        <p></p>
+        <center>
+            
+            <i class="fa fa-tags"></i>
+            
+            <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/">Huawei 交换机 基础配置 命令</a>
+            
+            
+            
+        </center>
+        <p></p>
+        <div class="alert alert-gal article-body content-article">
+            <p style="text-align: center;">
+                <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
+                    
+                    <img src="/imgs/preview/preview3.jpg" alt="Huawei交换机基础配置命令">
+                </a>
+            </p>
+        </div>
+        
+        <a class="btn btn-danger pull-right read-more btn-block" href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
+            阅读全文
+            <!--<span class="badge">739</span>-->
+        </a>
+    </section>
+</div>
+     
+     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+    
+    <div class="data-article hidden-xs">
+        <span class="month">10月</span>
+        <span class="day">17</span>
+    </div>
+    <!-- 大型设备文章 -->
+    <section class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
+                    <span>Windows搭建AD域冗余</span>
+                </a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/">Windows AD 域 冗余</a>
+                
+            </span>
+            
+            
+            <!-- TODO 添加评论统计 -->
+            <!--<span class="label label-gal">
+                <i class="fa fa-comments"></i>
+                <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/#comments">739</a>
+            </span>-->
+        </div>
+        <div class="alert alert-gal article-body content-article">
+            <div class="item">
+                <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview3.jpg" alt="Windows搭建AD域冗余">
+                    </div>
+                    <div class="info">
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="visible-xs">
+        <div class="title-article">
+            <center>
+                <h4>
+                    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
+                        <span>Windows搭建AD域冗余</span>
+                    </a>
+                </h4>
+            </center>
+        </div>
+        <p></p>
+        <center>
+            <i class="fa fa-calendar"></i> 2025-10-17
+        </center>
+        <p></p>
+        <p></p>
+        <center>
+            
+            <i class="fa fa-tags"></i>
+            
+            <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/">Windows AD 域 冗余</a>
+            
+            
+            
+        </center>
+        <p></p>
+        <div class="alert alert-gal article-body content-article">
+            <p style="text-align: center;">
+                <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
+                    
+                    <img src="/imgs/preview/preview1.jpg" alt="Windows搭建AD域冗余">
+                </a>
+            </p>
+        </div>
+        
+        <a class="btn btn-danger pull-right read-more btn-block" href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
+            阅读全文
+            <!--<span class="badge">739</span>-->
+        </a>
+    </section>
+</div>
+     
+</div>
+<!-- 前方最多7个 < 1 2 3 4 5 6 -->
+<!-- 前方超过第7页则分为 < 1 ... (n - 3) (n - 2) (n - 1) n, 此时前面为固定的6个 -->
+
+<!-- 后方最多8个 (n + 1) 到 (n + 7) > -->
+<!-- 如果末页和当前页相差超过7, 此时后面为固定的6个, (n + 1) (n + 2) (n + 3) ... total > -->
+
+
+
+<div id="gal-pagination" class="clearfix">
+    <ul class="pagination pagination-gal pull-right">
+        
+        
+        
+        
+        <li class="current">
+            <span>1</span>
+        </li>
+        
+        
+        
+        
+    </ul>
+</div>
+
+<!-- 加上这段代码原因： gitment在首页加载时, 如果找不到对应的控件会报错，此处加上，同时设置为none，防止报错 -->   
+
                 </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            黄先生
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">如何在N8N上创建一个RSS订阅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">三层交换VLAN互访配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">Huawei交换机基础配置命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">Windows搭建AD域冗余</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">Huawei交换机基础配置命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">Windows搭建AD域冗余</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">三层交换VLAN互访配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">如何在N8N上创建一个RSS订阅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 14.892227049245367px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
+    
+    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 19.62138590951374px;" class="tag-cloud-link">Windows AD 域 冗余</a>
+    
+    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 10.343710421243093px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
+    
+    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 18.264193219622598px;" class="tag-cloud-link">告警</a>
+    
+    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 9.175514143403412px;" class="tag-cloud-link">监控</a>
+    
+    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 18.492065110692643px;" class="tag-cloud-link">订阅</a>
+    
+    <a href="/tags/AI/" style="font-size: 11.661622335310447px;" class="tag-cloud-link">AI</a>
+    
+    <a href="/tags/N8N/" style="font-size: 9.25245506005707px;" class="tag-cloud-link">N8N</a>
+    
+    <a href="/tags/Nginx/" style="font-size: 14.621894623411823px;" class="tag-cloud-link">Nginx</a>
+    
+    <a href="/tags/Tomcat/" style="font-size: 11.513614935997118px;" class="tag-cloud-link">Tomcat</a>
+    
+    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 14.874256132686533px;" class="tag-cloud-link">Keepalived 网络</a>
+    
+</div>
+                
+                
+                
             </div>
-        </transition>
-        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
-    <nav id="desktop-menu">
-        <a class="title" href="/">
-            <span>黄先生的小站</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;主页</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;关于</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;归档</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;分类</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;标签</span>
-        </a>
-        
-    </nav>
-    <nav id="mobile-menu">
-        <div class="title" @click="showMenuItems = !showMenuItems">
-            <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;黄先生的小站</span>
         </div>
-        <transition name="slide">
-            <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">主页</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">分类</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
-                    </div>
-                </a>
-                
+    </aside>
+    
+</aside>
             </div>
-        </transition>
-    </nav>
-</div>
-<transition name="fade">
-    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
-</transition>
-
-        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="home-head">
-    <div
-        id="home-background"
-        ref="homeBackground"
-        data-images="/Images/themes/background/background_0099.png,/Images/themes/background/background_0098.png,/Images/themes/background/background_0097.png,/Images/themes/background/background_0096.png,/Images/themes/background/background_0095.png,/Images/themes/background/background_0094.png,/Images/themes/background/background_0093.png,/Images/themes/background/background_0092.png,/Images/themes/background/background_0091.png,/Images/themes/background/background_0090.png,/Images/themes/background/background_009.png,/Images/themes/background/background_0089.png,/Images/themes/background/background_0088.png,/Images/themes/background/background_0087.png,/Images/themes/background/background_0086.png,/Images/themes/background/background_0085.png,/Images/themes/background/background_0084.png,/Images/themes/background/background_0083.png,/Images/themes/background/background_0082.png,/Images/themes/background/background_0081.png,/Images/themes/background/background_0080.png,/Images/themes/background/background_008.png,/Images/themes/background/background_0079.png,/Images/themes/background/background_0078.png,/Images/themes/background/background_0077.png,/Images/themes/background/background_0076.png,/Images/themes/background/background_0075.png,/Images/themes/background/background_0074.png,/Images/themes/background/background_0073.png,/Images/themes/background/background_0072.png,/Images/themes/background/background_0071.png,/Images/themes/background/background_0070.png,/Images/themes/background/background_007.png,/Images/themes/background/background_0069.png,/Images/themes/background/background_0068.png,/Images/themes/background/background_0067.png,/Images/themes/background/background_0066.png,/Images/themes/background/background_0065.png,/Images/themes/background/background_0064.png,/Images/themes/background/background_0063.png,/Images/themes/background/background_0062.png,/Images/themes/background/background_0061.png,/Images/themes/background/background_0060.png,/Images/themes/background/background_006.png,/Images/themes/background/background_0059.png,/Images/themes/background/background_0058.png,/Images/themes/background/background_0057.png,/Images/themes/background/background_0056.png,/Images/themes/background/background_0055.png,/Images/themes/background/background_0054.png,/Images/themes/background/background_0053.png,/Images/themes/background/background_0052.png,/Images/themes/background/background_0051.png,/Images/themes/background/background_0050.png,/Images/themes/background/background_005.png,/Images/themes/background/background_0049.png,/Images/themes/background/background_0048.png,/Images/themes/background/background_0047.png,/Images/themes/background/background_0046.png,/Images/themes/background/background_0045.png,/Images/themes/background/background_0044.png,/Images/themes/background/background_0043.png,/Images/themes/background/background_0042.png,/Images/themes/background/background_0041.png,/Images/themes/background/background_0040.png,/Images/themes/background/background_004.png,/Images/themes/background/background_0039.png,/Images/themes/background/background_0038.png,/Images/themes/background/background_0037.png,/Images/themes/background/background_0036.png,/Images/themes/background/background_0035.png,/Images/themes/background/background_0034.png,/Images/themes/background/background_0033.png,/Images/themes/background/background_0032.png,/Images/themes/background/background_0031.png,/Images/themes/background/background_0030.png,/Images/themes/background/background_003.png,/Images/themes/background/background_0029.png,/Images/themes/background/background_0028.png,/Images/themes/background/background_0027.png,/Images/themes/background/background_0026.png,/Images/themes/background/background_0025.png,/Images/themes/background/background_0024.png,/Images/themes/background/background_0023.png,/Images/themes/background/background_0022.png,/Images/themes/background/background_0021.png,/Images/themes/background/background_0020.png,/Images/themes/background/background_002.png,/Images/themes/background/background_0019.png,/Images/themes/background/background_0018.png,/Images/themes/background/background_0017.png,/Images/themes/background/background_0016.png,/Images/themes/background/background_00150.png,/Images/themes/background/background_0015.png,/Images/themes/background/background_00149.png,/Images/themes/background/background_00148.png,/Images/themes/background/background_00147.png,/Images/themes/background/background_00146.png,/Images/themes/background/background_00145.png,/Images/themes/background/background_00144.png,/Images/themes/background/background_00143.png,/Images/themes/background/background_00142.png,/Images/themes/background/background_00141.png,/Images/themes/background/background_00140.png,/Images/themes/background/background_0014.png,/Images/themes/background/background_00139.png,/Images/themes/background/background_00138.png,/Images/themes/background/background_00137.png,/Images/themes/background/background_00136.png,/Images/themes/background/background_00135.png,/Images/themes/background/background_00134.png,/Images/themes/background/background_00133.png,/Images/themes/background/background_00132.png,/Images/themes/background/background_00131.png,/Images/themes/background/background_00130.png,/Images/themes/background/background_0013.png,/Images/themes/background/background_00129.png,/Images/themes/background/background_00128.png,/Images/themes/background/background_00127.png,/Images/themes/background/background_00126.png,/Images/themes/background/background_00125.png,/Images/themes/background/background_00124.png,/Images/themes/background/background_00123.png,/Images/themes/background/background_00122.png,/Images/themes/background/background_00121.png,/Images/themes/background/background_00120.png,/Images/themes/background/background_0012.png,/Images/themes/background/background_00119.png,/Images/themes/background/background_00118.png,/Images/themes/background/background_00117.png,/Images/themes/background/background_00116.png,/Images/themes/background/background_00115.png,/Images/themes/background/background_00114.png,/Images/themes/background/background_00113.png,/Images/themes/background/background_00112.png,/Images/themes/background/background_00111.png,/Images/themes/background/background_00110.png,/Images/themes/background/background_0011.png,/Images/themes/background/background_00109.png,/Images/themes/background/background_00108.png,/Images/themes/background/background_00107.png,/Images/themes/background/background_00106.png,/Images/themes/background/background_00105.png,/Images/themes/background/background_00104.png,/Images/themes/background/background_00103.png,/Images/themes/background/background_00102.png,/Images/themes/background/background_00101.png,/Images/themes/background/background_00100.png,/Images/themes/background/background_0010.png,/Images/themes/background/background_001.jpg"
-    ></div>
-    <div id="home-info" @click="homeClick">
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="loop"></span>
-        <span class="info">
-            <div class="wrap">
-                <h1>黄先生的小站</h1>
-                <h3></h3>
-                <h5></h5>
-            </div>
-        </span>
-    </div>
-</div>
-<div
-    id="home-posts-wrap"
-    ref="homePostsWrap"
-    true
->
-    <div id="home-posts">
-        
-
-<div class="post">
-    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
-        <h2 class="post-title">如何在N8N上创建一个RSS订阅</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/11/17
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="用-N8N-搭建阿里云公告监控告警系统"><a href="#用-N8N-搭建阿里云公告监控告警系统" class="headerlink" title="用 N8N 搭建阿里云公告监控告警系统"></a>用 N8N 搭建阿里云公告监控告警系统</h1><p>近期在使用阿里云服务时，遇到了一次颇为棘手的问题 —— 某项核心配置在未收到任何官方告知的情况下被自动回滚，不仅导致服务临时异常，更造成了关键业务日志的丢失，排查与恢复耗费了大量时间。事后复盘发现，核心原因在于未能及时获取阿里云的官方配置调整公告与更新通知，错过了提前规避风险的机会。<br>为了避免类似问题再次发生，我决定用 N8N 快速搭建一套阿里云公告 RSS 采集器，实现公告内容的实时抓取与提醒。本文将详细记录整个采集器的搭建过程（注：不包含 N8N 的部署环节，默认已完成基础环境配置），帮助有同样需求的开发者快速落地公告监控方案，让服务变更尽在掌握。</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>已部署 N8N 基础环境</li>
-<li>阿里云公告 RSS 订阅地址（可从阿里云官网公告页面获取）</li>
-<li>钉钉机器人（需提前创建，获取 access_token 和加签 secret）</li>
-</ul>
-<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><h3 id="1-创建工作流"><a href="#1-创建工作流" class="headerlink" title="1. 创建工作流"></a>1. 创建工作流</h3><p>登录 N8N 后，点击顶部导航栏的Create workflow按钮创建新工作流，开始配置监控流程。</p>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_1.png"></p>
-<h3 id="2-添加定时触发器（Schedule-Trigger）"><a href="#2-添加定时触发器（Schedule-Trigger）" class="headerlink" title="2. 添加定时触发器（Schedule Trigger）"></a>2. 添加定时触发器（Schedule Trigger）</h3><p>用于设置公告采集频率，配置如下：</p>
-<ul>
-<li>触发类型：选择时间间隔触发</li>
-<li>时间间隔：测试环境可设为每分钟，生产环境建议每小时（平衡时效性与资源消耗）</li>
-<li>时区：根据实际业务场景调整（默认与服务器时区一致</li>
-</ul>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_2.png"></p>
-<h3 id="3-添加-RSS-读取节点（RSS-Read）"><a href="#3-添加-RSS-读取节点（RSS-Read）" class="headerlink" title="3. 添加 RSS 读取节点（RSS Read）"></a>3. 添加 RSS 读取节点（RSS Read）</h3><p>用于获取阿里云公告的 RSS 订阅内容：</p>
-<ul>
-<li>在节点配置中填入阿里云公告 RSS 地址（例如产品公告、安全更新等特定分类的 RSS 链接）</li>
-<li>其他参数保持默认（自动解析 RSS XML 格式内容）</li>
-</ul>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_3.png"></p>
-<h3 id="4-添加过滤节点（Filter）"><a href="#4-添加过滤节点（Filter）" class="headerlink" title="4. 添加过滤节点（Filter）"></a>4. 添加过滤节点（Filter）</h3><p>用于筛选指定时间范围内的公告，避免重复处理历史数据：</p>
-<ul>
-<li>条件设置：pubDate（发布时间）大于等于当前时间减去指定天数</li>
-<li>测试环境建议设置为 7 天（便于验证流程），生产环境建议设置为 1 天（仅监控当天新公告）</li>
-</ul>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_4.png"></p>
-<h3 id="5-添加数据处理节点（Code-in-JavaScript）"><a href="#5-添加数据处理节点（Code-in-JavaScript）" class="headerlink" title="5. 添加数据处理节点（Code in JavaScript）"></a>5. 添加数据处理节点（Code in JavaScript）</h3><ul>
-<li>用于提取 RSS 内容中的关键信息（N8N 对 JavaScript 支持更完善），代码如下</li>
-</ul>
-<pre><code>// 从输入数据中安全获取第一条记录
-// 使用可选链操作符(?.)避免$input为空时调用first()报错
-// 若$input或first()返回空值，则默认使用空对象&#123;&#125;
-const item = $input?.first() || &#123;&#125;;
-
-// 从item中解构出json字段，并设置默认值为空对象&#123;&#125;
-// 防止item.json不存在时，后续访问json的属性报错
-const &#123; json = &#123;&#125; &#125; = item;
-
-// 定义需要从json中提取的目标字段列表
-const targetKeys = [
-  &#39;title&#39;,               // 标题字段
-  &#39;pubDate&#39;,             // 发布日期字段
-  &#39;content:encodedSnippet&#39;, // 内容摘要字段
-  &#39;categories&#39;           // 分类字段
-];
-
-// 使用reduce方法遍历目标字段，构建处理后的结果对象
-const transformedData = targetKeys.reduce((result, key) =&gt; &#123;
-  const value = json[key];
-  // 过滤掉值为undefined或null的字段
-  if (value !== undefined &amp;&amp; value !== null) &#123;
-    result[key] = value;
-  &#125;
-  return result;
-&#125;, &#123;&#125;);
-
-// 返回处理结果作为节点输出
-return transformedData;
-</code></pre>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_5.png"></p>
-<h3 id="6-添加-AI-处理节点（AI-Agent）"><a href="#6-添加-AI-处理节点（AI-Agent）" class="headerlink" title="6. 添加 AI 处理节点（AI Agent）"></a>6. 添加 AI 处理节点（AI Agent）</h3><p>使用 AI 对公告内容进行分析提炼（以 DeepSeek 为例），快速抓取关键信息：</p>
-<ul>
-<li>模型选择：DeepSeek（可根据需求替换为其他支持的模型）</li>
-<li>提示词配置：请分析以下阿里云公告内容，提炼关键变更点和影响范围，用简洁的语言总结（不超过200字）</li>
-<li>输入数据：选择上一节点处理后的字段（title、content:encodedSnippet 等）</li>
-</ul>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_6.png"></p>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_7.png"></p>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_8.png"></p>
-<h3 id="7-添加钉钉签名处理（Code-in-Python）"><a href="#7-添加钉钉签名处理（Code-in-Python）" class="headerlink" title="7. 添加钉钉签名处理（Code in Python）"></a>7. 添加钉钉签名处理（Code in Python）</h3><p>为钉钉机器人请求生成加签信息（确保请求安全性），代码如下：</p>
-<pre><code>import time
-import hmac
-import hashlib
-import base64
-import urllib.parse
-
-for item in _input.all():
-  # 生成时间戳（毫秒级）
-  timestamp = str(round(time.time() * 1000))
-  # 钉钉机器人加签密钥（替换为实际secret）
-  secret = &#39;你的钉钉机器人secret&#39;
-  secret_enc = secret.encode(&#39;utf-8&#39;)
-  # 构建签名字符串
-  string_to_sign = &#39;&#123;&#125;\n&#123;&#125;&#39;.format(timestamp, secret)
-  string_to_sign_enc = string_to_sign.encode(&#39;utf-8&#39;)
-  # 计算HMAC-SHA256签名
-  hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
-  # 对签名进行Base64编码和URL编码
-  sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-  # 存储计算结果到输出
-  item.json.timestamp = timestamp
-  item.json.sign = sign 
-return _input.all()
-</code></pre>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_9.png"></p>
-<h3 id="8-添加-HTTP-请求节点（HTTP-Request）"><a href="#8-添加-HTTP-请求节点（HTTP-Request）" class="headerlink" title="8. 添加 HTTP 请求节点（HTTP Request）"></a>8. 添加 HTTP 请求节点（HTTP Request）</h3><p>用于发送通知到钉钉机器人，配置如下：</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>取值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Method</td>
-<td>POST</td>
-</tr>
-<tr>
-<td>URL</td>
-<td><a target="_blank" rel="noopener" href="https://oapi.dingtalk.com/robot/send?access_token=%E4%BD%A0%E7%9A%84%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BAaccess_token">https://oapi.dingtalk.com/robot/send?access_token=你的钉钉机器人access_token</a></td>
-</tr>
-<tr>
-<td>Authentication</td>
-<td>None</td>
-</tr>
-<tr>
-<td>Send Query Parameters</td>
-<td>Using Field Below</td>
-</tr>
-<tr>
-<td>Query 参数 1</td>
-<td>name: timestamp, Value: </td>
-</tr>
-<tr>
-<td>Query 参数 2</td>
-<td>name: sign, Value: </td>
-</tr>
-<tr>
-<td>Body Content Type</td>
-<td>application&#x2F;json</td>
-</tr>
-<tr>
-<td>Body</td>
-<td>json { “msgtype”: “text”, “text”: { “content”: “阿里云公告提醒：\n标题：\n发布时间：\n摘要：\nAI分析：“ } }</td>
-</tr>
-</tbody></table>
-<p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_10.png"></p>
-<h3 id="工作流测试与运行"><a href="#工作流测试与运行" class="headerlink" title="工作流测试与运行"></a>工作流测试与运行</h3><ul>
-<li>点击工作流编辑器右上角的Execute Workflow按钮进行测试</li>
-<li>检查各节点执行状态（绿色表示成功，红色表示失败），可通过节点日志排查错误</li>
-<li>测试成功后，点击Activate按钮启用工作流自动运行</li>
-</ul>
-<h3 id="任务流全景："><a href="#任务流全景：" class="headerlink" title="任务流全景："></a>任务流全景：</h3><p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_11.png"></p>
-<h3 id="消息展示："><a href="#消息展示：" class="headerlink" title="消息展示："></a>消息展示：</h3><p><img src="/Images/N8N_RSS_Aliyun/n8n_ali_12.png"></p>
-
-            
         </div>
     </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%91%8A%E8%AD%A6/" style="color: #00a596">告警</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E7%9B%91%E6%8E%A7/" style="color: #00bcd4">监控</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/%E8%AE%A2%E9%98%85/" style="color: #ff7d73">订阅</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/AI/" style="color: #00bcd4">AI</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/N8N/" style="color: #ffa2c4">N8N</a>
-        </span>
-        
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 黄先生 Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
     </div>
-    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
-        <h2 class="post-title">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/10/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构"><a href="#搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构" class="headerlink" title="搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构"></a>搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><p>初期的互联网企业由于业务量较小，所以一般单机部署，实现单点访问即可满足业务的需求，这也是最简单的部署方式，但是随着业务的不断扩大，系统的访问量逐渐的上升，单机部署的模式已无法承载现有的业务量，需要进行服务集群化部署，本文主要介绍服务端Tomcat多实例部署，以及如何保证web服务的高可用方案。</p>
-<ul>
-<li><p>Nginx 是一个高性能的 HTTP反向代理服务器</p>
-</li>
-<li><p>Keepalived 是一个基于VRRP协议来实现的LVS服务高可用方案，可以利用其来避免服务的单点故障</p>
-</li>
-<li><p>Tomcat 是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器。</p>
-</li>
-</ul>
-<h2 id="2-Nginx的高可用负载均衡架构"><a href="#2-Nginx的高可用负载均衡架构" class="headerlink" title="2 Nginx的高可用负载均衡架构"></a>2 Nginx的高可用负载均衡架构</h2><p>如下图：为典型的Tomcat服务多实例部署的架构图</p>
-<p><img src="/Images/Keepalived/Keepalived_1.png"></p>
-<p>1.用户通过域名请求到DNS，由DNS解析域名后返回对应的IP地址，该IP及为Keepalived映射服务器的虚拟IP</p>
-<p>2.通过该虚拟IP访问到对应的负载均衡器（Nginx），这里Nginx部署两个，然后通过Keepalived来保证NG的高可用，正常情况下由Keepalived-M将虚拟IP映射转发至Nginx-M，如果Nginx-M出现故障，此时Keepalived会切换至Keepalived-S开始工作，从而保证了NG的单点故障问题。</p>
-<p>3.通过Nginx负载均衡器，将请求路由到对应的Tomcat服务。</p>
-<h2 id="3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构"><a href="#3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构" class="headerlink" title="3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构"></a>3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构</h2><h4 id="3-1-需要准备的软件"><a href="#3-1-需要准备的软件" class="headerlink" title="3.1 需要准备的软件"></a>3.1 需要准备的软件</h4><p>（1）apache-tomcat-8.5.16.tar.gz</p>
-<p>（2）nginx-1.12.2.tar.gz</p>
-<p>（3）keepalived-1.3.9.tar.gz</p>
-<h4 id="3-2-服务器准备"><a href="#3-2-服务器准备" class="headerlink" title="3.2 服务器准备"></a>3.2 服务器准备</h4><p>两台服务器如：192.168.10.11，192.168.10.12</p>
-<h4 id="3-3-安装需要的依赖包"><a href="#3-3-安装需要的依赖包" class="headerlink" title="3.3 安装需要的依赖包"></a>3.3 安装需要的依赖包</h4><pre><code>yum -y install gcc gcc-c++ automake pcre pcre-devel zlib zlib-devel open openssl-devel
-</code></pre>
-<h4 id="3-4-安装"><a href="#3-4-安装" class="headerlink" title="3.4 安装"></a>3.4 安装</h4><h5 id="3-4-1-安装Tomcat"><a href="#3-4-1-安装Tomcat" class="headerlink" title="3.4.1 安装Tomcat"></a>3.4.1 安装Tomcat</h5><p>（1）分别在两台服务器中安装Tomcat，解压apache-tomcat-8.5.16.tar.gz及可完成安装。</p>
-<h5 id="3-4-2-安装Nginx"><a href="#3-4-2-安装Nginx" class="headerlink" title="3.4.2 安装Nginx"></a>3.4.2 安装Nginx</h5><p>（1）解压安装包：tar -zxvf nginx-1.12.2.tar.gz</p>
-<p>（2）进入到nginx-1.12.2目录：cd nginx-1.12.2</p>
-<p>（3）编译：</p>
-<pre><code>./configure --with-http_stub_status_module --with-http_ssl_module  --prefix=/usr/local/nginx
-make &amp;&amp; sudo make install
-</code></pre>
-<h5 id="3-4-3-安装Keepalived"><a href="#3-4-3-安装Keepalived" class="headerlink" title="3.4.3 安装Keepalived"></a>3.4.3 安装Keepalived</h5><p>（1）解压安装包：tar -zxvf keepalived-1.3.9.tar.gz</p>
-<p>（2）进入到keepalived-1.3.9目录：cd keepalived-1.3.9</p>
-<p>（3）执行编译：</p>
-<pre><code>./configure --prefix=/usr/local/keepalived --sysconf=/etc
-make &amp;&amp; sudo make install
-</code></pre>
-<h4 id="3-5-配置"><a href="#3-5-配置" class="headerlink" title="3.5 配置"></a>3.5 配置</h4><h5 id="3-5-1-分别配置两台服务器的Nginx"><a href="#3-5-1-分别配置两台服务器的Nginx" class="headerlink" title="3.5.1 分别配置两台服务器的Nginx"></a>3.5.1 分别配置两台服务器的Nginx</h5><p>（1）分别修改两台服务器nginx配置文件，vi &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</p>
-<p>（2）内容如下：</p>
-<pre><code>#nginx进程数
-worker_processes  1;
-
-#单个进程最大连接数
-events {
-    worker_connections  1024;
-}
-
-#http服务器配置
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-	#长连接超时时间，单位是秒
-    keepalive_timeout  65;
-	#upstream负载均衡配置，配置路由到tomcat的服务地址以及权重
-    upstream localhost{
-       server 192.168.10.11:8080 weight=2;
-       server 192.168.10.12:8080 weight=2;
-    }
-	
-	#虚拟主机的配置
-    server {
-	    #监听端口
-        listen       80;
-		 #域名可以有多个，用空格隔开
-        server_name  localhost;
-        location / {
-            root   html;
-            index  index.html index.htm;
-			#nginx跟后端服务器连接超时时间(代理连接超时)
-            proxy_connect_timeout 3;
-			#后端服务器数据回传时间(代理发送超时)
-            proxy_send_timeout 30;
-			#连接成功后，后端服务器响应时间(代理接收超时)
-            proxy_read_timeout 30;
-            proxy_pass http://localhost;
-        }
-
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-    }
-}
-</code></pre>
-<h5 id="3-5-2-主Keepalived配置"><a href="#3-5-2-主Keepalived配置" class="headerlink" title="3.5.2 主Keepalived配置"></a>3.5.2 主Keepalived配置</h5><p>（1）修改11服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
-<p>（2）内容如下：</p>
-<pre><code>! Configuration File for keepalived
-#全局配置
-global_defs {
-   #keepalived切换的时候，发消息到指定的email，可配置多个email
-   notification_email {
-     feinik1@foxmail.com
-	 feinik2@foxmail.com
-   }
-   #通知邮件从哪个地址发出
-   notification_email_from feinik@foxmail.com
-   #通知邮件的smtp地址
-   smtp_server smtp.exmail.qq.com
-   #连接smtp服务器的超时时间，单位秒
-   smtp_connect_timeout 30
-   #Keepalived的机器标识，一个网络内保持唯一
-   router_id nginx-master
-}
-
-#执行脚本配置
-vrrp_script chk_nginx {
-	#脚本所在路径
-    script &quot;/home/project/keepalived/check_nginx.sh&quot;
-	#脚本执行间隔时间，秒
-    interval 2
-	#优先级
-    weight 2
-}
-#keepalived实例配置
-vrrp_instance VI_1 {
-	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
-    state MASTER
-	#实例绑定的网卡
-    interface ens33
-	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
-    virtual_router_id 51
-	#优先级，数值愈大，优先级越高
-    priority 100
-	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
-    advert_int 1
-	#通信验证
-    authentication {
-        auth_type PASS
-        auth_pass feinik
-    }
-	#追踪外围脚本
-    track_script {
-	    #这里配置vrrp_script的名称
-        chk_nginx
-    }
-	#虚拟ip配置，可配置多个
-    virtual_ipaddress {
-        192.168.10.200
-    }
-}
-</code></pre>
-<h5 id="3-5-3-备Keepalived配置"><a href="#3-5-3-备Keepalived配置" class="headerlink" title="3.5.3 备Keepalived配置"></a>3.5.3 备Keepalived配置</h5><p>（1）修改12服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
-<p>（2）内容如下：</p>
-<pre><code>! Configuration File for keepalived
-#全局配置
-global_defs {
-   #keepalived切换的时候，发消息到指定的email，可配置多个email
-   notification_email {
-     feinik1@foxmail.com
-	 feinik2@foxmail.com
-   }
-   #通知邮件从哪个地址发出
-   notification_email_from feinik@foxmail.com
-   #通知邮件的smtp地址
-   smtp_server smtp.exmail.qq.com
-   #连接smtp服务器的超时时间，单位秒
-   smtp_connect_timeout 30
-   #Keepalived的机器标识，一个网络内保持唯一
-   router_id nginx-master
-}
-
-#执行脚本配置
-vrrp_script chk_nginx {
-	#脚本所在路径
-    script &quot;/home/project/keepalived/check_nginx.sh&quot;
-	#脚本执行间隔时间，秒
-    interval 2
-	#优先级
-    weight 2
-}
-#keepalived实例配置
-vrrp_instance VI_1 {
-	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
-    state BACKUP
-	#实例绑定的网卡
-    interface ens33
-	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
-    virtual_router_id 51
-	#优先级，数值愈大，优先级越高
-    priority 99
-	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
-    advert_int 1
-	#通信验证
-    authentication {
-        auth_type PASS
-        auth_pass feinik
-    }
-	#追踪外围脚本
-    track_script {
-	    #这里配置vrrp_script的名称
-        chk_nginx
-    }
-	#虚拟ip配置，可配置多个
-    virtual_ipaddress {
-        192.168.10.200
-    }
-}
-</code></pre>
-<h5 id="3-5-4-Nginx状态检查脚本创建"><a href="#3-5-4-Nginx状态检查脚本创建" class="headerlink" title="3.5.4 Nginx状态检查脚本创建"></a>3.5.4 Nginx状态检查脚本创建</h5><p>（1）新建Nginx的状态检查脚本：check_nginx.sh</p>
-<p>（2）内容如下：</p>
-<pre><code>#!/bin/sh
-NGINX=/usr/common/nginx/sbin/nginx
-PORT=80
-nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
-#echo $?
-if [ $? -ne 0 ];then
-    $NGINX -s stop
-    #这里再次尝试启动NG
-    $NGINX
-    sleep 5
-    nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
-    [ $? -ne 0 ] &amp;&amp; cd /usr/common/keepalived/sbin &amp;&amp; pkill keepalived
-    echo &quot;stoped&quot;
-fi
-</code></pre>
-<h2 id="4-运行测试"><a href="#4-运行测试" class="headerlink" title="4 运行测试"></a>4 运行测试</h2><p>（1）为了更直观的查看到keepalived切换的效果，将11服务器中的nginx的upstream服务只配置11的tomcat服务地址，12服务器中的upstream服务只配置12的tomcat服务地址，这样只需要观察将11服务器中的nginx关闭看使用虚拟ip是否可以访问到12服务器的tomcat。</p>
-<p>（2）分别启动两个服务器中的tomcat、nginx、keepalived，访问虚拟ip：192.168.10.200，可以查看到访问的是主keepalived服务器的tomcat</p>
-<p><img src="/Images/Keepalived/Keepalived_2.png"></p>
-<p>3）关闭11服务器的nginx，nginx -s stop，再次访问虚拟ip，如下：说明主keepalived通过配置的脚本检测到了本服务的nginx服务挂掉了，所以立马切换至了备的keepalived，这时12服务器的keepalived升为了主，所以就访问到了12服务器的tomcat。<br><img src="/Images/Keepalived/Keepalived_3.png"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Nginx/" style="color: #00a596">Nginx</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Tomcat/" style="color: #00bcd4">Tomcat</a>
-        </span>
-        
-        <span class="tag">
-            
-            <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="color: #ff7d73">Keepalived 网络</a>
-        </span>
-        
-    </div>
-    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">
-        <h2 class="post-title">三层交换VLAN互访配置</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/10/21
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="三层交换VLAN互访配置"><a href="#三层交换VLAN互访配置" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h1><p>在配置三层交换VLAN互访之前，先了解下VLAN配置，网口工作模式配置。</p>
-<h4 id="VLAN配置："><a href="#VLAN配置：" class="headerlink" title="VLAN配置："></a>VLAN配置：</h4><p>名词解释：</p>
-<ul>
-<li>Ethernet—————–以太网</li>
-<li>fastEthernet————-快速以太网</li>
-<li>GigabitEthernet———-千兆以太网</li>
-<li>TenGigabitEthernet——-万兆以太网</li>
-</ul>
-<p>以下是VLAN配置命令</p>
-<pre><code>Switch&gt;enable                                                         #进入特权模式
-
-Switch#configure  terminal                                            #进入全局配置模式
-Enter configuration commands, one per line.  End with CNTL/Z.
-
-Switch(config)#interface  vlan 1                                      #进入交换机接口配置模式
-
-Switch(config-if)#ip address  IP.IP.IP.IP   SM.SM.SM.SM               #配置交换机的IP地址和子网掩码
-
-Switch(config-if)#end                                                 #退出
-
-Switch#show ip interface                                              #验证交换机IP地址已经配置，管理端口已经开启
-
-Switch#configure  terminal                                            #进入全局配置模式
-
-Switch(config)#hostname Test                                          #修改主机名称
-
-Test(config)#interface fastEthernet 0/3                               #进入端口
-
-Test(config-if)#speed 10                                              #限速100MB/S流量上限
-
-Test(config-if)#no shutdown                                           #激活端口
-
-Test#show interfaces fastEthernet 0/3                                 #查看端口配置情况
-
-Test#show mac address-tabl                                            #显示Mac地址
-
-Test#show running-config                                              #查看交换机的当前的配置信息
-
-Test#show ip interface                                                #查看接口信息
-</code></pre>
-<h4 id="网口工作模式："><a href="#网口工作模式：" class="headerlink" title="网口工作模式："></a>网口工作模式：</h4><p>Cisco网络设备支持动态协商端口的工作状态，这为网络设备的实施提供了一定的方便（但不建议使用动态方式）。cisco动态协商协议从最初的DISL（Cisco私有协议）发展到DTP（公有协议）。根据动态协议的实现方式，Cisco网络设备接口主要分为下面几种模式：<br>switchport mode access:  强制接口成为access接口，并且可以与对方主动进行协商，诱使对方成为access模式。</p>
-<p>switchport mode dynamic desirable：主动与对协商成为Trunk接口的可能性，如果邻居接口模式为Trunk&#x2F;desirable&#x2F;auto之一，则接口将变成trunk接口工作。如果不能形成trunk模式，则工作在access模式。这种模式是现在交换机的默认模式。</p>
-<p>switchport mode dynamic auto:  只有邻居交换机主动与自己协商时才会变成Trunk接口，所以它是一种被动模式，当邻居接口为Trunk／desirable之一时，才会成为Trunk。如果不能形成trunk模式，则工作在access模式。</p>
-<p>switchport mode trunk:  强制接口成为Trunk接口，并且主动诱使对方成为Trunk模式，所以当邻居交换机接口为trunk&#x2F;desirable&#x2F;auto时会成为Trunk接口。</p>
-<p>switchport nonegotiate:  严格的说，这不算是种接口模式，它的作用只是阻止交换机接口发出DTP数据包，它必须与switchport mode trunk或者switchport mode access一起使用。</p>
-<p>switchport mode dot1q-tunnel：　配置交换机接口为隧道接口（非Trunk），以便与用户交换机的Trunk接口形成不对称链路。</p>
-<hr>
-<h2 id="三层交换VLAN互访配置-1"><a href="#三层交换VLAN互访配置-1" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h2><p><img src="/Images/Layer_3_Switching/Layer_3_Switching_1.png" alt="image"><br>上图是三层交换的扩扑图</p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_2.png" alt="image"><br>三层交换机的Fa0&#x2F;1和Fa0&#x2F;2分别连接到下面的两个二层交换机，并将Fa0&#x2F;1和Fa0&#x2F;2做了Trunk。</p>
-<p>以下是三层交换机的配置：</p>
-<p>创建VLAN：</p>
-<pre><code>Switch&gt;
-Switch&gt;en
-Switch#conf t
-Enter configuration commands, one per line.  End with CNTL/Z.
-Switch(config)#vlan 10
-Switch(config-vlan)#exit
-Switch(config)#vlan 20
-Switch(config-vlan)#exit
-</code></pre>
-<p>为VLAN配置IP和子网掩码：</p>
-<pre><code>Switch(config)#int vlan 10
-Switch(config-if)#
-%LINK-5-CHANGED: Interface Vlan10, changed state to up
-Switch(config-if)#ip add 192.168.1.1 255.255.255.0
-Switch(config-if)#no shut
-Switch(config-if)#exit
-
-Switch(config)#int vlan 20
-Switch(config-if)#
-%LINK-5-CHANGED: Interface Vlan20, changed state to up
-Switch(config-if)#ip add 192.168.2.1 255.255.255.0
-Switch(config-if)#no shut
-Switch(config-if)#exit
-</code></pre>
-<p>为fastEthernet 0&#x2F;1和fastEthernet 0&#x2F;2创建trunk并启动三层交换机的路由功能</p>
-<pre><code>Switch(config)#interface fastEthernet 0/1
-Switch(config-if)#switchport mode access 
-Switch(config-if)#switchport mode trunk 
-Switch(config-if)#exit
-
-Switch(config)#int fastEthernet 0/2
-Switch(config-if)#switchport mode access 
-Switch(config-if)#switchport mode trunk 
-Switch(config-if)#exit
-
-Switch#(config)#ip routing
-Switch#(config)#end
-Switch#write 
-Building configuration...
-[OK]
-</code></pre>
-<p>以上是三层交换的配置，下面开始配置二层交换机：</p>
-<p>创建VLAN：</p>
-<pre><code>Switch&gt;en
-Switch#conf t
-Enter configuration commands, one per line.  End with CNTL/Z.
-Switch(config)#vlan 10
-Switch(config-vlan)#exit
-Switch(config)#vlan 20
-Switch(config-vlan)#exit
-</code></pre>
-<p>将VLAN和fastEthernet绑定：</p>
-<pre><code>Switch(config)#interface fastEthernet 0/1
-Switch(config-if)#switchport mode access 
-Switch(config-if)#switchport access vlan 10
-Switch(config-if)#exit
-
-Switch(config)#interface fastEthernet 0/2
-Switch(config-if)#switchport mode access 
-Switch(config-if)#switchport access vlan 20
-Switch(config-if)#exit
-</code></pre>
-<p>这里二层交换的fastEthernet 0&#x2F;24是和三层交换机相互连接，这里需要为fastEthernet 0&#x2F;24做trunk,并做保存。</p>
-<pre><code>Switch(config)#interface fastEthernet 0/24
-Switch(config-if)#sw
-Switch(config-if)#switchport acc
-Switch(config-if)#switchport mo
-Switch(config-if)#switchport mode ac
-Switch(config-if)#switchport mode access 
-Switch(config-if)#sw mo
-Switch(config-if)#sw
-Switch(config-if)#switchport mo
-Switch(config-if)#switchport mode re
-Switch(config-if)#switchport mode tr
-Switch(config-if)#switchport mode trunk 
-Switch(config-if)#end
-Switch#write 
-Building configuration...
-[OK]
-</code></pre>
-<p>二层交换配置完成，另外一台二层交换机的配置与此交换机配置相同。</p>
-<p>当PC1向PC4发送数据的时候，数据通过VLAN进入三层交换机，三层交换机查询路由表后将数据转给PC4。</p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_3.gif" alt="image"></p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_4.png" alt="image"></p>
-<p>至此，三层交换VLAN互访配置完成！</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="color: #00bcd4">Cisco 三层交换 VLAN 互访</a>
-        </span>
-        
-    </div>
-    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">
-        <h2 class="post-title">Huawei交换机基础配置命令</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/10/17
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1、配置文件相关命令"><a href="#1、配置文件相关命令" class="headerlink" title="1、配置文件相关命令"></a>1、配置文件相关命令</h2><pre><code class="language-shell">[Huawei-switch]display current-configuration    显示当前生效的配置
-[Huawei-switch]display saved-configuration      显示flash中配置文件，即下次上电启动时所用的配置文件
-[Huawei-switch]reset saved-configuration        檫除旧的配置文件
-&lt;Huawei-switch&gt;reboot                           交换机重启
-&lt;Huawei-switch&gt;display version                  显示系统版本信息
-</code></pre>
-<h2 id="2、基本配置"><a href="#2、基本配置" class="headerlink" title="2、基本配置"></a>2、基本配置</h2><pre><code class="language-plain">[Huawei-switch]super password                   修改特权用户密码
-[Huawei-switch]Huawei-switch                    交换机命名
-[Huawei-switch]interface ethernet 1/0/1         进入接口视图
-[Huawei-switch]interface vlan 1                 进入接口视图
-[Huawei-switch-Vlan-interfacex]ip address 10.1.1.11 255.255.0.0     配置VLAN的IP地址
-[Huawei-switch]ip route-static 0.0.0.0 0.0.0.0 10.1.1.1             静态路由＝网关
-</code></pre>
-<h2 id="3、telnet配置"><a href="#3、telnet配置" class="headerlink" title="3、telnet配置"></a>3、telnet配置</h2><pre><code class="language-shell">[Huawei-switch]user-interface vty 0 4               进入虚拟终端
-[Huawei-switch]authentication-mode password         设置口令模式
-[Huawei-switch]set authentication-mode password simple xmws123       设置口令
-[Huawei-switch]user privilege level 3               用户级别
-</code></pre>
-<h2 id="4、端口配置"><a href="#4、端口配置" class="headerlink" title="4、端口配置"></a>4、端口配置</h2><pre><code class="language-plain">[Huawei-switch-Ethernet1/0/1]duplex {half|full|auto}        配置端口工作状态
-[Huawei-switch-Ethernet1/0/1]speed {10|100|auto}            配置端口工作速率
-[Huawei-switch-Ethernet1/0/1]flow-control                   配置端口流控
-[Huawei-switch-Ethernet1/0/1]mdi {across|auto|normal}       配置端口平接扭接
-[Huawei-switch-Ethernet1/0/1]port link-type {trunk|access|hybrid} 设置端口工作模式
-[Huawei-switch-Ethernet1/0/1]undo shutdown                  激活端口
-[Huawei-switch-Ethernet1/0/2]quit                           退出系统视图
-</code></pre>
-<h2 id="5、链路聚合配置"><a href="#5、链路聚合配置" class="headerlink" title="5、链路聚合配置"></a>5、链路聚合配置</h2><pre><code class="language-plain">[Huawei-switch] link-aggregation group 1 mode manual            创建手工聚合组1
-[Huawei-switch] interface ethernet 1/0/1                        将以太网端口Ethernet1/0/1加入聚合组1
-[Huawei-switch-Ethernet1/0/1] port link-aggregation group 1
-[Huawei-switch-Ethernet1/0/1] interface ethernet 1/0/2          将以太网端口Ethernet1/0/1加入聚合组1
-[Huawei-switch-Ethernet1/0/2] port link-aggregation group 1
-[Huawei-switch] link-aggregation group 1 service-type tunnel    在手工聚合组的基础上创建 tunnel业务环回组。
-[Huawei-switch] interface ethernet 1/0/1                        将以太网端口Ethernet1/0/1加入业务环回组。
-[Huawei-switch-Ethernet1/0/1] undo stp
-[Huawei-switch-Ethernet1/0/1] port link-aggregation group 1
-</code></pre>
-<h2 id="6、端口镜像"><a href="#6、端口镜像" class="headerlink" title="6、端口镜像"></a>6、端口镜像</h2><pre><code class="language-plain">[Huawei-switch]monitor-port 　         指定镜像端口
-[Huawei-switch]port mirror 　　        指定被镜像端口
-[Huawei-switch]port mirror int_list observing-port int_type int_num 指定镜像和被镜像
-</code></pre>
-<h2 id="7、VLAN配置"><a href="#7、VLAN配置" class="headerlink" title="7、VLAN配置"></a>7、VLAN配置</h2><pre><code class="language-plain">[Huawei-switch]vlan 4   创建VLAN
-[Huawei-switch-vlan4]port ethernet 1/0/1 to ethernet 1/0/4  在VLAN中增加端口
-
-配置基于access的VLAN
-[Huawei-switch-Ethernet1/0/2]port access vlan 4             当前端口加入到VLAN
-注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1
-
-配置基于trunk的VLAN
-[Huawei-switch-Ethernet 1/0/24]port link-type trunk         设置当前端口为trunk
-[Huawei-switch-Ethernet 1/0/24]port trunk permit vlan {ID|All} 　　设trunk允许的VLAN
-注意：所有端口缺省情况下都是允许VLAN1的报文通过的
-[Huawei-switch-Ethernet1/0/2]port trunk pvid vlan 34 　　　　设置trunk端口的PVID
-
-配置基于Hybrid端口的VLAN
-[Huawei-switch-Ethernet1/0/2]port link-type hybrid      配置端口的链路类型为Hybrid类型
-[Huawei-switch-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }        允许指定的VLAN通过当前Hybrid端口
-注意：缺省情况下，所有Hybrid端口只允许VLAN1通过
-[Huawei-switch-Ethernet1/0/2]port hybrid pvid vlan vlan-id 设置Hybrid端口的缺省VLAN
-注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1
-
-VLAN描述
-[Huawei-switch]description string 　　　　   指定VLAN描述字符
-[Huawei-switch]undo description             删除VLAN描述字符
-[Huawei-switch]display vlan [vlan_id]       查看VLAN设置
-
-私有VLAN配置
-[Huawei-switch-vlanx]isolate-user-vlan enable           设置主vlan
-[Huawei-switch]Isolate-user-vlan secondary              设置主vlan包括的子vlan
-[Huawei-switch-Ethernet1/0/2]port hybrid pvid vlan      设置vlan的pvid
-[Huawei-switch-Ethernet1/0/2]port hybrid pvid           删除vlan的pvid
-[Huawei-switch-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged     设置无标识的vlan
-如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。
-所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.
-</code></pre>
-<h2 id="8、STP配置"><a href="#8、STP配置" class="headerlink" title="8、STP配置"></a>8、STP配置</h2><pre><code class="language-plain">[Huawei-switch]stp {enable|disable}             设置生成树,默认关闭
-[Huawei-switch]stp mode rstp                    设置生成树模式为rstp
-[Huawei-switch]stp priority 8192                设置交换机的优先级
-[Huawei-switch]stp root {primary|secondary} 　　设置为根或根的备份
-[Huawei-switch-Ethernet0/1]stp cost 200         设置交换机端口的花费
-MSTP配置：
-　　配置MST域名为info，MSTP修订级别为1，VLAN映射关系为VLAN2～VLAN10映射到生成树实例1上，VLAN20～VLAN30映射生成树实例2上。
-
-&lt;Huawei-switch&gt;system-view
-[Huawei-switch] stp region-configuration
-[Huawei-switch-mst-region] region-name info
-[Huawei-switch-mst-region] instance 1 vlan 2 to 10
-[Huawei-switch-mst-region] instance 2 vlan 20 to 30
-[Huawei-switch-mst-region] revision-level 1
-[Huawei-switch-mst-region] active region-configuration
-</code></pre>
-<h2 id="9、MAC地址表的操作"><a href="#9、MAC地址表的操作" class="headerlink" title="9、MAC地址表的操作"></a>9、MAC地址表的操作</h2><pre><code class="language-plain">在系统视图下添加MAC地址表项
-[Huawei-switch]mac-address { static | dynamic | blackhole } mac-address interface interface-type interface-number vlan vlan-id      添加MAC地址表项
-
-在添加MAC地址表项时，命令中interface参数指定的端口必须属于vlan参数指定的VLAN，否则将添加失败。
-如果vlan参数指定的VLAN是动态VLAN，在添加静态MAC地址之后，会自动变为静态VLAN。
-
-在以太网端口视图下添加MAC地址表项
-
-[Huawei-switch-Ethernet1/0/2]mac-address { static | dynamic | blackhole } mac-address vlan vlan-id
-
-在添加MAC地址表项时，当前的端口必须属于命令中vlan参数指定的VLAN，否则将添加失败；
-如果vlan参数指定的VLAN是动态VLAN，在添加静态MAC地址之后，会自动变为静态VLAN。
-[Huawei-switch]mac-address timer { aging age | no-aging } 设置MAC地址表项的老化时间
-注意：缺省情况下，MAC地址表项的老化时间为300秒，使用参数no-aging时表示不对MAC地址表项进行老化。
-
-MAC地址老化时间的配置对所有端口都生效，但地址老化功能只对动态的（学习到的或者用户配置可老化的）MAC地址表项起作用。
-
-[Huawei-switch-Ethernet1/0/2]mac-address max-mac-count count        设置端口最多可以学习到的MAC地址数量
-
-注意：缺省情况下，没有配置对端口学习MAC地址数量的限制。反之，如果端口启动了MAC地址认证和端口安全功能，则不能配置该端口的最大MAC地址学习个数。
-
-[Huawei-switch-Ethernet1/0/2]port-mac start-mac-address             配置以太网端口MAC地址的起始值
-
-在缺省情况下，E126/E126A交换机的以太网端口是没有配置MAC地址的，因此当交换机在发送二层协议报文（例如STP）时，由于无法取用发送端口的MAC地址，将使用该协议预置的MAC地址作为源地址填充到报文中进行发送。在实际组网中，由于多台设备都使用相同的源MAC地址发送二层协议报文，会造成在某台设备的不同端口学习到相同MAC地址的情况，可能会对MAC地址表的维护产生影响。
-
-[Huawei-switch]display mac-address              显示地址表信息
-[Huawei-switch]display mac-address aging-time   显示地址表动态表项的老化时间
-[Huawei-switch]display port-mac                 显示用户配置的以太网端口MAC地址的起始值
-</code></pre>
-<h2 id="10、GVRP配置"><a href="#10、GVRP配置" class="headerlink" title="10、GVRP配置"></a>10、GVRP配置</h2><pre><code class="language-plain">[Huawei-switch] gvrp                    开启全局GVRP
-[Huawei-switch-Ethernet1/0/1] gvrp      在以太网端口Ethernet1/0/1上开启GVRP
-[Huawei-switch-Ethernet1/0/1] gvrp registration { fixed | forbidden | normal }          配置GVRP端口注册模式 ，缺省为normal。
-[Huawei-switch] display garp statistics [ interface interface-list ]                    显示GARP统计信息
-[Huawei-switch] display garp timer [ interface interface-list ]                         显示GARP定时器的值
-[Huawei-switch] display gvrp statistics [ interface interface-list ]                    显示GVRP统计信息
-[Huawei-switch] display gvrp status                                                     显示GVRP的全局状态信息
-[Huawei-switch] display gvrp statusreset garp statistics [ interface interface-list ]   清除GARP统计
-</code></pre>
-<h2 id="11、DLDP配置"><a href="#11、DLDP配置" class="headerlink" title="11、DLDP配置"></a>11、DLDP配置</h2><pre><code class="language-plain">[Huawei-switch] interface gigabitethernet 1/1/1
-[Huawei-switch-GigabitEthernet1/1/1] duplex full                     配置端口工作在强制全双工模式
-[Huawei-switch-GigabitEthernet1/1/1] speed 1000                      速率为1000Mbits/s
-[Huawei-switch] dldp enable                                          全局开启DLDP。
-[Huawei-switch] dldp interval 15                                     设置发送DLDP报文的时间间隔为15秒
-[Huawei-switch] dldp work-mode { enhance | normal }                  配置DLDP协议的工作模式为加强模式/ 缺省为normal
-[Huawei-switch] dldp unidirectional-shutdown { auto | manual }       配置DLDP单向链路操作模式为自动模式/缺省为auto
-[Huawei-switch] display dldp 1                                       查看DLDP状态
-
-当光纤交叉连接时，可能有两个或三个端口处于Disable状态，剩余端口处于Inactive状态。
-当光纤一端连接正确，一端未连接时：
-    如果DLDP的工作模式为normal，则有收光的一端处于Advertisement状态，没有收光的一端处于Inactive状态。
-    如果DLDP的工作模式为enhance，则有收光的一端处于Disable状态，没有收光的一端处于Inactive状态。
-dldp reset命令在全局下可以重置所有端口的DLDP状态，在接口下可以充值该端口的DLDP状态
-</code></pre>
-<h2 id="12、端口隔离配置"><a href="#12、端口隔离配置" class="headerlink" title="12、端口隔离配置"></a>12、端口隔离配置</h2><pre><code class="language-plain">通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。
-
-[Huawei-switch] interface ethernet1/0/2         将以太网端口Ethernet1/0/2加入隔离组。
-[Huawei-switch-Ethernet1/0/2] port isolate
-[Huawei-switch] display isolate port            显示隔离组中的端口信息
-
-配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。
-端口隔离特性与以太网端口所属的VLAN无关。
-当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。
-对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。
-如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。
-当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。
-</code></pre>
-<h2 id="13、端口安全配置"><a href="#13、端口安全配置" class="headerlink" title="13、端口安全配置"></a>13、端口安全配置</h2><pre><code class="language-shell">[Switch] port-security enable           启动端口安全功能
-[Switch] interface Ethernet 1/0/1       进入以太网Ethernet1/0/1端口视图
-[Switch-Ethernet1/0/1] port-security max-mac-count 80           设置端口允许接入的最大MAC地址数为80
-[Switch-Ethernet1/0/1] port-security port-mode autolearn        配置端口的安全模式为autolearn
-[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1
-
-将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中
-
-[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily         设置Intrusion Protection特性被触发后，暂时关闭该端口
-[Switch]port-security timer disableport 30                                          关闭时间为30秒。
-</code></pre>
-<h2 id="14、端口绑定配置"><a href="#14、端口绑定配置" class="headerlink" title="14、端口绑定配置"></a>14、端口绑定配置</h2><pre><code class="language-shell">通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。
-
-[Huawei-switch-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1
-
-将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。
-有的交换机上绑定的配置不一样
-
-[Huawei-switch] interface ethernet 1/0/2
-[Huawei-switch-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405
-
-端口过滤配置
-
-[Huawei-switch] interface ethernet1/0/1         配置端口Ethernet1/0/1的端口过滤功能。
-[Huawei-switch-Ethernet1/0/1] ip check source ip-address mac-address
-[Huawei-switch] dhcp-snooping                   开启DHCP Snooping功能。
-[Huawei-switch] interface ethernet1/0/2
-
-设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。
-
-[Huawei-switch-Ethernet1/0/2] dhcp-snooping trust
-
-在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击
-</code></pre>
-<h2 id="15、交换机巡检常用命令"><a href="#15、交换机巡检常用命令" class="headerlink" title="15、交换机巡检常用命令"></a>15、交换机巡检常用命令</h2><pre><code class="language-shell">&lt;Huawei-switch&gt; display esn								查看设备序列号
-&lt;Huawei-switch&gt; display reboot-info      	查看设备复位情况
-&lt;Huawei-switch&gt; display temperature all  	查看设备温度
-&lt;Huawei-switch&gt; display alarm urgent     	查看设备的告警信息
-&lt;Huawei-switch&gt; display cpu-usage        	查看cpu状态
-&lt;Huawei-switch&gt; display memory-usage    	查看内存占用情况
-&lt;Huawei-switch&gt; display logbuffe         	查看日志信息
-&lt;Huawei-switch&gt; display trapbuffer       	查看日志信息
-&lt;Huawei-switch&gt; display bgp peer					查看BGP信息
-&lt;Huawei-switch&gt; display device						查看设备信息
-&lt;Huawei-switch&gt; display device fan				查看风扇转速
-&lt;Huawei-switch&gt; display interface					查看端口信息
-&lt;Huawei-switch&gt; display stack							查看堆叠信息
-&lt;Huawei-switch&gt; display dual-active				查看堆叠系统中的双主检测配置
-&lt;Huawei-switch&gt; display ospf peer					查看OSPF信息
-&lt;Huawei-switch&gt; display device power			查看电源信息
-&lt;Huawei-switch&gt; display vrrp verbose			查看VRRP配置
-&lt;Huawei-switch&gt; display eth-trunk					查看eth-trunk相关成员
-&lt;Huawei-switch&gt; display stack configuration															查看堆叠配置
-&lt;Huawei-switch&gt; display ssh server status																查看SSH信息
-&lt;Huawei-switch&gt; dis mac-address aging-time															查看MAC老化时间
-&lt;Huawei-switch&gt; display current-configuration														查看交换机配置
-&lt;Huawei-switch&gt; display monitor-link group all													查看所有Monitor Link组的信息
-&lt;Huawei-switch&gt; display stp region-configuration												查看STP信息
-&lt;Huawei-switch&gt; display current-configuration | in ntp									查看NTP配置
-&lt;Huawei-switch&gt; display current-configuration interface									查看端口配置
-&lt;Huawei-switch&gt; display current-configuration configuration bgp					查看BGP配置
-&lt;Huawei-switch&gt; display current-configuration configuration  ospf				查看OSPF配置
-&lt;Huawei-switch&gt; display current-configuration | include  route-static		查看路由配置
-</code></pre>
-<h2 id="16、术语解释"><a href="#16、术语解释" class="headerlink" title="16、术语解释"></a>16、术语解释</h2><h3 id="交换机。"><a href="#交换机。" class="headerlink" title="交换机。"></a>交换机。</h3><p>交换机是用于实现交换式网络的设备，在iSO的ON模式中，它位于第二层——数据链路层，可以对帧进行操作，是一种智能设备。</p>
-<h3 id="IEEE-802-3"><a href="#IEEE-802-3" class="headerlink" title="IEEE 802.3"></a>IEEE 802.3</h3><p>IEEE 802.3是一个工作组，该工作组编写了电气和电子工程师协会（IEEE）标准集合,该工作组定义了有线以太网的物理层和数据链路层的介质访问控制（MAC）。这通常是具有一些广域网（WAN）应用的局域网（LAN）技术。 通过各种类型的铜缆或光缆在节点和&#x2F;或基础设施设备（集线器，交换机，路由器）之间建立物理连接。</p>
-<h3 id="IEEE-802-3U。"><a href="#IEEE-802-3U。" class="headerlink" title="IEEE 802.3U。"></a>IEEE 802.3U。</h3><p>IEEE 802.3u (100Base-T)是100兆比特每秒以太网的标准。100Base-T技术中可采用3类传输介质，即100Base-T4、100Base-TX和100Base-FX，它采用4B&#x2F;5B编码方式。</p>
-<h3 id="IEEE-802-3AB"><a href="#IEEE-802-3AB" class="headerlink" title="IEEE 802.3AB"></a>IEEE 802.3AB</h3><p>千兆以太网技术标准，制定了五类双绞线上较长距离连接方案的标准。</p>
-<h3 id="IEEE-802-3Z"><a href="#IEEE-802-3Z" class="headerlink" title="IEEE 802.3Z"></a>IEEE 802.3Z</h3><p>千兆以太网技术标准，制定了光纤和短程铜线连接方案的标准。</p>
-<h3 id="IEEE-802-3X"><a href="#IEEE-802-3X" class="headerlink" title="IEEE 802.3X"></a>IEEE 802.3X</h3><p>全双工以太网数据链路层的流控方法。</p>
-<h3 id="IEEE-802-1X"><a href="#IEEE-802-1X" class="headerlink" title="IEEE 802.1X"></a>IEEE 802.1X</h3><p>一种应用于LAN交换机和无线LAN接入点的用户认证技术。</p>
-<h3 id="IEEE-802-1Q"><a href="#IEEE-802-1Q" class="headerlink" title="IEEE 802.1Q"></a>IEEE 802.1Q</h3><p>IEEE 802.1q定义一个关于VLAN连接介质访问控制层和IEEE 802.1D生成树协议的具体概念模型。这个模型允许各个独立的VLAN与以太网交换机的数据链路层或路由器互相连接。</p>
-<h3 id="IEEES802-1P"><a href="#IEEES802-1P" class="headerlink" title="IEEES802.1P"></a>IEEES802.1P</h3><p>IEEE 802.1p是IEEE 802.1Q（VLAN标签技术）标准的扩展协议，两者共同运作，使第二层网上交换器能够提供流量优先级和动态多播过滤服务。</p>
-<h3 id="STP协议"><a href="#STP协议" class="headerlink" title="STP协议"></a>STP协议</h3><p>STP协议（生成树协议）逻辑上断开环路，防止二层网络的广播风暴的产生。</p>
-<h3 id="数据链接层"><a href="#数据链接层" class="headerlink" title="数据链接层"></a>数据链接层</h3><p>在ISO&#x2F;OSI参考模型的第二层中，负责通过节点间线路上的一系列手段，如检测、流量控制和重发，使从上一层(网络层)看来不出错的传输一帧数据。</p>
-<h3 id="全部、部分双工。"><a href="#全部、部分双工。" class="headerlink" title="全部、部分双工。"></a>全部、部分双工。</h3><p>全双工是网络中收发采用两个相互独立的信道，可以同时进行，互不干扰。而且半双工是接收和发送共用一个通道，在同一时刻只能发送或接收，因此半双工可能会发生冲突。交换机是全双工设备，集线器是半双工设备。</p>
-<h3 id="MAC地址。"><a href="#MAC地址。" class="headerlink" title="MAC地址。"></a>MAC地址。</h3><p>MAC地址直译为媒体存取控制位址，也称为局域网地址（LAN Address），MAC位址，以太网地址（Ethernet Address）或物理地址（Physical Address），它是一个用来确认网络设备位置的位址。在OSI模型中，第三层网络层负责IP地址，第二层数据链路层则负责MAC位址。MAC地址用于在网络中唯一标示一个网卡，一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的MAC地址。</p>
-<h3 id="IP地址。"><a href="#IP地址。" class="headerlink" title="IP地址。"></a>IP地址。</h3><p>IP地址是一个32bit的地址，它为每个连接的Internet主机指定。每一台主机都可以通过IP地址访问。</p>
-<h3 id="适应性-自我咨询-自动更新"><a href="#适应性-自我咨询-自动更新" class="headerlink" title="适应性&#x2F;自我咨询(自动更新)"></a>适应性&#x2F;自我咨询(自动更新)</h3><p>自动调光交换机标准按如下顺序调整交换机的工作速度和工作方式：100M全双工、100M全双工、10M全双工、10M全双工。</p>
-<h3 id="完全双向流动控制。"><a href="#完全双向流动控制。" class="headerlink" title="完全双向流动控制。"></a>完全双向流动控制。</h3><p>按照IEEE 802.3X标准，当网络出现拥塞时，网络设备会使用预定义的Pause帧来实现流控制。</p>
-<h3 id="Pause帧"><a href="#Pause帧" class="headerlink" title="Pause帧"></a>Pause帧</h3><p>PAUSE帧是以太网在全双工模式下，MAC控制子层发出的流量控制帧。</p>
-<h3 id="半双工流量控制-B-P-P-Sur"><a href="#半双工流量控制-B-P-P-Sur" class="headerlink" title="半双工流量控制(B-P-P-Sur)"></a>半双工流量控制(B-P-P-Sur)</h3><p>根据IEEE 802.3x标准，当处理器发现缓冲器将被填满时，会向源发站发送一个虚假的冲突信号，它导致客观的网络带宽不能正常运行。RadioRiver控制允许一个端口过滤网络上出现的RadioRiver。打开广播风暴控制后，当端口接收的广播帧累积到预定的阈值时，端口将自动接收广播帧。如果没有启用此功能，或者播帧没有累积到门限，则播帧将正常广播到交换机的其他端口。</p>
-<h3 id="TRUNK-合并端口"><a href="#TRUNK-合并端口" class="headerlink" title="TRUNK(合并端口)"></a>TRUNK(合并端口)</h3><p>一般情况下用来将多个端口聚集在一起，形成一个高带宽的数据传输信道。交换机将所有连接在一起的端口看作是逻辑端口。</p>
-<h3 id="VLAN-虚拟局域网，VirtualLocalAreaNetwork"><a href="#VLAN-虚拟局域网，VirtualLocalAreaNetwork" class="headerlink" title="VLAN(虚拟局域网，VirtualLocalAreaNetwork)"></a>VLAN(虚拟局域网，VirtualLocalAreaNetwork)</h3><p>它是一个广播域，由一组终端工作站组成，在同一个VLT上相互通信的主机(交换机端口)，它可以建立逻辑工作组，而无需考虑具体的布线结构。弹性配置，提高系统安全性。</p>
-<h3 id="TagVLa。"><a href="#TagVLa。" class="headerlink" title="TagVLa。"></a>TagVLa。</h3><p>在IEEE 802.1Q基础上，采用VID对VLAN进行划分。</p>
-<h3 id="身份识别码-VLANID"><a href="#身份识别码-VLANID" class="headerlink" title="身份识别码(VLANID)"></a>身份识别码(VLANID)</h3><p>VLAN的标识符，用来代表一个标签AN。</p>
-<h3 id="MTUVLL。"><a href="#MTUVLL。" class="headerlink" title="MTUVLL。"></a>MTUVLL。</h3><p>当设置交换机的VLT时，将每个用户占用的端口和上行端口分开，形成一个独立的VLT。</p>
-<h3 id="MAC地址的老化时间。"><a href="#MAC地址的老化时间。" class="headerlink" title="MAC地址的老化时间。"></a>MAC地址的老化时间。</h3><p>交换机中每一个端口都有自动学习地址的功能，通过该端口发送和接收帧的源地址(源MAC地址，交换机端口号)被存储在地址表中。陈旧度是一个影响切换过程的参数。在一个地址记录添加到地址表之后开始计时，如果在使用期间各个端口没有接收到作为该MAC地址的源地址的帧，则动态转发地址表(由源MAC地址、目的MAC地址及其对应的交换机的端口号)将删除这些地址。地址老化时间对静态MAC地址表没有影响。</p>
-<h3 id="固定地址表。"><a href="#固定地址表。" class="headerlink" title="固定地址表。"></a>固定地址表。</h3><p>动态MAC地址与普通MAC地址的区别是通过学习而得到的。一旦加入，该静态地址将一直有效，直到删除，并且不受最长老化时间的限制。StaticAddress表记录端口的静态地址。在静态地址表中，MAC地址对应于一个端口，如果设置，发送到该地址的所有数据将仅转发到该端口。还可以绑定MAC地址。</p>
-<h3 id="MAC地址过滤"><a href="#MAC地址过滤" class="headerlink" title="MAC地址过滤"></a>MAC地址过滤</h3><p>通过配置过滤地址，MAC地址过滤允许交换机过滤不希望转发的数据帧。在有限的MAC地址进入交换机时，交换机会自动过滤目标地址为该地址的帧，从而保证交换机的安全性。在所有交换机端口上过滤地址表中的地址有效。添加到过滤器地址表的地址不能添加到静态地址表，并且不能由端口动态绑定。</p>
-<h3 id="MAC地址的动态绑定"><a href="#MAC地址的动态绑定" class="headerlink" title="MAC地址的动态绑定"></a>MAC地址的动态绑定</h3><p>动态地址绑定是指交换机端口处于动态地址绑定状态，MAC地址可以动态学习，但MAC地址数量有限。学习到一个MAC地址的端口之后，立即进行绑定，继续学习下一个地址。该绑定地址不受老化时间限制，并将始终有效。学到一定数量的端口之后，就不需要再学习和绑定了。只有在停用了端口地址绑定功能或者切换后，才会删除被端口绑定的MAC地址。</p>
-<h3 id="端口安全性"><a href="#端口安全性" class="headerlink" title="端口安全性"></a>端口安全性</h3><p>如果端口启用了端口安全，则端口将不会学习新的MAC地址，而只会转发MAC地址学习过的数据帧，而丢弃其它数据帧。判定条件是：发送到交换机的帧，如果其源地址是MAC地址中该端口的成员，则允许转发，否则将放弃。在端口安全设置为“禁用”的情况下，它会恢复自动学习新MAC地址并转发接收到的帧。</p>
-<h3 id="控制端口带宽"><a href="#控制端口带宽" class="headerlink" title="控制端口带宽"></a>控制端口带宽</h3><p>每个端口(非模块化接口)的输入输出数据传输速率可以被带宽限制。</p>
-<h3 id="端口监测-端口镜像（Port-Monitoring）"><a href="#端口监测-端口镜像（Port-Monitoring）" class="headerlink" title="端口监测\端口镜像（Port-Monitoring）"></a>端口监测\端口镜像（Port-Monitoring）</h3><p>Port-Monitoring是将被监控端口的消息复制到监控端口，在监控端口上接有一个安装了包分析软件的主机，网络管理员通过分析收集到的包来进行网络监控，并排除网络故障。</p>
-<h3 id="探测电缆"><a href="#探测电缆" class="headerlink" title="探测电缆"></a>探测电缆</h3><p>如果交换机端口连接上了合适的双绞线，则可通过交换机测试双绞线的状态，确定是否有问题，以及出现问题的位置。</p>
-<h3 id="简单网络管理协议（Simple-Network-Management-Protocol）"><a href="#简单网络管理协议（Simple-Network-Management-Protocol）" class="headerlink" title="简单网络管理协议（Simple Network Management Protocol）"></a>简单网络管理协议（Simple Network Management Protocol）</h3><p>用于在管理服务器和代表管理服务器执行的代理之间传递网络 管理控制和信息报文</p>
-<h3 id="IGMP"><a href="#IGMP" class="headerlink" title="IGMP"></a>IGMP</h3><p>Internet 组管理协议称为IGMP协议（Internet Group Management Protocol），是因特网协议家族中的一个组播协议。该协议运行在主机和组播路由器之间。IGMP</p>
-<h3 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h3><p>VLAN（Virtual Local Area Network）的中文名为”虚拟局域网”。既然是虚拟的局域网，也就不受物理位置的限制，可以根据功能、部门及应用等因素将它们组织起来，相互之间的通信就好像它们在同一个网段中一样，所以叫虚拟局域网</p>
-<h3 id="Telnet"><a href="#Telnet" class="headerlink" title="Telnet"></a>Telnet</h3><p>是Intelnet远程登录服务的标准协议和主要方式，Telnet是常用的远程控制Web服务器的方法<br>可以在终端查找到交换机的原始ip，192.168.0.233<br>将本机ip改为和交换机同一网段，在浏览器地址中输入交换机ip即可查看交换机web登录界面</p>
-<h3 id="端口镜像"><a href="#端口镜像" class="headerlink" title="端口镜像"></a>端口镜像</h3><p>端口镜像的目的就是实现对网络的监听，为服务器听抓取数据、故障定位等功能<br>• 镜像入端口：只对从该端口进入的流量进行镜像。<br>• 镜像出端口：只对该端口的发出的流量进行镜像。<br>• 镜像入和出端口：支持对该端口收到和发出的双向流量进行镜像。</p>
-<h3 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h3><p>地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP&#x2F;IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到局域网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
-<h3 id="SNMP"><a href="#SNMP" class="headerlink" title="SNMP"></a>SNMP</h3><p>SNMP一般指简单网络管理协议。 简单网络管理协议（SNMP） 是专门设计用于在 IP 网络管理网络节点（服务器、工作站、路由器、交换机及HUBS等）的一种标准协议，它是一种应用层协议。</p>
-<h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>OSPF路由协议是用于网际协议（IP）网络的链路状态路由协议。该协议使用链路状态路由算法的内部网关协议（IGP），在单一自治系统（AS）内部工作。适用于IPv4的OSPFv2协议定义于RFC 2328，RFC 5340定义了适用于IPv6的OSPFv3。</p>
-<h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>BGP是自治系统间的路由协议，BGP交换的网络可达性信息提供了足够的信息来检测路由回路并根据性能优先和策略约束对路由进行决策。</p>
-<h3 id="广播风暴"><a href="#广播风暴" class="headerlink" title="广播风暴"></a>广播风暴</h3><p>广播风暴（broadcast storm）简单的讲是指当广播数据充斥网络无法处理，并占用大量网络带宽，导致正常业务不能运行，甚至彻底瘫痪，这就发生了“广播风暴”</p>
-<h3 id="PPP"><a href="#PPP" class="headerlink" title="PPP"></a>PPP</h3><p>PPP协议一般指PPP。 点对点协议（Point to Point Protocol，PPP）为在点对点连接上传输多协议数据包提供了一个标准方法。</p>
-<h3 id="aaa"><a href="#aaa" class="headerlink" title="aaa"></a>aaa</h3><p>AAA是指：Authentication(认证)、Authorization(授权)、Accounting(计费)的简称，是网络安全的一种管理机制；Authentication是本地认证&#x2F;授权，authorization和accounting是由远处radius(远程拨号认证系统)服务或hwtacacs(华为终端访问控制系统)服务器完成认证&#x2F;授权；AAA是基于用户进行认证、授权、计费的，而NAC方案是基于接入设备接口进行认证的。</p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="color: #00a596">Huawei 交换机 基础配置 命令</a>
-        </span>
-        
-    </div>
-    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">
-        <h2 class="post-title">Windows搭建AD域冗余</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/10/17
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>需要准备两台服务器作为 Windows AD 域的主备机</p>
-<p>本文环境示例信息如下：</p>
-<ul>
-<li>域名信息：AD域的根域名信息，示例域名为example.com。</li>
-<li>Windows 主机 IP信息：AD-Master 的 IP 为 192.168.100.35，AD-Slave 的 IP 为 192.168.100.30</li>
-<li>本环境的 IP 均为 IPV4，无 IPV6 的参与。</li>
-</ul>
-<h1 id="部署-AD-域控制器"><a href="#部署-AD-域控制器" class="headerlink" title="部署 AD 域控制器"></a>部署 AD 域控制器</h1><h2 id="打开服务器管理器。"><a href="#打开服务器管理器。" class="headerlink" title="打开服务器管理器。"></a>打开服务器管理器。</h2><p><img src="/Images/Windows_AD/Windows_AD_1.png"></p>
-<h3 id="在服务器管理器中，为服务器添加角色和功能。"><a href="#在服务器管理器中，为服务器添加角色和功能。" class="headerlink" title="在服务器管理器中，为服务器添加角色和功能。"></a>在服务器管理器中，为服务器添加角色和功能。</h3><h4 id="单击添加角色和功能。"><a href="#单击添加角色和功能。" class="headerlink" title="单击添加角色和功能。"></a>单击添加角色和功能。</h4><p><img src="/Images/Windows_AD/Windows_AD_2.png"></p>
-<h4 id="选择安装类型。"><a href="#选择安装类型。" class="headerlink" title="选择安装类型。"></a>选择安装类型。</h4><p><img src="/Images/Windows_AD/Windows_AD_3.png"></p>
-<h4 id="选择要安装角色和功能的服务器。"><a href="#选择要安装角色和功能的服务器。" class="headerlink" title="选择要安装角色和功能的服务器。"></a>选择要安装角色和功能的服务器。</h4><p><img src="/Images/Windows_AD/Windows_AD_4.png"></p>
-<h4 id="选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。"><a href="#选中要安装在服务器上的角色，即Active-Directory-域服务和DNS-服务器。" class="headerlink" title="选中要安装在服务器上的角色，即Active Directory 域服务和DNS 服务器。"></a>选中要安装在服务器上的角色，即Active Directory 域服务和DNS 服务器。</h4><p><img src="/Images/Windows_AD/Windows_AD_5.png"></p>
-<p><img src="/Images/Windows_AD/Windows_AD_6.png"></p>
-<h4 id="安装完成后，单击关闭。"><a href="#安装完成后，单击关闭。" class="headerlink" title="安装完成后，单击关闭。"></a>安装完成后，单击关闭。</h4><p><img src="/Images/Windows_AD/Windows_AD_7.png"></p>
-<h2 id="将当前主机设置为主域服务器。"><a href="#将当前主机设置为主域服务器。" class="headerlink" title="将当前主机设置为主域服务器。"></a>将当前主机设置为主域服务器。</h2><h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a>单击服务器管理器右上角的<img src="/Images/Windows_AD/Windows_AD_8.png">图标，然后单击将此服务器提升为域控制器。</h4><p><img src="/Images/Windows_AD/Windows_AD_9.png"></p>
-<h4 id="在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。"><a href="#在Active-Directory-域服务配置向导中，选择添加新林，并在根域名中设置域名。" class="headerlink" title="在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。"></a>在Active Directory 域服务配置向导中，选择添加新林，并在根域名中设置域名。</h4><p>本文操作中，AD域的示例域名为: <code>example.com</code></p>
-<p><img src="/Images/Windows_AD/Windows_AD_10.png"></p>
-<h4 id="配置域服务器参数，然后单击下一步。"><a href="#配置域服务器参数，然后单击下一步。" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a>配置域服务器参数，然后单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_11.png"></p>
-<h4 id="配置DNS选项，然后单击下一步。"><a href="#配置DNS选项，然后单击下一步。" class="headerlink" title="配置DNS选项，然后单击下一步。"></a>配置DNS选项，然后单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_12.png"></p>
-<h4 id="配置NetBIOS域名，然后单击下一步。"><a href="#配置NetBIOS域名，然后单击下一步。" class="headerlink" title="配置NetBIOS域名，然后单击下一步。"></a>配置NetBIOS域名，然后单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_13.png"></p>
-<h4 id="检查并确认您的选择，单击下一步。"><a href="#检查并确认您的选择，单击下一步。" class="headerlink" title="检查并确认您的选择，单击下一步。"></a>检查并确认您的选择，单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_14.png"></p>
-<p><img src="/Images/Windows_AD/Windows_AD_15.png"></p>
-<h4 id="所有先决条件都检查通过后，单击安装。"><a href="#所有先决条件都检查通过后，单击安装。" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a>所有先决条件都检查通过后，单击安装。</h4><p><img src="/Images/Windows_AD/Windows_AD_16.png"></p>
-<p>安装完成后将自动重启该服务器，重新连接该服务器后可以在系统配置中查看安装结果，当您的DC相关信息无误时，表示安装成功，如下图所示。</p>
-<p><img src="/Images/Windows_AD/Windows_AD_17.png"></p>
-<h2 id="设置备域服务器。"><a href="#设置备域服务器。" class="headerlink" title="设置备域服务器。"></a>设置备域服务器。</h2><h4 id="重复上文的《打开服务器管理器》部分"><a href="#重复上文的《打开服务器管理器》部分" class="headerlink" title="重复上文的《打开服务器管理器》部分"></a>重复上文的《打开服务器管理器》部分</h4><h4 id="设置备域服务器的-DNS-为主域服务器的-IP"><a href="#设置备域服务器的-DNS-为主域服务器的-IP" class="headerlink" title="设置备域服务器的 DNS 为主域服务器的 IP"></a>设置备域服务器的 DNS 为主域服务器的 IP</h4><p><img src="/Images/Windows_AD/Windows_AD_18.png"></p>
-<h4 id="将此服务器加入-AD-域，如果域名无法解析到，需要先在-hosts-里面添加本地域名解析。"><a href="#将此服务器加入-AD-域，如果域名无法解析到，需要先在-hosts-里面添加本地域名解析。" class="headerlink" title="将此服务器加入 AD 域，如果域名无法解析到，需要先在 hosts 里面添加本地域名解析。"></a>将此服务器加入 AD 域，如果域名无法解析到，需要先在 hosts 里面添加本地域名解析。</h4><p><img src="/Images/Windows_AD/Windows_AD_19.png"></p>
-<h4 id="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1"><a href="#单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。-1" class="headerlink" title="单击服务器管理器右上角的图标，然后单击将此服务器提升为域控制器。"></a>单击服务器管理器右上角的<img src="/Images/Windows_AD/Windows_AD_20.png">图标，然后单击将此服务器提升为域控制器。</h4><p><img src="/Images/Windows_AD/Windows_AD_21.png"></p>
-<h4 id="在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。"><a href="#在Active-Directory-域服务配置向导中，选择将域控制器添加到现有域。" class="headerlink" title="在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。"></a>在Active Directory 域服务配置向导中，选择将域控制器添加到现有域。</h4><p>本文操作中，AD域的示例域名为: <code>example.com</code></p>
-<p><img src="/Images/Windows_AD/Windows_AD_22.png"></p>
-<p><img src="/Images/Windows_AD/Windows_AD_23.png"></p>
-<h4 id="配置域服务器参数，然后单击下一步。-1"><a href="#配置域服务器参数，然后单击下一步。-1" class="headerlink" title="配置域服务器参数，然后单击下一步。"></a>配置域服务器参数，然后单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_24.png"></p>
-<h4 id="配置DNS选项，然后单击下一步。-1"><a href="#配置DNS选项，然后单击下一步。-1" class="headerlink" title="配置DNS选项，然后单击下一步。"></a>配置DNS选项，然后单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_25.png"></p>
-<h4 id="检查并确认您的选择，单击下一步。-1"><a href="#检查并确认您的选择，单击下一步。-1" class="headerlink" title="检查并确认您的选择，单击下一步。"></a>检查并确认您的选择，单击下一步。</h4><p><img src="/Images/Windows_AD/Windows_AD_26.png"></p>
-<p><img src="/Images/Windows_AD/Windows_AD_27.png"></p>
-<p><img src="/Images/Windows_AD/Windows_AD_28.png"></p>
-<h4 id="所有先决条件都检查通过后，单击安装。-1"><a href="#所有先决条件都检查通过后，单击安装。-1" class="headerlink" title="所有先决条件都检查通过后，单击安装。"></a>所有先决条件都检查通过后，单击安装。</h4><p><img src="/Images/Windows_AD/Windows_AD_29.png"></p>
-
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="color: #03a9f4">Windows AD 域 冗余</a>
-        </span>
-        
-    </div>
-    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/" class="go-post">阅读全文</a>
-</div>
-
-
-        <div class="page-current">
-    
-    <span class="current">1</span>
-    
-    
-    
-    
-</div>
-
-    </div>
-    
-    <div id="home-card">
-        <div id="card-style">
-    <div id="card-div">
-        <div class="avatar">
-            <img src="/Images/themes/avatar.jpg" alt="avatar" />
-        </div>
-        <div class="name">黄先生</div>
-        <div class="description">
-            <p>Description …</p>
-
-        </div>
-        
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a href="https://i-love-you.work">Argvchs</a>
-            </div>
-            
-        </div>
-        
-    </div>
-</div>
-
-    </div>
-    
-</div>
-
-            <footer id="footer">
-    <div id="footer-wrap">
-        <div>
-            &copy; 2025 - 2025 HZ的小站
-            <span id="footer-icon">
-                <i class="fa-solid fa-font-awesome fa-fw"></i>
-            </span>
-            @hz1995
-        </div>
-        
-    </div>
-    <!-- 引入核心库 -->
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/highlight.min.js"></script>
-    <!-- 引入 Bash/Shell 语言支持（解决 language-shell 错误） -->
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/lib/languages/bash.min.js"></script>
-    <!-- 纯文本（plaintext）通常无需额外引入，核心已支持 -->
 </footer>
-        </div>
-        
-        <transition name="fade">
-            <div id="preview" ref="preview" v-show="previewShow">
-                <img id="preview-content" ref="previewContent" />
-            </div>
-        </transition>
-        
-    </div>
-    <script src="/js/main.js"></script>
-    
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
 </body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
 </html>

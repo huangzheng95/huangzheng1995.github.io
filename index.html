@@ -181,6 +181,185 @@
         
 
 <div class="post">
+    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">
+        <h2 class="post-title">如何在N8N上创建一个RSS订阅</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/11/17
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h1 id="用-N8N-搭建阿里云公告监控告警系统"><a href="#用-N8N-搭建阿里云公告监控告警系统" class="headerlink" title="用 N8N 搭建阿里云公告监控告警系统"></a>用 N8N 搭建阿里云公告监控告警系统</h1><p>近期在使用阿里云服务时，遇到了一次颇为棘手的问题 —— 某项核心配置在未收到任何官方告知的情况下被自动回滚，不仅导致服务临时异常，更造成了关键业务日志的丢失，排查与恢复耗费了大量时间。事后复盘发现，核心原因在于未能及时获取阿里云的官方配置调整公告与更新通知，错过了提前规避风险的机会。<br>为了避免类似问题再次发生，我决定用 N8N 快速搭建一套阿里云公告 RSS 采集器，实现公告内容的实时抓取与提醒。本文将详细记录整个采集器的搭建过程（注：不包含 N8N 的部署环节，默认已完成基础环境配置），帮助有同样需求的开发者快速落地公告监控方案，让服务变更尽在掌握。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
+<li>已部署 N8N 基础环境</li>
+<li>阿里云公告 RSS 订阅地址（可从阿里云官网公告页面获取）</li>
+<li>钉钉机器人（需提前创建，获取 access_token 和加签 secret）</li>
+</ul>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><h3 id="1-创建工作流"><a href="#1-创建工作流" class="headerlink" title="1. 创建工作流"></a>1. 创建工作流</h3><p>登录 N8N 后，点击顶部导航栏的Create workflow按钮创建新工作流，开始配置监控流程。</p>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_1.png"></p>
+<h3 id="2-添加定时触发器（Schedule-Trigger）"><a href="#2-添加定时触发器（Schedule-Trigger）" class="headerlink" title="2. 添加定时触发器（Schedule Trigger）"></a>2. 添加定时触发器（Schedule Trigger）</h3><p>用于设置公告采集频率，配置如下：</p>
+<ul>
+<li>触发类型：选择时间间隔触发</li>
+<li>时间间隔：测试环境可设为每分钟，生产环境建议每小时（平衡时效性与资源消耗）</li>
+<li>时区：根据实际业务场景调整（默认与服务器时区一致</li>
+</ul>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_2.png"></p>
+<h3 id="3-添加-RSS-读取节点（RSS-Read）"><a href="#3-添加-RSS-读取节点（RSS-Read）" class="headerlink" title="3. 添加 RSS 读取节点（RSS Read）"></a>3. 添加 RSS 读取节点（RSS Read）</h3><p>用于获取阿里云公告的 RSS 订阅内容：</p>
+<ul>
+<li>在节点配置中填入阿里云公告 RSS 地址（例如产品公告、安全更新等特定分类的 RSS 链接）</li>
+<li>其他参数保持默认（自动解析 RSS XML 格式内容）</li>
+</ul>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_3.png"></p>
+<h3 id="4-添加过滤节点（Filter）"><a href="#4-添加过滤节点（Filter）" class="headerlink" title="4. 添加过滤节点（Filter）"></a>4. 添加过滤节点（Filter）</h3><p>用于筛选指定时间范围内的公告，避免重复处理历史数据：</p>
+<ul>
+<li>条件设置：pubDate（发布时间）大于等于当前时间减去指定天数</li>
+<li>测试环境建议设置为 7 天（便于验证流程），生产环境建议设置为 1 天（仅监控当天新公告）</li>
+</ul>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_4.png"></p>
+<h3 id="5-添加数据处理节点（Code-in-JavaScript）"><a href="#5-添加数据处理节点（Code-in-JavaScript）" class="headerlink" title="5. 添加数据处理节点（Code in JavaScript）"></a>5. 添加数据处理节点（Code in JavaScript）</h3><ul>
+<li>用于提取 RSS 内容中的关键信息（N8N 对 JavaScript 支持更完善），代码如下</li>
+</ul>
+<pre><code>// 从输入数据中安全获取第一条记录
+// 使用可选链操作符(?.)避免$input为空时调用first()报错
+// 若$input或first()返回空值，则默认使用空对象&#123;&#125;
+const item = $input?.first() || &#123;&#125;;
+
+// 从item中解构出json字段，并设置默认值为空对象&#123;&#125;
+// 防止item.json不存在时，后续访问json的属性报错
+const &#123; json = &#123;&#125; &#125; = item;
+
+// 定义需要从json中提取的目标字段列表
+const targetKeys = [
+  &#39;title&#39;,               // 标题字段
+  &#39;pubDate&#39;,             // 发布日期字段
+  &#39;content:encodedSnippet&#39;, // 内容摘要字段
+  &#39;categories&#39;           // 分类字段
+];
+
+// 使用reduce方法遍历目标字段，构建处理后的结果对象
+const transformedData = targetKeys.reduce((result, key) =&gt; &#123;
+  const value = json[key];
+  // 过滤掉值为undefined或null的字段
+  if (value !== undefined &amp;&amp; value !== null) &#123;
+    result[key] = value;
+  &#125;
+  return result;
+&#125;, &#123;&#125;);
+
+// 返回处理结果作为节点输出
+return transformedData;
+</code></pre>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_5.png"></p>
+<h3 id="6-添加-AI-处理节点（AI-Agent）"><a href="#6-添加-AI-处理节点（AI-Agent）" class="headerlink" title="6. 添加 AI 处理节点（AI Agent）"></a>6. 添加 AI 处理节点（AI Agent）</h3><p>使用 AI 对公告内容进行分析提炼（以 DeepSeek 为例），快速抓取关键信息：</p>
+<ul>
+<li>模型选择：DeepSeek（可根据需求替换为其他支持的模型）</li>
+<li>提示词配置：请分析以下阿里云公告内容，提炼关键变更点和影响范围，用简洁的语言总结（不超过200字）</li>
+<li>输入数据：选择上一节点处理后的字段（title、content:encodedSnippet 等）</li>
+</ul>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_6.png"></p>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_7.png"></p>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_8.png"></p>
+<h3 id="7-添加钉钉签名处理（Code-in-Python）"><a href="#7-添加钉钉签名处理（Code-in-Python）" class="headerlink" title="7. 添加钉钉签名处理（Code in Python）"></a>7. 添加钉钉签名处理（Code in Python）</h3><p>为钉钉机器人请求生成加签信息（确保请求安全性），代码如下：</p>
+<pre><code>import time
+import hmac
+import hashlib
+import base64
+import urllib.parse
+
+for item in _input.all():
+  # 生成时间戳（毫秒级）
+  timestamp = str(round(time.time() * 1000))
+  # 钉钉机器人加签密钥（替换为实际secret）
+  secret = &#39;你的钉钉机器人secret&#39;
+  secret_enc = secret.encode(&#39;utf-8&#39;)
+  # 构建签名字符串
+  string_to_sign = &#39;&#123;&#125;\n&#123;&#125;&#39;.format(timestamp, secret)
+  string_to_sign_enc = string_to_sign.encode(&#39;utf-8&#39;)
+  # 计算HMAC-SHA256签名
+  hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+  # 对签名进行Base64编码和URL编码
+  sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+  # 存储计算结果到输出
+  item.json.timestamp = timestamp
+  item.json.sign = sign 
+return _input.all()
+</code></pre>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_9.png"></p>
+<h3 id="8-添加-HTTP-请求节点（HTTP-Request）"><a href="#8-添加-HTTP-请求节点（HTTP-Request）" class="headerlink" title="8. 添加 HTTP 请求节点（HTTP Request）"></a>8. 添加 HTTP 请求节点（HTTP Request）</h3><p>用于发送通知到钉钉机器人，配置如下：</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>取值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method</td>
+<td>POST</td>
+</tr>
+<tr>
+<td>URL</td>
+<td><a target="_blank" rel="noopener" href="https://oapi.dingtalk.com/robot/send?access_token=%E4%BD%A0%E7%9A%84%E9%92%89%E9%92%89%E6%9C%BA%E5%99%A8%E4%BA%BAaccess_token">https://oapi.dingtalk.com/robot/send?access_token=你的钉钉机器人access_token</a></td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Send Query Parameters</td>
+<td>Using Field Below</td>
+</tr>
+<tr>
+<td>Query 参数 1</td>
+<td>name: timestamp, Value: </td>
+</tr>
+<tr>
+<td>Query 参数 2</td>
+<td>name: sign, Value: </td>
+</tr>
+<tr>
+<td>Body Content Type</td>
+<td>application&#x2F;json</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>json { “msgtype”: “text”, “text”: { “content”: “阿里云公告提醒：\n标题：\n发布时间：\n摘要：\nAI分析：“ } }</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_10.png"></p>
+<h3 id="工作流测试与运行"><a href="#工作流测试与运行" class="headerlink" title="工作流测试与运行"></a>工作流测试与运行</h3><ul>
+<li>点击工作流编辑器右上角的Execute Workflow按钮进行测试</li>
+<li>检查各节点执行状态（绿色表示成功，红色表示失败），可通过节点日志排查错误</li>
+<li>测试成功后，点击Activate按钮启用工作流自动运行</li>
+</ul>
+<h3 id="任务流全景："><a href="#任务流全景：" class="headerlink" title="任务流全景："></a>任务流全景：</h3><p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_11.png"></p>
+<h3 id="消息展示："><a href="#消息展示：" class="headerlink" title="消息展示："></a>消息展示：</h3><p><img src="/Images/WindowN8N_RSS_Aliyuns_AD/n8n_ali_12.png"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        
+        
+    </div>
+    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">
         <h2 class="post-title">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</h2>
     </a>

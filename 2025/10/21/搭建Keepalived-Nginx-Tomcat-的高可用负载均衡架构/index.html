@@ -245,7 +245,7 @@
 </li>
 </ul>
 <h2 id="2-Nginx的高可用负载均衡架构"><a href="#2-Nginx的高可用负载均衡架构" class="headerlink" title="2 Nginx的高可用负载均衡架构"></a>2 Nginx的高可用负载均衡架构</h2><p>如下图：为典型的Tomcat服务多实例部署的架构图</p>
-<p><img src="/Images/Keepalived/Keepalived_1.png"></p>
+<p><img src="/imgs/Keepalived/Keepalived_1.png"></p>
 <p>1.用户通过域名请求到DNS，由DNS解析域名后返回对应的IP地址，该IP及为Keepalived映射服务器的虚拟IP</p>
 <p>2.通过该虚拟IP访问到对应的负载均衡器（Nginx），这里Nginx部署两个，然后通过Keepalived来保证NG的高可用，正常情况下由Keepalived-M将虚拟IP映射转发至Nginx-M，如果Nginx-M出现故障，此时Keepalived会切换至Keepalived-S开始工作，从而保证了NG的单点故障问题。</p>
 <p>3.通过Nginx负载均衡器，将请求路由到对应的Tomcat服务。</p>
@@ -449,8 +449,8 @@ fi
 </code></pre>
 <h2 id="4-运行测试"><a href="#4-运行测试" class="headerlink" title="4 运行测试"></a>4 运行测试</h2><p>（1）为了更直观的查看到keepalived切换的效果，将11服务器中的nginx的upstream服务只配置11的tomcat服务地址，12服务器中的upstream服务只配置12的tomcat服务地址，这样只需要观察将11服务器中的nginx关闭看使用虚拟ip是否可以访问到12服务器的tomcat。</p>
 <p>（2）分别启动两个服务器中的tomcat、nginx、keepalived，访问虚拟ip：192.168.10.200，可以查看到访问的是主keepalived服务器的tomcat</p>
-<p><img src="/Images/Keepalived/Keepalived_2.png"></p>
-<p>3）关闭11服务器的nginx，nginx -s stop，再次访问虚拟ip，如下：说明主keepalived通过配置的脚本检测到了本服务的nginx服务挂掉了，所以立马切换至了备的keepalived，这时12服务器的keepalived升为了主，所以就访问到了12服务器的tomcat。<br><img src="/Images/Keepalived/Keepalived_3.png"></p>
+<p><img src="/imgs/Keepalived/Keepalived_2.png"></p>
+<p>3）关闭11服务器的nginx，nginx -s stop，再次访问虚拟ip，如下：说明主keepalived通过配置的脚本检测到了本服务的nginx服务挂掉了，所以立马切换至了备的keepalived，这时12服务器的keepalived升为了主，所以就访问到了12服务器的tomcat。<br><img src="/imgs/Keepalived/Keepalived_3.png"></p>
 
     </div>
 </article>
@@ -619,33 +619,33 @@ fi
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 9.173948877748145px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
+    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 19.07737661152371px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
     
-    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 13.070951590202931px;" class="tag-cloud-link">操作系统</a>
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 8.857783876272476px;" class="tag-cloud-link">操作系统</a>
     
-    <a href="/tags/Windows/" style="font-size: 18.339105600695962px;" class="tag-cloud-link">Windows</a>
+    <a href="/tags/Windows/" style="font-size: 19.070466620172418px;" class="tag-cloud-link">Windows</a>
     
-    <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 18.21682655042091px;" class="tag-cloud-link">安装教程</a>
+    <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 17.80963971728349px;" class="tag-cloud-link">安装教程</a>
     
-    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 13.931530691293284px;" class="tag-cloud-link">Windows AD 域 冗余</a>
+    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 15.806320584759458px;" class="tag-cloud-link">Windows AD 域 冗余</a>
     
-    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 18.468457893508578px;" class="tag-cloud-link">告警</a>
+    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 13.680752837967251px;" class="tag-cloud-link">告警</a>
     
-    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 18.067846010165354px;" class="tag-cloud-link">监控</a>
+    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 17.773224441935234px;" class="tag-cloud-link">监控</a>
     
-    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 9.899037069214724px;" class="tag-cloud-link">订阅</a>
+    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 14.216010349801774px;" class="tag-cloud-link">订阅</a>
     
-    <a href="/tags/AI/" style="font-size: 15.167742826107368px;" class="tag-cloud-link">AI</a>
+    <a href="/tags/AI/" style="font-size: 19.277076209689938px;" class="tag-cloud-link">AI</a>
     
-    <a href="/tags/N8N/" style="font-size: 12.922850393322094px;" class="tag-cloud-link">N8N</a>
+    <a href="/tags/N8N/" style="font-size: 16.56109441816824px;" class="tag-cloud-link">N8N</a>
     
-    <a href="/tags/Nginx/" style="font-size: 11.571726429468661px;" class="tag-cloud-link">Nginx</a>
+    <a href="/tags/Nginx/" style="font-size: 14.398640357076577px;" class="tag-cloud-link">Nginx</a>
     
-    <a href="/tags/Tomcat/" style="font-size: 19.20252675448721px;" class="tag-cloud-link">Tomcat</a>
+    <a href="/tags/Tomcat/" style="font-size: 8.504208383435007px;" class="tag-cloud-link">Tomcat</a>
     
-    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 11.320719086179832px;" class="tag-cloud-link">Keepalived 网络</a>
+    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 17.812708365291122px;" class="tag-cloud-link">Keepalived 网络</a>
     
-    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 19.71931694163825px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
+    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 12.325119300702017px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
     
 </div>
                 

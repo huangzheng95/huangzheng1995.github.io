@@ -274,8 +274,8 @@ Test#show ip interface                                                #查看接
 <p>switchport nonegotiate:  严格的说，这不算是种接口模式，它的作用只是阻止交换机接口发出DTP数据包，它必须与switchport mode trunk或者switchport mode access一起使用。</p>
 <p>switchport mode dot1q-tunnel：　配置交换机接口为隧道接口（非Trunk），以便与用户交换机的Trunk接口形成不对称链路。</p>
 <hr>
-<h2 id="三层交换VLAN互访配置-1"><a href="#三层交换VLAN互访配置-1" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h2><p><img src="/Images/Layer_3_Switching/Layer_3_Switching_1.png" alt="image"><br>上图是三层交换的扩扑图</p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_2.png" alt="image"><br>三层交换机的Fa0&#x2F;1和Fa0&#x2F;2分别连接到下面的两个二层交换机，并将Fa0&#x2F;1和Fa0&#x2F;2做了Trunk。</p>
+<h2 id="三层交换VLAN互访配置-1"><a href="#三层交换VLAN互访配置-1" class="headerlink" title="三层交换VLAN互访配置"></a>三层交换VLAN互访配置</h2><p><img src="/imgs/Layer_3_Switching/Layer_3_Switching_1.png" alt="image"><br>上图是三层交换的扩扑图</p>
+<p><img src="/imgs/Layer_3_Switching/Layer_3_Switching_2.png" alt="image"><br>三层交换机的Fa0&#x2F;1和Fa0&#x2F;2分别连接到下面的两个二层交换机，并将Fa0&#x2F;1和Fa0&#x2F;2做了Trunk。</p>
 <p>以下是三层交换机的配置：</p>
 <p>创建VLAN：</p>
 <pre><code>Switch&gt;
@@ -360,8 +360,8 @@ Building configuration...
 </code></pre>
 <p>二层交换配置完成，另外一台二层交换机的配置与此交换机配置相同。</p>
 <p>当PC1向PC4发送数据的时候，数据通过VLAN进入三层交换机，三层交换机查询路由表后将数据转给PC4。</p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_3.gif" alt="image"></p>
-<p><img src="/Images/Layer_3_Switching/Layer_3_Switching_4.png" alt="image"></p>
+<p><img src="/imgs/Layer_3_Switching/Layer_3_Switching_3.gif" alt="image"></p>
+<p><img src="/imgs/Layer_3_Switching/Layer_3_Switching_4.png" alt="image"></p>
 <p>至此，三层交换VLAN互访配置完成！</p>
 
     </div>
@@ -531,33 +531,33 @@ Building configuration...
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 16.137986109974964px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
+    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 8.024832929932494px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
     
-    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 13.529531910781921px;" class="tag-cloud-link">操作系统</a>
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 18.780841509455065px;" class="tag-cloud-link">操作系统</a>
     
-    <a href="/tags/Windows/" style="font-size: 11.109104541452421px;" class="tag-cloud-link">Windows</a>
+    <a href="/tags/Windows/" style="font-size: 9.14833448652525px;" class="tag-cloud-link">Windows</a>
     
-    <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 18.621770619800827px;" class="tag-cloud-link">安装教程</a>
+    <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 14.656531025728999px;" class="tag-cloud-link">安装教程</a>
     
-    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 13.786577498850543px;" class="tag-cloud-link">Windows AD 域 冗余</a>
+    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 8.389012743882677px;" class="tag-cloud-link">Windows AD 域 冗余</a>
     
-    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 8.88131886989969px;" class="tag-cloud-link">告警</a>
+    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 13.375992236601041px;" class="tag-cloud-link">告警</a>
     
-    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 14.427212063040916px;" class="tag-cloud-link">监控</a>
+    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 8.316305378070634px;" class="tag-cloud-link">监控</a>
     
-    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 17.439771160642895px;" class="tag-cloud-link">订阅</a>
+    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 8.90622530516201px;" class="tag-cloud-link">订阅</a>
     
-    <a href="/tags/AI/" style="font-size: 10.810575221878501px;" class="tag-cloud-link">AI</a>
+    <a href="/tags/AI/" style="font-size: 18.950611094739987px;" class="tag-cloud-link">AI</a>
     
-    <a href="/tags/N8N/" style="font-size: 13.960391359587508px;" class="tag-cloud-link">N8N</a>
+    <a href="/tags/N8N/" style="font-size: 12.479524582716504px;" class="tag-cloud-link">N8N</a>
     
-    <a href="/tags/Nginx/" style="font-size: 18.960911764001203px;" class="tag-cloud-link">Nginx</a>
+    <a href="/tags/Nginx/" style="font-size: 17.150212942930462px;" class="tag-cloud-link">Nginx</a>
     
-    <a href="/tags/Tomcat/" style="font-size: 9.973766428862785px;" class="tag-cloud-link">Tomcat</a>
+    <a href="/tags/Tomcat/" style="font-size: 17.230447308946914px;" class="tag-cloud-link">Tomcat</a>
     
-    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 18.822192876054444px;" class="tag-cloud-link">Keepalived 网络</a>
+    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 14.233703392380093px;" class="tag-cloud-link">Keepalived 网络</a>
     
-    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 9.637317557792928px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
+    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 16.50536483558998px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
     
 </div>
                 

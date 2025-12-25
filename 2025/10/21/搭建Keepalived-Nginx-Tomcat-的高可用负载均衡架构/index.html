@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="黄先生">
+    
+    
+    
+    
+    
+    
+    <title>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构 | 黄先生的小站</title>
+    <link href="https://i-love-you.work" rel="prefetch" />
+
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/avatar.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg,preview5.jpg,preview6.jpg,preview7.jpg,preview8.jpg,preview9.jpg,preview10.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://i-love-you.work">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">黄先生的小站</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/categories">
+                        <i class="fa fa-"></i>分类
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/standalone">
+                        <i class="fa fa-"></i>独立页面
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://i-love-you.work">黄先生的小站</a>
+        >
+        <span>搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Nginx/">Nginx</a>, 
+                
+                <a href="/tags/Tomcat/">Tomcat</a>, 
+                
+                <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/">Keepalived 网络</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2025-10-21
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2025-10-21
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/Nginx/">Nginx</a>, 
+                
+                <a href="/tags/Tomcat/">Tomcat</a>, 
+                
+                <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/">Keepalived 网络</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h1 id="搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构"><a href="#搭建-Keepalived-Nginx-Tomcat-的高可用负载均衡架构" class="headerlink" title="搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构"></a>搭建 Keepalived + Nginx + Tomcat 的高可用负载均衡架构</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h2><p>初期的互联网企业由于业务量较小，所以一般单机部署，实现单点访问即可满足业务的需求，这也是最简单的部署方式，但是随着业务的不断扩大，系统的访问量逐渐的上升，单机部署的模式已无法承载现有的业务量，需要进行服务集群化部署，本文主要介绍服务端Tomcat多实例部署，以及如何保证web服务的高可用方案。</p>
+<ul>
+<li><p>Nginx 是一个高性能的 HTTP反向代理服务器</p>
+</li>
+<li><p>Keepalived 是一个基于VRRP协议来实现的LVS服务高可用方案，可以利用其来避免服务的单点故障</p>
+</li>
+<li><p>Tomcat 是一个免费的开放源代码的Web 应用服务器，属于轻量级应用服务器。</p>
+</li>
+</ul>
+<h2 id="2-Nginx的高可用负载均衡架构"><a href="#2-Nginx的高可用负载均衡架构" class="headerlink" title="2 Nginx的高可用负载均衡架构"></a>2 Nginx的高可用负载均衡架构</h2><p>如下图：为典型的Tomcat服务多实例部署的架构图</p>
+<p><img src="/imgs/Keepalived/Keepalived_1.png"></p>
+<p>1.用户通过域名请求到DNS，由DNS解析域名后返回对应的IP地址，该IP及为Keepalived映射服务器的虚拟IP</p>
+<p>2.通过该虚拟IP访问到对应的负载均衡器（Nginx），这里Nginx部署两个，然后通过Keepalived来保证NG的高可用，正常情况下由Keepalived-M将虚拟IP映射转发至Nginx-M，如果Nginx-M出现故障，此时Keepalived会切换至Keepalived-S开始工作，从而保证了NG的单点故障问题。</p>
+<p>3.通过Nginx负载均衡器，将请求路由到对应的Tomcat服务。</p>
+<h2 id="3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构"><a href="#3-搭建Keepalived-Nginx-Tomcat的高可用负载均衡架构" class="headerlink" title="3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构"></a>3 搭建Keepalived + Nginx + Tomcat的高可用负载均衡架构</h2><h4 id="3-1-需要准备的软件"><a href="#3-1-需要准备的软件" class="headerlink" title="3.1 需要准备的软件"></a>3.1 需要准备的软件</h4><p>（1）apache-tomcat-8.5.16.tar.gz</p>
+<p>（2）nginx-1.12.2.tar.gz</p>
+<p>（3）keepalived-1.3.9.tar.gz</p>
+<h4 id="3-2-服务器准备"><a href="#3-2-服务器准备" class="headerlink" title="3.2 服务器准备"></a>3.2 服务器准备</h4><p>两台服务器如：192.168.10.11，192.168.10.12</p>
+<h4 id="3-3-安装需要的依赖包"><a href="#3-3-安装需要的依赖包" class="headerlink" title="3.3 安装需要的依赖包"></a>3.3 安装需要的依赖包</h4><pre><code>yum -y install gcc gcc-c++ automake pcre pcre-devel zlib zlib-devel open openssl-devel
+</code></pre>
+<h4 id="3-4-安装"><a href="#3-4-安装" class="headerlink" title="3.4 安装"></a>3.4 安装</h4><h5 id="3-4-1-安装Tomcat"><a href="#3-4-1-安装Tomcat" class="headerlink" title="3.4.1 安装Tomcat"></a>3.4.1 安装Tomcat</h5><p>（1）分别在两台服务器中安装Tomcat，解压apache-tomcat-8.5.16.tar.gz及可完成安装。</p>
+<h5 id="3-4-2-安装Nginx"><a href="#3-4-2-安装Nginx" class="headerlink" title="3.4.2 安装Nginx"></a>3.4.2 安装Nginx</h5><p>（1）解压安装包：tar -zxvf nginx-1.12.2.tar.gz</p>
+<p>（2）进入到nginx-1.12.2目录：cd nginx-1.12.2</p>
+<p>（3）编译：</p>
+<pre><code>./configure --with-http_stub_status_module --with-http_ssl_module  --prefix=/usr/local/nginx
+make &amp;&amp; sudo make install
+</code></pre>
+<h5 id="3-4-3-安装Keepalived"><a href="#3-4-3-安装Keepalived" class="headerlink" title="3.4.3 安装Keepalived"></a>3.4.3 安装Keepalived</h5><p>（1）解压安装包：tar -zxvf keepalived-1.3.9.tar.gz</p>
+<p>（2）进入到keepalived-1.3.9目录：cd keepalived-1.3.9</p>
+<p>（3）执行编译：</p>
+<pre><code>./configure --prefix=/usr/local/keepalived --sysconf=/etc
+make &amp;&amp; sudo make install
+</code></pre>
+<h4 id="3-5-配置"><a href="#3-5-配置" class="headerlink" title="3.5 配置"></a>3.5 配置</h4><h5 id="3-5-1-分别配置两台服务器的Nginx"><a href="#3-5-1-分别配置两台服务器的Nginx" class="headerlink" title="3.5.1 分别配置两台服务器的Nginx"></a>3.5.1 分别配置两台服务器的Nginx</h5><p>（1）分别修改两台服务器nginx配置文件，vi &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>#nginx进程数
+worker_processes  1;
+
+#单个进程最大连接数
+events {
+    worker_connections  1024;
+}
+
+#http服务器配置
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+	#长连接超时时间，单位是秒
+    keepalive_timeout  65;
+	#upstream负载均衡配置，配置路由到tomcat的服务地址以及权重
+    upstream localhost{
+       server 192.168.10.11:8080 weight=2;
+       server 192.168.10.12:8080 weight=2;
+    }
+	
+	#虚拟主机的配置
+    server {
+	    #监听端口
+        listen       80;
+		 #域名可以有多个，用空格隔开
+        server_name  localhost;
+        location / {
+            root   html;
+            index  index.html index.htm;
+			#nginx跟后端服务器连接超时时间(代理连接超时)
+            proxy_connect_timeout 3;
+			#后端服务器数据回传时间(代理发送超时)
+            proxy_send_timeout 30;
+			#连接成功后，后端服务器响应时间(代理接收超时)
+            proxy_read_timeout 30;
+            proxy_pass http://localhost;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+</code></pre>
+<h5 id="3-5-2-主Keepalived配置"><a href="#3-5-2-主Keepalived配置" class="headerlink" title="3.5.2 主Keepalived配置"></a>3.5.2 主Keepalived配置</h5><p>（1）修改11服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>! Configuration File for keepalived
+#全局配置
+global_defs {
+   #keepalived切换的时候，发消息到指定的email，可配置多个email
+   notification_email {
+     feinik1@foxmail.com
+	 feinik2@foxmail.com
+   }
+   #通知邮件从哪个地址发出
+   notification_email_from feinik@foxmail.com
+   #通知邮件的smtp地址
+   smtp_server smtp.exmail.qq.com
+   #连接smtp服务器的超时时间，单位秒
+   smtp_connect_timeout 30
+   #Keepalived的机器标识，一个网络内保持唯一
+   router_id nginx-master
+}
+
+#执行脚本配置
+vrrp_script chk_nginx {
+	#脚本所在路径
+    script &quot;/home/project/keepalived/check_nginx.sh&quot;
+	#脚本执行间隔时间，秒
+    interval 2
+	#优先级
+    weight 2
+}
+#keepalived实例配置
+vrrp_instance VI_1 {
+	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
+    state MASTER
+	#实例绑定的网卡
+    interface ens33
+	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
+    virtual_router_id 51
+	#优先级，数值愈大，优先级越高
+    priority 100
+	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
+    advert_int 1
+	#通信验证
+    authentication {
+        auth_type PASS
+        auth_pass feinik
+    }
+	#追踪外围脚本
+    track_script {
+	    #这里配置vrrp_script的名称
+        chk_nginx
+    }
+	#虚拟ip配置，可配置多个
+    virtual_ipaddress {
+        192.168.10.200
+    }
+}
+</code></pre>
+<h5 id="3-5-3-备Keepalived配置"><a href="#3-5-3-备Keepalived配置" class="headerlink" title="3.5.3 备Keepalived配置"></a>3.5.3 备Keepalived配置</h5><p>（1）修改12服务器的keepalived配置文件，vi &#x2F;etc&#x2F;keepalived&#x2F;keepalived.conf</p>
+<p>（2）内容如下：</p>
+<pre><code>! Configuration File for keepalived
+#全局配置
+global_defs {
+   #keepalived切换的时候，发消息到指定的email，可配置多个email
+   notification_email {
+     feinik1@foxmail.com
+	 feinik2@foxmail.com
+   }
+   #通知邮件从哪个地址发出
+   notification_email_from feinik@foxmail.com
+   #通知邮件的smtp地址
+   smtp_server smtp.exmail.qq.com
+   #连接smtp服务器的超时时间，单位秒
+   smtp_connect_timeout 30
+   #Keepalived的机器标识，一个网络内保持唯一
+   router_id nginx-master
+}
+
+#执行脚本配置
+vrrp_script chk_nginx {
+	#脚本所在路径
+    script &quot;/home/project/keepalived/check_nginx.sh&quot;
+	#脚本执行间隔时间，秒
+    interval 2
+	#优先级
+    weight 2
+}
+#keepalived实例配置
+vrrp_instance VI_1 {
+	#指定实例的初始状态，MASTER或BACKUP两种状态，并且需要大写
+    state BACKUP
+	#实例绑定的网卡
+    interface ens33
+	#虚拟路由标识，是一个数字，整个VRRP内唯一，如果keepalived配置了主备，需要相同
+    virtual_router_id 51
+	#优先级，数值愈大，优先级越高
+    priority 99
+	#MASTER与BACKUP之间同步检查的时间间隔，单位为秒
+    advert_int 1
+	#通信验证
+    authentication {
+        auth_type PASS
+        auth_pass feinik
+    }
+	#追踪外围脚本
+    track_script {
+	    #这里配置vrrp_script的名称
+        chk_nginx
+    }
+	#虚拟ip配置，可配置多个
+    virtual_ipaddress {
+        192.168.10.200
+    }
+}
+</code></pre>
+<h5 id="3-5-4-Nginx状态检查脚本创建"><a href="#3-5-4-Nginx状态检查脚本创建" class="headerlink" title="3.5.4 Nginx状态检查脚本创建"></a>3.5.4 Nginx状态检查脚本创建</h5><p>（1）新建Nginx的状态检查脚本：check_nginx.sh</p>
+<p>（2）内容如下：</p>
+<pre><code>#!/bin/sh
+NGINX=/usr/common/nginx/sbin/nginx
+PORT=80
+nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
+#echo $?
+if [ $? -ne 0 ];then
+    $NGINX -s stop
+    #这里再次尝试启动NG
+    $NGINX
+    sleep 5
+    nmap localhost -p $PORT | grep &quot;$PORT/tcp open&quot;
+    [ $? -ne 0 ] &amp;&amp; cd /usr/common/keepalived/sbin &amp;&amp; pkill keepalived
+    echo &quot;stoped&quot;
+fi
+</code></pre>
+<h2 id="4-运行测试"><a href="#4-运行测试" class="headerlink" title="4 运行测试"></a>4 运行测试</h2><p>（1）为了更直观的查看到keepalived切换的效果，将11服务器中的nginx的upstream服务只配置11的tomcat服务地址，12服务器中的upstream服务只配置12的tomcat服务地址，这样只需要观察将11服务器中的nginx关闭看使用虚拟ip是否可以访问到12服务器的tomcat。</p>
+<p>（2）分别启动两个服务器中的tomcat、nginx、keepalived，访问虚拟ip：192.168.10.200，可以查看到访问的是主keepalived服务器的tomcat</p>
+<p><img src="/imgs/Keepalived/Keepalived_2.png"></p>
+<p>3）关闭11服务器的nginx，nginx -s stop，再次访问虚拟ip，如下：说明主keepalived通过配置的脚本检测到了本服务的nginx服务挂掉了，所以立马切换至了备的keepalived，这时12服务器的keepalived升为了主，所以就访问到了12服务器的tomcat。<br><img src="/imgs/Keepalived/Keepalived_3.png"></p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            黄先生
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/avatar.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/24/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">Windows系统安装方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">如何在N8N上创建一个RSS订阅</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">三层交换VLAN互访配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">Huawei交换机基础配置命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">Windows搭建AD域冗余</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Huawei%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4/">Huawei交换机基础配置命令</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/17/Windows%E6%90%AD%E5%BB%BAAD%E5%9F%9F%E5%86%97%E4%BD%99/">Windows搭建AD域冗余</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2VLAN%E4%BA%92%E8%AE%BF%E9%85%8D%E7%BD%AE/">三层交换VLAN互访配置</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/24/Windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">Windows系统安装方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/">搭建Keepalived+Nginx+Tomcat 的高可用负载均衡架构</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2025/11/17/%E5%A6%82%E4%BD%95%E5%9C%A8N8N%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AARSS%E8%AE%A2%E9%98%85/">如何在N8N上创建一个RSS订阅</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2025/10/21/%E6%90%AD%E5%BB%BAKeepalived-Nginx-Tomcat-%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9E%B6%E6%9E%84/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/Huawei-%E4%BA%A4%E6%8D%A2%E6%9C%BA-%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE-%E5%91%BD%E4%BB%A4/" style="font-size: 8.226274434560425px;" class="tag-cloud-link">Huawei 交换机 基础配置 命令</a>
+    
+    <a href="/tags/Windows-AD-%E5%9F%9F-%E5%86%97%E4%BD%99/" style="font-size: 12.608506671562443px;" class="tag-cloud-link">Windows AD 域 冗余</a>
+    
+    <a href="/tags/Cisco-%E4%B8%89%E5%B1%82%E4%BA%A4%E6%8D%A2-VLAN-%E4%BA%92%E8%AE%BF/" style="font-size: 19.27656829770055px;" class="tag-cloud-link">Cisco 三层交换 VLAN 互访</a>
+    
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 11.75787319383863px;" class="tag-cloud-link">操作系统</a>
+    
+    <a href="/tags/Windows/" style="font-size: 15.868607085575682px;" class="tag-cloud-link">Windows</a>
+    
+    <a href="/tags/%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B/" style="font-size: 16.809981294100176px;" class="tag-cloud-link">安装教程</a>
+    
+    <a href="/tags/Nginx/" style="font-size: 11.029896776462015px;" class="tag-cloud-link">Nginx</a>
+    
+    <a href="/tags/Tomcat/" style="font-size: 8.041616415770683px;" class="tag-cloud-link">Tomcat</a>
+    
+    <a href="/tags/Keepalived-%E7%BD%91%E7%BB%9C/" style="font-size: 13.938145035486377px;" class="tag-cloud-link">Keepalived 网络</a>
+    
+    <a href="/tags/%E5%91%8A%E8%AD%A6/" style="font-size: 18.877919083054984px;" class="tag-cloud-link">告警</a>
+    
+    <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 16.064893573564657px;" class="tag-cloud-link">监控</a>
+    
+    <a href="/tags/%E8%AE%A2%E9%98%85/" style="font-size: 11.258749493569619px;" class="tag-cloud-link">订阅</a>
+    
+    <a href="/tags/AI/" style="font-size: 15.80271098011794px;" class="tag-cloud-link">AI</a>
+    
+    <a href="/tags/N8N/" style="font-size: 8.10331566129172px;" class="tag-cloud-link">N8N</a>
+    
+</div>
+                
+                
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 黄先生
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'png',
+      maxCount: '168'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
